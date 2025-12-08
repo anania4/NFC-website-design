@@ -351,10 +351,15 @@
       padding: 0 60px;
     }
 
+    /* STACKING CARDS SECTION */
+    .stacking-cards-section {
+      padding: 50vh 0;
+      position: relative;
+    }
+
     .service-badge {
       display: inline-block;
       padding: 8px 20px;
-      /* Default to accent, overridden per card/section if needed */
       background: rgba(181, 255, 74, 0.1);
       border: 1px solid var(--accent);
       border-radius: 20px;
@@ -377,9 +382,7 @@
       min-height: 520px;
       border-radius: 40px;
       width: 98%;
-      /* WIDE CARD STYLE */
       margin: 0 auto 40vh auto;
-      /* Center horizontally */
       overflow: hidden;
       transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
       box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
@@ -390,13 +393,7 @@
       will-change: transform;
     }
 
-    .stacking-cards {
-      position: relative;
-      transform-origin: top center;
-      will-change: transform;
-    }
-
-    /* CARD 1: DARK (Matches Mivon 001/003 Dark) */
+    /* CARD 1: DARK */
     .service-card.card-1 {
       background: #111111;
       color: #ffffff;
@@ -404,16 +401,15 @@
       border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    /* CARD 2: LIME GREEN (Matches Mivon 002 Product Design) */
+    /* CARD 2: LIME GREEN */
     .service-card.card-2 {
       background: #daf933;
-      /* The Mivon Green */
       color: #1a1a1a;
       z-index: 2;
       border: none;
     }
 
-    /* CARD 3: WHITE (Matches Mivon 003 Branding) */
+    /* CARD 3: WHITE */
     .service-card.card-3 {
       background: #ffffff;
       color: #1a1a1a;
@@ -421,13 +417,11 @@
       border: none;
     }
 
-    /* CARD 4: SECURITY (Blue Theme) */
+    /* CARD 4: BLUE */
     .service-card.card-4 {
       background: #bde0fe;
-      /* Baby Blue / Cloud Blue */
       color: #1a1a1a;
       z-index: 4;
-      margin: 0 20px 40vh 20px;
       border: none;
     }
 
@@ -444,10 +438,8 @@
       display: flex;
       flex-direction: column;
       gap: 30px;
-      position: relative;
     }
 
-    /* NUMBER 001, 002, 003, 004 */
     .service-number {
       font-size: 18px;
       font-weight: 600;
@@ -459,19 +451,12 @@
       color: #aaaaaa;
     }
 
-    .card-2 .service-number {
-      color: #333333;
-    }
-
-    .card-3 .service-number {
-      color: #333333;
-    }
-
+    .card-2 .service-number,
+    .card-3 .service-number,
     .card-4 .service-number {
       color: #333333;
     }
 
-    /* HEADING */
     .service-heading {
       font-size: 72px;
       font-weight: 800;
@@ -480,7 +465,6 @@
       letter-spacing: -2px;
     }
 
-    /* DESCRIPTION */
     .service-description {
       font-size: 18px;
       line-height: 1.6;
@@ -492,68 +476,22 @@
       color: #bbbbbb;
     }
 
-    .card-2 .service-description {
-      color: #444444;
-    }
-
-    .card-3 .service-description {
-      color: #555555;
-    }
-
+    .card-2 .service-description,
+    .card-3 .service-description,
     .card-4 .service-description {
       color: #444444;
     }
 
-    /* TAGS / BUTTONS */
-    .service-tags {
-      display: flex;
-      gap: 15px;
-      margin-top: 20px;
-    }
-
-    .tag-pill {
-      padding: 12px 24px;
-      border-radius: 50px;
-      font-size: 14px;
-      font-weight: 500;
-      border: 1px solid;
-      background: transparent;
-      cursor: default;
-    }
-
-    .card-1 .tag-pill {
-      border-color: rgba(255, 255, 255, 0.2);
-      color: #fff;
-    }
-
-    .card-2 .tag-pill {
-      border-color: rgba(0, 0, 0, 0.1);
-      color: #1a1a1a;
-    }
-
-    .card-3 .tag-pill {
-      border-color: rgba(0, 0, 0, 0.15);
-      color: #1a1a1a;
-    }
-
-    .card-4 .tag-pill {
-      border-color: rgba(0, 0, 0, 0.15);
-      color: #1a1a1a;
-    }
-
-    /* VISUAL / ICON */
     .service-visual {
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
       height: 400px;
     }
 
     .service-icon-img {
       width: 100%;
       max-width: 450px;
-      /* Big Hero Size */
       height: auto;
       object-fit: contain;
       filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.2));
@@ -563,6 +501,8 @@
     .service-card:hover .service-icon-img {
       transform: scale(1.05) translateY(-10px) rotate(2deg);
     }
+
+
 
     /* GLOBAL BOTTOM BLUR */
     .bottom-screen-blur {
@@ -579,23 +519,772 @@
       -webkit-mask-image: linear-gradient(to top, black, transparent);
     }
 
-    .footer-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 70px;
+    /* APPROACH / FEATURES SECTION */
+    .features-section {
+      padding: 30px 0;
+      position: relative;
+      background: var(--bg);
+      isolation: isolate;
+      overflow: visible;
+    }
+
+    .tap-watermark {
+      position: sticky;
+      top: 50vh;
+      left: 0;
+      width: 100%;
+      height: 0;
+      z-index: 1;
+      pointer-events: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 60px;
+      transform: translateY(-50%);
+    }
+
+    .tap-watermark::before {
+      content: 'TAP';
+      font-size: 40vw;
+      font-weight: 700;
+      color: #ffffff;
+      white-space: nowrap;
+      user-select: none;
+      font-family: 'Inter', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: -10px;
+      line-height: 0.8;
+      opacity: 0.3;
+    }
+
+    /* MIVON ITEM STYLES */
+    .item {
+      padding: 50px 40px;
+      border-radius: 30px;
+      transition: all 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 450px;
+      position: relative;
+      z-index: 10;
+      /* Above watermark */
+    }
+
+    .item:hover {
+      transform: translateY(-10px);
+    }
+
+    /* UTILITIES (Mivon Spacing) */
+    .mb-60px {
+      margin-bottom: 60px !important;
+    }
+
+    .mt-60px {
+      margin-top: 60px !important;
+    }
+
+    .mb-30px {
+      margin-bottom: 30px !important;
+    }
+
+    .mb-40px {
+      margin-bottom: 40px !important;
+    }
+
+    .mb-80px {
+      margin-bottom: 80px !important;
+    }
+
+    .w-60px {
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+    }
+
+    .w-60px img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    /* VARIANTS */
+    .app-dark {
+      background: #111;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+
+    .app-white {
+      background: #ffffff;
+      color: #000 !important;
+    }
+
+    .app-white h6,
+    .app-white p,
+    .app-white .mb-40px {
+      color: #000 !important;
+    }
+
+    .app-lime {
+      background: #daf933;
+      color: #000 !important;
+    }
+
+    .app-lime h6,
+    .app-lime p {
+      color: #000 !important;
+    }
+
+    /* REMOVED OLD GRID CSS (relying on Bootstrap .col-lg-3 now) */
+
+
+    .app-lime {
+      background: #daf933;
+      color: #000 !important;
+    }
+
+    .app-lime h6,
+    .app-lime p {
+      color: #000 !important;
+    }
+
+    /* Features Section */
+    .features-section {
+      position: relative;
+      /* For Watermark */
+      padding: 100px 0;
+    }
+
+    .service-badge {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.1);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+      color: var(--accent);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .sec-head {
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      margin-bottom: 80px;
+    }
+
+    /* BOOTSTRAP-STYLE GRID */
+    .container {
+      width: 100%;
       max-width: 1200px;
       margin: 0 auto;
+      padding: 0 15px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0 -15px;
+    }
+
+    .col-lg-3,
+    .col-md-6 {
+      position: relative;
+      width: 100%;
+      padding: 0 15px;
+    }
+
+    @media (min-width: 768px) {
+      .col-md-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+      }
+    }
+
+    @media (min-width: 992px) {
+      .col-lg-3 {
+        flex: 0 0 25%;
+        max-width: 25%;
+      }
+
+      .offset-lg-2 {
+        margin-left: 16.666667%;
+      }
+
+      .offset-lg-3 {
+        margin-left: 25%;
+      }
+
+      .offset-lg-5 {
+        margin-left: 41.666667%;
+      }
+
+      .offset-lg-6 {
+        margin-left: 50%;
+      }
+    }
+
+    .sec-head {
+      text-align: center;
+      position: relative;
+      z-index: 10;
+      margin-bottom: 80px;
+    }
+
+    .service-title {
+      font-size: 48px;
+      font-weight: 700;
+      margin: 0;
+      background: linear-gradient(to right, #fff, #888);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 991px) {
+      .approach-grid {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .approach-item {
+        width: 100%;
+        margin-top: 0 !important;
+        margin-bottom: 30px;
+      }
+    }
+
+    /* TYPOGRAPHY */
+    .app-icon-box {
+      margin-bottom: 30px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+    }
+
+    .app-icon-box img {
+      height: 100%;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .app-title {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .app-desc {
+      font-size: 16px;
+      color: #aaa;
+      line-height: 1.6;
+    }
+
+    /* HOW IT WORKS SECTION - 3D PERSPECTIVE CARDS */
+    .how-it-works {
+      padding: 50px 40px;
+      background: var(--bg);
+      text-align: center;
+      position: relative;
+      overflow: visible;
+    }
+
+    .how-title {
+      font-size: 72px;
+      font-weight: 900;
+      margin-bottom: 80px;
+      text-transform: uppercase;
+      letter-spacing: -2px;
+      color: #fff;
+    }
+
+    .steps-container {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+      perspective: 1000px;
+      position: relative;
+    }
+
+    .step-card {
+      position: relative;
+      width: 320px;
+      height: 480px;
+      transition: all 0.5s ease;
+      transform: rotateX(45deg) scale(0.85);
+      perspective: 1000px;
+      box-shadow: 0px 20px 50px rgba(0, 0, 0, 0.5);
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: pointer;
+      animation: cardEntry 1s ease-out;
+    }
+
+    .step-card:nth-child(1) {
+      background: linear-gradient(to bottom, #1a3a2f 30%, #0d1f1a 100%);
+      z-index: 3;
+    }
+
+    .step-card:nth-child(2) {
+      background: linear-gradient(to bottom, #2d1f4e 30%, #1a1232 100%);
+      z-index: 2;
+    }
+
+    .step-card:nth-child(3) {
+      background: linear-gradient(to bottom, #3a2a1a 30%, #1f1610 100%);
+      z-index: 1;
+    }
+
+    .step-card:hover {
+      transform: rotate(0deg) scale(1) translateY(-20px);
+      z-index: 100;
+      box-shadow: 0px 40px 100px rgba(181, 255, 74, 0.2);
+    }
+
+    @keyframes cardEntry {
+      0% {
+        opacity: 0;
+        transform: rotateX(60deg) scale(0.7) translateY(-50px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: rotateX(45deg) scale(0.85);
+      }
+    }
+
+    .step-card:nth-child(1) {
+      animation-delay: 0s;
+    }
+
+    .step-card:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .step-card:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    .step-image {
+      position: relative;
+      width: 100%;
+      height: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .step-card:nth-child(1) .step-image {
+      background: linear-gradient(to top, #1a3a2f 0%, #2d5a4a 100%);
+    }
+
+    .step-card:nth-child(2) .step-image {
+      background: linear-gradient(to top, #2d1f4e 0%, #4a3a6e 100%);
+    }
+
+    .step-card:nth-child(3) .step-image {
+      background: linear-gradient(to top, #3a2a1a 0%, #5a4a3a 100%);
+    }
+
+    .step-image-placeholder {
+      font-size: 100px;
+      transition: all 0.5s ease;
+      filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+    }
+
+    .step-card:hover .step-image-placeholder {
+      transform: scale(1.3) translateY(-10px);
+    }
+
+    .step-number {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 80px;
+      font-weight: 900;
+      color: rgba(255, 255, 255, 0.1);
+      line-height: 1;
+      z-index: 5;
+    }
+
+    .step-content {
+      position: relative;
+      width: 100%;
+      height: 50%;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      z-index: 10;
+    }
+
+    .step-title {
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: #fff;
+      text-align: center;
+      text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .step-description {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.7;
+      text-align: center;
+      padding: 0 10px;
+    }
+
+    .step-hint {
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.4);
+      letter-spacing: 1px;
+    }
+
+    @media (max-width: 991px) {
+      .steps-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+        perspective: none;
+      }
+
+      .step-card {
+        transform: rotateX(0deg) scale(1);
+        width: 90%;
+        max-width: 350px;
+      }
+
+      .step-card:hover {
+        transform: scale(1.02) translateY(-10px);
+      }
+
+      @keyframes cardEntry {
+        0% {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .how-title {
+        font-size: 48px;
+      }
+    }
+
+
+    /* PRICING SECTION */
+    .pricing-section {
+      padding: 80px 40px;
+      background: var(--bg);
+      overflow: visible;
+    }
+
+    .pricing-title {
+      font-size: 72px;
+      font-weight: 900;
+      margin-bottom: 80px;
       text-align: left;
+      text-transform: uppercase;
+      letter-spacing: -2px;
+      padding-left: 40px;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .pricing-card {
+      background: #111;
+      border-radius: 30px;
+      overflow: hidden;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      position: relative;
+      height: 500px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .pricing-card:hover {
+      transform: scale(1.15);
+      z-index: 10;
+      border-color: var(--accent);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+    }
+
+    .pricing-image {
+      width: 100%;
+      height: 300px;
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 80px;
+      transition: height 0.5s ease;
+    }
+
+    .pricing-card:hover .pricing-image {
+      height: 200px;
+    }
+
+    .pricing-content {
+      padding: 30px;
+      transition: all 0.5s ease;
+    }
+
+    .pricing-package {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    .pricing-subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .pricing-details {
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.5s ease;
+    }
+
+    .pricing-card:hover .pricing-details {
+      opacity: 1;
+      max-height: 300px;
+    }
+
+    .pricing-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      padding-top: 15px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .pricing-label {
+      font-size: 14px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .pricing-value {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .pricing-price {
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--accent);
+      margin-top: 20px;
+    }
+
+    .pricing-note {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 15px;
+      font-style: italic;
+    }
+
+    @media (max-width: 1200px) {
+      .pricing-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pricing-title {
+        font-size: 48px;
+      }
+
+      .pricing-card:hover {
+        transform: scale(1.05);
+      }
+    }
+
+
+    /* FOOTER STYLES */
+    footer {
+      background: #0a0a0a;
+      padding: 80px 0 40px;
+      margin-top: 100px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 60px 60px 0 0;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .footer-main {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 60px;
+    }
+
+    .footer-brand h2 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--accent);
+    }
+
+    .footer-brand p {
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 30px;
+      max-width: 350px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 15px;
+    }
+
+    .footer-social a {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-size: 18px;
+    }
+
+    .footer-social a:hover {
+      background: var(--accent);
+      color: #000;
+      transform: translateY(-3px);
+    }
+
+    .footer-links h4 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 25px;
+      color: #fff;
+    }
+
+    .footer-links ul {
+      list-style: none;
+    }
+
+    .footer-links ul li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links ul li a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+      font-size: 15px;
+    }
+
+    .footer-links ul li a:hover {
+      color: var(--accent);
+    }
+
+    .footer-contact p {
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      font-size: 15px;
+    }
+
+    .footer-contact a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-contact a:hover {
+      color: var(--accent);
     }
 
     .footer-bottom {
       display: flex;
       justify-content: space-between;
+      align-items: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
       color: var(--text-muted);
       font-size: 14px;
-      padding-top: 30px;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      margin-top: 70px;
+    }
+
+    .footer-legal {
+      display: flex;
+      gap: 30px;
+    }
+
+    .footer-legal a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-legal a:hover {
+      color: var(--accent);
+    }
+
+    @media (max-width: 991px) {
+      .footer-main {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .footer-main {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+      }
     }
   </style>
 </head>
@@ -649,129 +1338,341 @@
     </div>
   </section>
 
-  <!-- ==================== Start Services ==================== -->
-  <section class="services-section">
-    <div class="container">
-      <div class="sec-head">
-        <h6 class="service-badge">Our Service</h6>
-        <h2 class="service-title">What We Offer</h2>
+  <!-- ==================== HOW IT WORKS SECTION ==================== -->
+  <section class="how-it-works">
+    <h2 class="how-title">How It Works</h2>
+
+    <div class="steps-container">
+      <!-- Step 1 -->
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <div class="step-image">
+          <div class="step-image-placeholder">📱</div>
+        </div>
+        <div class="step-content">
+          <h3 class="step-title">Tap or Scan</h3>
+          <p class="step-description">Simply tap your TAP card to any smartphone or scan the QR code to instantly share
+            your digital profile.</p>
+        </div>
       </div>
 
-      <div class="stacking-cards">
-        <!-- Card 1: Warranty (Dark) -->
-        <div class="service-card card-1">
-          <div class="service-content">
-            <div class="service-text">
-              <span class="service-number">001</span>
-              <h3 class="service-heading">Warranty Strategy</h3>
-              <p class="service-description">We give 2 years warranty for each enterprise client. Ensuring your peace of
-                mind.</p>
-              <div class="service-tags">
-                <div class="tag-pill">2 Years</div>
-                <div class="tag-pill">Enterprise</div>
-                <div class="tag-pill">Support</div>
-              </div>
-            </div>
-            <div class="service-visual">
-              <img
-                src="file:///C:/Users/ruthm/.gemini/antigravity/brain/3a27335f-f59d-4c98-9333-058da3835464/icon_warranty_1765147580386.png"
-                class="service-icon-img" alt="Warranty">
-            </div>
-          </div>
+      <!-- Step 2 -->
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <div class="step-image">
+          <div class="step-image-placeholder">👤</div>
         </div>
+        <div class="step-content">
+          <h3 class="step-title">Digital Profile</h3>
+          <p class="step-description">Your complete digital business card appears on their phone - no app needed, works
+            on any device.</p>
+        </div>
+      </div>
 
-        <!-- Card 2: Replacement (Lime Green) -->
-        <div class="service-card card-2">
-          <div class="service-content">
-            <div class="service-text">
-              <span class="service-number">002</span>
-              <h3 class="service-heading">Product Replacement</h3>
-              <p class="service-description">For lost Tap Cards, we will replace the card with a service charge. Simple
-                and fast.</p>
-              <div class="service-tags">
-                <div class="tag-pill">Fast Service</div>
-                <div class="tag-pill">Replacement</div>
-              </div>
-            </div>
-            <div class="service-visual">
-              <img
-                src="file:///C:/Users/ruthm/.gemini/antigravity/brain/3a27335f-f59d-4c98-9333-058da3835464/icon_replacement_1765147599595.png"
-                class="service-icon-img" alt="Replacement">
-            </div>
-          </div>
+      <!-- Step 3 -->
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <div class="step-image">
+          <div class="step-image-placeholder">💾</div>
         </div>
-
-        <!-- Card 3: Data Protection (White) -->
-        <div class="service-card card-3">
-          <div class="service-content">
-            <div class="service-text">
-              <span class="service-number">003</span>
-              <h3 class="service-heading">Data Protection</h3>
-              <p class="service-description">We assure our clients of their data privacy & non negotiable security
-                measures. All data is stored in Ethiopia.</p>
-              <div class="service-tags">
-                <div class="tag-pill">Privacy</div>
-                <div class="tag-pill">Local Data</div>
-              </div>
-            </div>
-            <div class="service-visual">
-              <img
-                src="file:///C:/Users/ruthm/.gemini/antigravity/brain/3a27335f-f59d-4c98-9333-058da3835464/icon_data_protection_1765147615461.png"
-                class="service-icon-img" alt="Data Protection">
-            </div>
-          </div>
+        <div class="step-content">
+          <h3 class="step-title">Save & Connect</h3>
+          <p class="step-description">They save your contact directly to their phone with one tap. Networking made
+            effortless.</p>
         </div>
-
-        <!-- Card 4: Platform Security (Blue) -->
-        <div class="service-card card-4">
-          <div class="service-content">
-            <div class="service-text">
-              <span class="service-number">004</span>
-              <h3 class="service-heading">Platform Security</h3>
-              <p class="service-description">Bank-grade encryption for all your digital interactions. Your profile is
-                safe with us.</p>
-              <div class="service-tags">
-                <div class="tag-pill">Encrypted</div>
-                <div class="tag-pill">NFC Secure</div>
-                <div class="tag-pill">Safe</div>
-              </div>
-            </div>
-            <div class="service-visual">
-              <img
-                src="file:///C:/Users/ruthm/.gemini/antigravity/brain/3a27335f-f59d-4c98-9333-058da3835464/icon_security_shield_1765148411201.png"
-                class="service-icon-img" alt="Security Shield">
-            </div>
-          </div>
-        </div>
-        <div style="height: 80vh;"></div>
       </div>
     </div>
   </section>
-  <!-- ==================== End Services ==================== -->
+  <!-- ==================== END HOW IT WORKS SECTION ==================== -->
 
-  <footer>
-    <div class="footer-top">WE WOULD LOVE TO HEAR FROM YOU.</div>
-    <a href="mailto:info@tap.et" class="email">info@tap.et</a>
+  <!-- ==================== STACKING CARDS SECTION ==================== -->
+  <section class="stacking-cards-section">
+    <div class="sec-head">
+      <h6 class="service-badge">Services</h6>
+      <h2 class="service-title">Our Services</h2>
+    </div>
 
-    <div class="footer-grid">
-      <div>
-        <h4>Tap.et</h4>
-      </div>
-
-      <div>
-        <h5>Contact</h5>
-        <p>0927-34-73-54</p>
-        <p>0936-51-51-36</p>
-      </div>
-
-      <div>
-        <h5>Our Office:</h5>
-        <p>Ethiopia</p>
+    <!-- Card 1: Instant Sharing -->
+    <div class="service-card card-1">
+      <div class="service-content">
+        <div class="service-text">
+          <span class="service-number">001</span>
+          <h2 class="service-heading">Instant<br>Sharing</h2>
+          <p class="service-description">Share your contact details, social profiles, and websites with a single tap. No
+            app required.</p>
+        </div>
+        <div class="service-visual">
+          <span style="font-size:150px;">📲</span>
+        </div>
       </div>
     </div>
 
-    <div class="footer-bottom">
-      <div>© 2025 TAP - Digital Business Card</div>
+    <!-- Card 2: Real-Time Analytics -->
+    <div class="service-card card-2">
+      <div class="service-content">
+        <div class="service-text">
+          <span class="service-number">002</span>
+          <h2 class="service-heading">Real-Time<br>Analytics</h2>
+          <p class="service-description">Track who views your card and from where. Gain insights instantly.</p>
+        </div>
+        <div class="service-visual">
+          <span style="font-size:150px;">📊</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3: Eco-Friendly -->
+    <div class="service-card card-3">
+      <div class="service-content">
+        <div class="service-text">
+          <span class="service-number">003</span>
+          <h2 class="service-heading">Eco-Friendly<br>Solution</h2>
+          <p class="service-description">Save paper and help the planet. One card lasts a lifetime.</p>
+        </div>
+        <div class="service-visual">
+          <span style="font-size:150px;">🌱</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4: Bank-Grade Security -->
+    <div class="service-card card-4">
+      <div class="service-content">
+        <div class="service-text">
+          <span class="service-number">004</span>
+          <h2 class="service-heading">Bank-Grade<br>Security</h2>
+          <p class="service-description">Your data is encrypted and safe. We prioritize your privacy.</p>
+        </div>
+        <div class="service-visual">
+          <span style="font-size:150px;">🔒</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ==================== END STACKING CARDS SECTION ==================== -->
+
+  <!-- ==================== Start Features Section ==================== -->
+  <section class="features-section">
+    <div class="tap-watermark"></div>
+    <div class="container">
+      <div class="sec-head">
+        <h6 class="service-badge">Dynamic</h6>
+        <h2 class="service-title" style="text-align: center; margin-bottom: 60px;">Features</h2>
+      </div>
+
+      <div class="row">
+
+        <!-- Lead Generation -->
+        <div class="col-lg-3 col-md-6" data-ui-animate data-delay="0.2">
+          <div class="item mb-60px app-dark">
+            <div class="w-60px mb-30px">
+              <span style="font-size:40px;">📅</span>
+            </div>
+            <h6 class="mb-40px">Lead <br> Generation</h6>
+            <ul style="color: var(--text-muted); font-size: 14px; padding-left: 0; list-style: none;">
+              <li>🟢 Appointment</li>
+              <li>🟡 Inquiry</li>
+              <li>🟢 Gallery</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Admin Panel -->
+        <div class="col-lg-3 offset-lg-6 col-md-6" data-ui-animate data-delay="0.2">
+          <div class="item bg-light mt-60px mb-60px app-white">
+            <div class="w-60px mb-30px">
+              <span style="font-size:40px;">⚙️</span>
+            </div>
+            <h6 class="mb-40px">Admin Panel <br>& Analytics</h6>
+            <ul style="color: #333; font-size: 14px; padding-left: 0; list-style: none;">
+              <li>🟢 User Management</li>
+              <li>🔴 Log in assign</li>
+              <li>🔴 Design Approval</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Personal Details -->
+        <div class="col-lg-3 offset-lg-5 col-md-6" data-ui-animate data-delay="0.2">
+          <div class="item mt-60px mb-60px app-dark">
+            <div class="w-60px mb-30px">
+              <span style="font-size:40px;">👤</span>
+            </div>
+            <h6 class="mb-40px">Personal <br> Details</h6>
+            <ul style="color: var(--text-muted); font-size: 14px; padding-left: 0; list-style: none;">
+              <li>• Name</li>
+              <li>• Phone</li>
+              <li>• Address</li>
+              <li>• Social Links</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Business Details -->
+        <div class="col-lg-3 offset-lg-2 col-md-6" data-ui-animate data-delay="0.2">
+          <div class="item bg-light main-colorbg mt-60px app-lime">
+            <div class="w-60px mb-30px">
+              <span style="font-size:40px;">🏢</span>
+            </div>
+            <h6 class="mb-40px">Business <br> Details</h6>
+            <ul style="color: #000; font-size: 14px; padding-left: 0; list-style: none;">
+              <li>• Website</li>
+              <li>• Location</li>
+              <li>• Product</li>
+              <li>• Service</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Reports -->
+        <div class="col-lg-3 offset-lg-3 col-md-6" data-ui-animate data-delay="0.2">
+          <div class="item mt-60px app-dark">
+            <div class="w-60px mb-30px">
+              <span style="font-size:40px;">📊</span>
+            </div>
+            <h6 class="mb-40px">Reports</h6>
+            <p>Generate reports and create daily, weekly or monthly information for your business.</p>
+          </div>
+        </div>
+
+      </div>
+
+
+  </section>
+  <!-- ==================== End Features ==================== -->
+
+  <!-- ==================== PRICING SECTION ==================== -->
+  <section class="pricing-section">
+    <h2 class="pricing-title">Pricing</h2>
+
+    <div class="pricing-grid">
+      <!-- Individual Cards -->
+      <div class="pricing-card">
+        <div class="pricing-image">💳</div>
+        <div class="pricing-content">
+          <h3 class="pricing-package">Individual Cards</h3>
+          <p class="pricing-subtitle">Customized card for 2 year</p>
+          <div class="pricing-details">
+            <div class="pricing-item">
+              <span class="pricing-label">Quantity</span>
+              <span class="pricing-value">&lt;10</span>
+            </div>
+            <div class="pricing-price">3900 Birr</div>
+            <p class="pricing-note">*All prices are subject to VAT</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- S&M Business Cards -->
+      <div class="pricing-card">
+        <div class="pricing-image">🏢</div>
+        <div class="pricing-content">
+          <h3 class="pricing-package">S&M Business</h3>
+          <p class="pricing-subtitle">Customized card for 2 year</p>
+          <div class="pricing-details">
+            <div class="pricing-item">
+              <span class="pricing-label">Quantity</span>
+              <span class="pricing-value">&lt;25</span>
+            </div>
+            <div class="pricing-price">3600 Birr</div>
+            <p class="pricing-note">*All prices are subject to VAT</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Enterprise Cards -->
+      <div class="pricing-card">
+        <div class="pricing-image">🏭</div>
+        <div class="pricing-content">
+          <h3 class="pricing-package">Enterprise</h3>
+          <p class="pricing-subtitle">Customized card for 2 year</p>
+          <div class="pricing-details">
+            <div class="pricing-item">
+              <span class="pricing-label">Quantity</span>
+              <span class="pricing-value">&lt;50</span>
+            </div>
+            <div class="pricing-price">3200 Birr</div>
+            <p class="pricing-note">*All prices are subject to VAT</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Corporate Cards -->
+      <div class="pricing-card">
+        <div class="pricing-image">🌟</div>
+        <div class="pricing-content">
+          <h3 class="pricing-package">Corporate</h3>
+          <p class="pricing-subtitle">Customized card for 2 year</p>
+          <div class="pricing-details">
+            <div class="pricing-item">
+              <span class="pricing-label">Quantity</span>
+              <span class="pricing-value">&gt;50</span>
+            </div>
+            <div class="pricing-price">2500 Birr</div>
+            <p class="pricing-note">*All prices are subject to VAT</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ==================== END PRICING SECTION ==================== -->
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-main">
+        <!-- Brand & Social -->
+        <div class="footer-brand">
+          <h2>TAP</h2>
+          <p>One tap is all it takes. Digital business cards that make networking effortless and eco-friendly.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook">📘</a>
+            <a href="#" aria-label="Twitter">🐦</a>
+            <a href="#" aria-label="Instagram">📷</a>
+            <a href="#" aria-label="LinkedIn">💼</a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-links">
+          <h4>Product</h4>
+          <ul>
+            <li><a href="#">Features</a></li>
+            <li><a href="#">Pricing</a></li>
+            <li><a href="#">How it Works</a></li>
+            <li><a href="#">Get Started</a></li>
+          </ul>
+        </div>
+
+        <!-- Company -->
+        <div class="footer-links">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-contact">
+          <h4>Contact</h4>
+          <p><a href="mailto:info@tap.et">info@tap.et</a></p>
+          <p><a href="https://tap.et">tap.et</a></p>
+          <p>0927-34-73-54</p>
+          <p>0936-51-51-36</p>
+          <p style="margin-top: 15px;">Ethiopia</p>
+        </div>
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <div>© 2025 TAP - Digital Business Card. All rights reserved.</div>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
     </div>
   </footer>
 
@@ -794,31 +1695,25 @@
       cards.forEach((card, i) => {
         const rect = card.getBoundingClientRect();
         const nextCard = cards[i + 1];
+        let scale = 1;
+        let brightness = 100;
 
-        // If this is NOT the last card, we check the NEXT card's position
         if (nextCard) {
           const nextRect = nextCard.getBoundingClientRect();
-          // Distance of next card from bottom of viewport (or top of this card)
-          // We want the current card to shrink as the next card moves UP nicely covering it.
-          // When next card is at bottom of screen, scale is 1. When next card is at 0px (sticking), scale is 0.9.
-
-          const diff = nextRect.top - 100; // 100 is sticky top
-          const maxDist = windowHeight; // Approx range of motion
+          const diff = nextRect.top - 100;
+          const maxDist = windowHeight;
 
           if (diff < windowHeight && diff > 0) {
-            // Calculate scale (1 -> 0.9)
-            const progress = 1 - (diff / maxDist); // 0 to 1
-            scale = 1 - (progress * 0.1); // shrink by 10% max
-            brightness = 100 - (progress * 50); // darken background card
+            const progress = 1 - (diff / maxDist);
+            scale = 1 - (progress * 0.1);
+            brightness = 100 - (progress * 50);
           } else if (diff <= 0) {
-            // Completely covered or scrolled past
             scale = 0.9;
             brightness = 50;
           }
         }
 
-        // Apply transform only if sticky (rect.top <= 100)
-        if (rect.top <= 101) { // 101 for safety
+        if (rect.top <= 101) {
           card.style.transform = `scale(${scale})`;
           card.style.filter = `brightness(${brightness}%)`;
         } else {
