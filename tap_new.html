@@ -59,6 +59,10 @@
       color: #fff;
     }
 
+    .cart-icon {
+      justify-self: end;
+    }
+
     nav {
       justify-self: center;
     }
@@ -789,9 +793,540 @@
       line-height: 1.6;
     }
 
+    /* ORBITAL FEATURES LAYOUT - SUN & PLANETS */
+    .orbital-features {
+      position: relative;
+      width: 100%;
+      min-height: 600px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .orbital-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      width: 320px;
+      height: 320px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle, rgba(181, 255, 74, 0.15) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: pulse-glow 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse-glow {
+
+      0%,
+      100% {
+        box-shadow: 0 0 60px rgba(181, 255, 74, 0.3);
+      }
+
+      50% {
+        box-shadow: 0 0 100px rgba(181, 255, 74, 0.5);
+      }
+    }
+
+    .orbital-center img {
+      max-width: 280px;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
+    }
+
+    .orbital-item {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 220px;
+      transform-origin: center center;
+      z-index: 5;
+    }
+
+    .orbital-item .item {
+      min-height: 280px;
+      padding: 30px 25px;
+      font-size: 14px;
+    }
+
+    .orbital-item .item h6 {
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+
+    .orbital-item .item ul,
+    .orbital-item .item p {
+      font-size: 12px;
+    }
+
+    /* Position 5 planets around the sun - evenly distributed at 72 degrees apart */
+    .orbital-item:nth-child(2) {
+      transform: translate(-50%, -50%) rotate(0deg) translateY(-380px) rotate(0deg);
+    }
+
+    .orbital-item:nth-child(3) {
+      transform: translate(-50%, -50%) rotate(72deg) translateY(-380px) rotate(-72deg);
+    }
+
+    .orbital-item:nth-child(4) {
+      transform: translate(-50%, -50%) rotate(144deg) translateY(-380px) rotate(-144deg);
+    }
+
+    .orbital-item:nth-child(5) {
+      transform: translate(-50%, -50%) rotate(216deg) translateY(-380px) rotate(-216deg);
+    }
+
+    .orbital-item:nth-child(6) {
+      transform: translate(-50%, -50%) rotate(288deg) translateY(-380px) rotate(-288deg);
+    }
+
+    /* Orbit ring decoration */
+    .orbital-features::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 760px;
+      height: 760px;
+      border: 1px dashed rgba(181, 255, 74, 0.2);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    /* Responsive - Stack on mobile */
+    @media (max-width: 1200px) {
+      .orbital-features {
+        min-height: auto;
+        flex-direction: column;
+        padding: 60px 20px;
+      }
+
+      .orbital-center {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        margin-bottom: 40px;
+      }
+
+      .orbital-item {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none !important;
+        width: 100%;
+        max-width: 350px;
+        margin: 15px auto;
+      }
+
+      .orbital-item .item {
+        min-height: auto;
+      }
+
+      .orbital-features::before {
+        display: none;
+      }
+    }
+
+    /* WHAT IS IT SECTION */
+    .what-is-it-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+      padding: 2rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .what-is-it-text {
+      color: #fff;
+    }
+
+    .what-is-it-text h2 {
+      font-size: 3.5rem;
+      margin-bottom: 30px;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+
+    .what-is-it-text p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      margin-bottom: 25px;
+      color: var(--text-muted);
+    }
+
+    .what-is-it-image {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .what-is-it-image img {
+      width: 100%;
+      height: auto;
+      max-height: 600px;
+      object-fit: contain;
+      filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-20px);
+      }
+
+      100% {
+        transform: translateY(0px);
+      }
+    }
+
+    @media (max-width: 991px) {
+      .what-is-it-section {
+        grid-template-columns: 1fr;
+        padding: 4rem 2rem;
+        text-align: center;
+      }
+
+      .what-is-it-image {
+        margin-top: 40px;
+      }
+    }
+
+    /* WHAT YOU'LL GET SECTION */
+    .purchase-section {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 2rem;
+      align-items: start;
+      padding: 2rem 2rem;
+    }
+
+    .what-text {
+      color: #fff;
+      position: sticky;
+      top: 120px;
+    }
+
+    .what-text h2 {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      font-weight: 900;
+      line-height: 1.1;
+      text-transform: uppercase;
+    }
+
+    .what-text p {
+      line-height: 1.7;
+      margin-bottom: 1rem;
+      opacity: 0.9;
+      color: var(--text-muted);
+    }
+
+    /* Purchase Grid Layout */
+    .purchase-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .purchase-hero {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #1a1a2e 0%, #0d0d0d 100%);
+      padding: 40px;
+      min-height: 350px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .purchase-hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .purchase-hero h3 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 15px;
+    }
+
+    .purchase-hero h3 span {
+      color: var(--accent);
+    }
+
+    .purchase-hero p {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 350px;
+      line-height: 1.6;
+    }
+
+    .purchase-hero-image {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 45%;
+      max-width: 280px;
+    }
+
+    .purchase-hero-image img {
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
+    }
+
+    .purchase-features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .purchase-feature {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 25px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .purchase-feature::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, transparent 60%);
+      z-index: 1;
+    }
+
+    .purchase-feature-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .purchase-feature h4 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .purchase-feature p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    @media (max-width: 1100px) {
+      .what-section {
+        grid-template-columns: 1fr;
+      }
+
+      .what-text {
+        position: relative;
+        top: auto;
+        text-align: center;
+      }
+
+      .what-text h2 {
+        font-size: 2.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .purchase-features {
+        grid-template-columns: 1fr;
+      }
+
+      .purchase-hero {
+        min-height: auto;
+        padding: 30px;
+      }
+
+      .purchase-hero-image {
+        position: relative;
+        right: auto;
+        top: auto;
+        transform: none;
+        width: 100%;
+        max-width: 200px;
+        margin: 20px auto 0;
+      }
+    }
+
+    /* PLATFORM SECURITY SECTION */
+    .security-section {
+      padding: 50px 0;
+      background: var(--bg);
+      position: relative;
+    }
+
+    .security-header {
+      text-align: center;
+      margin-bottom: 60px;
+      padding: 0 20px;
+    }
+
+    .security-header h2 {
+      font-size: 48px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.1;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+    }
+
+    /* Secure URL Bar Visual */
+    .secure-url-visual {
+      max-width: 800px;
+      margin: 0 auto 80px;
+      background: #1a1a1a;
+      border-radius: 12px;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      position: relative;
+    }
+
+    .url-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .url-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .url-dot:nth-child(1) {
+      background: #ff5f56;
+    }
+
+    .url-dot:nth-child(2) {
+      background: #ffbd2e;
+    }
+
+    .url-dot:nth-child(3) {
+      background: #27c93f;
+    }
+
+    .url-bar {
+      flex: 1;
+      background: #000;
+      border-radius: 6px;
+      padding: 10px 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #27c93f;
+      /* Secure Green */
+      font-family: monospace;
+      font-size: 14px;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .url-lock {
+      font-size: 14px;
+    }
+
+    .url-text span {
+      color: #fff;
+    }
+
+    /* Security Grid */
+    .security-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .security-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      padding: 30px;
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .security-card:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(181, 255, 74, 0.3);
+    }
+
+    .security-icon {
+      font-size: 32px;
+      margin-bottom: 20px;
+      color: var(--accent);
+    }
+
+    .security-card h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: #fff;
+    }
+
+    .security-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 1024px) {
+      .security-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .security-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .security-header h2 {
+        font-size: 32px;
+      }
+
+      .secure-url-visual {
+        margin: 0 20px 60px;
+      }
+    }
+
     /* HOW IT WORKS SECTION - 3D PERSPECTIVE CARDS */
     .how-it-works {
-      padding: 50px 40px;
+      padding: 30px 20px;
       background: var(--bg);
       text-align: center;
       position: relative;
@@ -996,7 +1531,7 @@
 
     /* PRICING SECTION */
     .pricing-section {
-      padding: 80px 40px;
+      padding: 120px 40px;
       background: var(--bg);
       overflow: visible;
     }
@@ -1027,39 +1562,28 @@
       transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
       cursor: pointer;
       position: relative;
-      height: 500px;
+      min-height: 350px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .pricing-card:hover {
-      transform: scale(1.15);
+      transform: scale(1.05);
       z-index: 10;
       border-color: var(--accent);
       box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
     }
 
-    .pricing-image {
-      width: 100%;
-      height: 300px;
-      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 80px;
-      transition: height 0.5s ease;
-    }
-
-    .pricing-card:hover .pricing-image {
-      height: 200px;
-    }
-
     .pricing-content {
-      padding: 30px;
+      padding: 40px;
       transition: all 0.5s ease;
+      width: 100%;
     }
 
     .pricing-package {
-      font-size: 24px;
+      font-size: 32px;
       font-weight: 700;
       margin-bottom: 10px;
       color: #fff;
@@ -1143,8 +1667,8 @@
     /* FOOTER STYLES */
     footer {
       background: #0a0a0a;
-      padding: 80px 0 40px;
-      margin-top: 100px;
+      padding: 40px 0 20px;
+      margin-top: 50px;
       border-top: 1px solid rgba(255, 255, 255, 0.05);
       border-radius: 60px 60px 0 0;
     }
@@ -1286,6 +1810,170 @@
         text-align: center;
       }
     }
+
+    /* CART DRAWER STYLES */
+    .cart-icon {
+      cursor: pointer;
+      font-size: 24px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .cart-icon:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: var(--accent);
+      color: #000;
+      font-size: 10px;
+      font-weight: bold;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cart-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(5px);
+      z-index: 9998;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .cart-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      max-width: 450px;
+      height: 100%;
+      background: #0a0a0a;
+      z-index: 9999;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      border-left: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+      box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .cart-drawer.open {
+      transform: translateX(0);
+    }
+
+    .cart-header {
+      padding: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .cart-header h2 {
+      font-size: 28px;
+      margin: 0;
+      font-weight: 700;
+    }
+
+    .close-cart {
+      cursor: pointer;
+      font-size: 24px;
+      color: var(--text-muted);
+      transition: color 0.3s ease;
+    }
+
+    .close-cart:hover {
+      color: #fff;
+    }
+
+    .cart-body {
+      padding: 30px;
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .empty-cart-msg {
+      color: var(--text-muted);
+      font-size: 16px;
+    }
+
+    .empty-cart-icon {
+      font-size: 48px;
+      margin-bottom: 20px;
+      opacity: 0.5;
+    }
+
+    .cart-footer {
+      padding: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      background: #111;
+    }
+
+    .cart-subtotal {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .checkout-btn {
+      width: 100%;
+      padding: 16px;
+      background: #fff;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.3s ease;
+    }
+
+    .checkout-btn:hover {
+      background: var(--accent);
+    }
+
+    @media (max-width: 500px) {
+      .cart-drawer {
+        width: 100%;
+        max-width: none;
+      }
+    }
   </style>
 </head>
 
@@ -1295,14 +1983,15 @@
     <div class="logo">Tap.et</div>
     <nav>
       <ul>
-        <li><a href="#">Products</a></li>
+        <li><a href="#">Tap Store</a></li>
         <li><a href="#">Features</a></li>
         <li><a href="#">Pricing</a></li>
-        <li><a href="#">Blogs</a></li>
         <li><a href="#">Contact Us</a></li>
       </ul>
     </nav>
-    <div class="dark-toggle">🌙</div>
+    <div class="cart-icon" onclick="toggleCart()">
+      🛒 <span class="cart-count">0</span>
+    </div>
   </header>
 
   <section class="hero">
@@ -1338,6 +2027,31 @@
     </div>
   </section>
 
+
+  <!-- ==================== WHAT IS IT SECTION ==================== -->
+  <section class="what-is-it-section">
+    <div class="what-is-it-text">
+      <h2>WHAT IS IT?</h2>
+      <p>
+        Forget carrying a stack of paper cards everywhere. With Tap, one endlessly reusable card is all you need.
+        Through a tap or scan, you can share a fully customizable profile that highlights your most important links and
+        content.
+      </p>
+      <p>
+        Before Tap, people relied on paper cards or manually typing info into someone’s phone. We saw the
+        chance to use technology instead of paper—and completely reinvent how people connect.
+      </p>
+      <p>
+        Tap replaces outdated paper business cards with a fast, modern, NFC-powered digital
+        experience that updates in real time.
+      </p>
+    </div>
+    <div class="what-is-it-image">
+      <img src="images/what_is_it.png" alt="What Is Tap">
+    </div>
+  </section>
+  <!-- ==================== END WHAT IS IT SECTION ==================== -->
+
   <!-- ==================== HOW IT WORKS SECTION ==================== -->
   <section class="how-it-works">
     <h2 class="how-title">How It Works</h2>
@@ -1347,7 +2061,7 @@
       <div class="step-card">
         <div class="step-number">1</div>
         <div class="step-image">
-          <div class="step-image-placeholder">📱</div>
+          <img src="images/1.png" alt="Tap or Scan" style="max-width: 100%; height: auto; border-radius: 15px;">
         </div>
         <div class="step-content">
           <h3 class="step-title">Tap or Scan</h3>
@@ -1360,7 +2074,7 @@
       <div class="step-card">
         <div class="step-number">2</div>
         <div class="step-image">
-          <div class="step-image-placeholder">👤</div>
+          <img src="images/2.png" alt="Digital Profile" style="max-width: 100%; height: auto; border-radius: 15px;">
         </div>
         <div class="step-content">
           <h3 class="step-title">Digital Profile</h3>
@@ -1373,7 +2087,7 @@
       <div class="step-card">
         <div class="step-number">3</div>
         <div class="step-image">
-          <div class="step-image-placeholder">💾</div>
+          <img src="images/3.png" alt="Save and Connect" style="max-width: 100%; height: auto; border-radius: 15px;">
         </div>
         <div class="step-content">
           <h3 class="step-title">Save & Connect</h3>
@@ -1385,11 +2099,123 @@
   </section>
   <!-- ==================== END HOW IT WORKS SECTION ==================== -->
 
+
+
+  <!-- ==================== WHAT YOU'LL GET SECTION ==================== -->
+  <section class="purchase-section">
+    <div class="what-text">
+      <h2>What You'll<br>Get With<br>Every<br>Purchase</h2>
+    </div>
+
+    <!-- Purchase Grid -->
+    <div class="purchase-grid">
+      <!-- Hero Card -->
+      <div class="purchase-hero">
+        <div class="purchase-hero-content">
+          <h3>Branded<br><span>NFC Card</span></h3>
+          <p>More than just a business card, create memorable experiences with a simple 'tap' or scan</p>
+        </div>
+        <div class="purchase-hero-image">
+          <img src="images/Screenshot_2025-12-09_114934-removebg-preview.png" alt="TAP NFC Card">
+        </div>
+      </div>
+
+      <!-- Three Feature Cards -->
+      <div class="purchase-features">
+        <!-- Profile Page -->
+        <div class="purchase-feature"
+          style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600');">
+          <div class="purchase-feature-content">
+            <h4>Profile page</h4>
+            <p>A dedicated digital profile where you can store, share and update relevant contact information and files
+              instantly.</p>
+          </div>
+        </div>
+
+        <!-- Dashboard -->
+        <div class="purchase-feature"
+          style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600');">
+          <div class="purchase-feature-content">
+            <h4>Dashboard</h4>
+            <p>A personalized dashboard that enables you to manage and edit all Tap cards, receive insights and optimize
+              them.</p>
+          </div>
+        </div>
+
+        <!-- Design Support -->
+        <div class="purchase-feature"
+          style="background-image: url('https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=600');">
+          <div class="purchase-feature-content">
+            <h4>Design Support</h4>
+            <p>Our in-house design team is at your disposal to assist you in creating eye-catching designs.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ==================== END WHAT YOU'LL GET SECTION ==================== -->
+
+  <!-- ==================== PLATFORM SECURITY SECTION ==================== -->
+  <section class="security-section">
+    <div class="security-header">
+      <h2>Platform Security</h2>
+
+      <!-- Secure URL Bar Visual -->
+      <div class="secure-url-visual">
+        <div class="url-dots">
+          <div class="url-dot"></div>
+          <div class="url-dot"></div>
+          <div class="url-dot"></div>
+        </div>
+        <div class="url-bar">
+          <span class="url-lock">🔒</span>
+          <div class="url-text">
+            <span>https://</span>www.reallygreatsite.com
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Security Features Grid -->
+    <div class="security-grid">
+      <!-- Feature 1 -->
+      <div class="security-card">
+        <div class="security-icon">🔐</div>
+        <h3>User Authentication</h3>
+        <p>We implement the most secured way of authentication. Only password hashes are stored in the database.</p>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="security-card">
+        <div class="security-icon">🛡️</div>
+        <h3>Encryption in motion</h3>
+        <p>All communication to and from Tap.et servers enforce HTTPS using TLS 1.2. Non HTTPS traffic is not allowed.
+        </p>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="security-card">
+        <div class="security-icon">☁️</div>
+        <h3>Hosting</h3>
+        <p>All system data is stored and hosted in Ethiotelecom hosting, in Ethiopia.</p>
+      </div>
+
+      <!-- Feature 4 -->
+      <div class="security-card">
+        <div class="security-icon">👁️</div>
+        <h3>Privacy</h3>
+        <p>User and Organization names and details stored within the Tap.et system is governed by Tap.et's Privacy
+          Policy</p>
+      </div>
+    </div>
+  </section>
+  <!-- ==================== END PLATFORM SECURITY SECTION ==================== -->
+
   <!-- ==================== STACKING CARDS SECTION ==================== -->
-  <section class="stacking-cards-section">
+  <section class="stacking-cards-section" style="padding: 30px 0;">
     <div class="sec-head">
-      <h6 class="service-badge">Services</h6>
-      <h2 class="service-title">Our Services</h2>
+
+      <h2 class="service-title">OUR SERVICES</h2>
     </div>
 
     <!-- Card 1: Instant Sharing -->
@@ -1401,9 +2227,7 @@
           <p class="service-description">Share your contact details, social profiles, and websites with a single tap. No
             app required.</p>
         </div>
-        <div class="service-visual">
-          <span style="font-size:150px;">📲</span>
-        </div>
+
       </div>
     </div>
 
@@ -1415,9 +2239,7 @@
           <h2 class="service-heading">Real-Time<br>Analytics</h2>
           <p class="service-description">Track who views your card and from where. Gain insights instantly.</p>
         </div>
-        <div class="service-visual">
-          <span style="font-size:150px;">📊</span>
-        </div>
+
       </div>
     </div>
 
@@ -1429,9 +2251,7 @@
           <h2 class="service-heading">Eco-Friendly<br>Solution</h2>
           <p class="service-description">Save paper and help the planet. One card lasts a lifetime.</p>
         </div>
-        <div class="service-visual">
-          <span style="font-size:150px;">🌱</span>
-        </div>
+
       </div>
     </div>
 
@@ -1443,9 +2263,7 @@
           <h2 class="service-heading">Bank-Grade<br>Security</h2>
           <p class="service-description">Your data is encrypted and safe. We prioritize your privacy.</p>
         </div>
-        <div class="service-visual">
-          <span style="font-size:150px;">🔒</span>
-        </div>
+
       </div>
     </div>
   </section>
@@ -1454,22 +2272,26 @@
   <!-- ==================== Start Features Section ==================== -->
   <section class="features-section">
     <div class="tap-watermark"></div>
-    <div class="container">
+    <div class="container" style="max-width: 1400px;">
       <div class="sec-head">
-        <h6 class="service-badge">Dynamic</h6>
+
         <h2 class="service-title" style="text-align: center; margin-bottom: 60px;">Features</h2>
       </div>
 
-      <div class="row">
+      <!-- Orbital Layout: Sun (Image) + 5 Planets (Cards) -->
+      <div class="orbital-features">
 
-        <!-- Lead Generation -->
-        <div class="col-lg-3 col-md-6" data-ui-animate data-delay="0.2">
-          <div class="item mb-60px app-dark">
-            <div class="w-60px mb-30px">
-              <span style="font-size:40px;">📅</span>
-            </div>
-            <h6 class="mb-40px">Lead <br> Generation</h6>
-            <ul style="color: var(--text-muted); font-size: 14px; padding-left: 0; list-style: none;">
+        <!-- Center Image (The Sun) -->
+        <div class="orbital-center">
+          <img src="images/Screenshot_2025-12-09_114934-removebg-preview.png" alt="TAP Card">
+        </div>
+
+        <!-- Planet 1: Lead Generation -->
+        <div class="orbital-item">
+          <div class="item app-dark">
+
+            <h6>Lead<br>Generation</h6>
+            <ul style="color: var(--text-muted); font-size: 12px; padding-left: 0; list-style: none;">
               <li>🟢 Appointment</li>
               <li>🟡 Inquiry</li>
               <li>🟢 Gallery</li>
@@ -1477,14 +2299,12 @@
           </div>
         </div>
 
-        <!-- Admin Panel -->
-        <div class="col-lg-3 offset-lg-6 col-md-6" data-ui-animate data-delay="0.2">
-          <div class="item bg-light mt-60px mb-60px app-white">
-            <div class="w-60px mb-30px">
-              <span style="font-size:40px;">⚙️</span>
-            </div>
-            <h6 class="mb-40px">Admin Panel <br>& Analytics</h6>
-            <ul style="color: #333; font-size: 14px; padding-left: 0; list-style: none;">
+        <!-- Planet 2: Admin Panel -->
+        <div class="orbital-item">
+          <div class="item app-white">
+
+            <h6>Admin Panel<br>& Analytics</h6>
+            <ul style="color: #333; font-size: 12px; padding-left: 0; list-style: none;">
               <li>🟢 User Management</li>
               <li>🔴 Log in assign</li>
               <li>🔴 Design Approval</li>
@@ -1492,14 +2312,12 @@
           </div>
         </div>
 
-        <!-- Personal Details -->
-        <div class="col-lg-3 offset-lg-5 col-md-6" data-ui-animate data-delay="0.2">
-          <div class="item mt-60px mb-60px app-dark">
-            <div class="w-60px mb-30px">
-              <span style="font-size:40px;">👤</span>
-            </div>
-            <h6 class="mb-40px">Personal <br> Details</h6>
-            <ul style="color: var(--text-muted); font-size: 14px; padding-left: 0; list-style: none;">
+        <!-- Planet 3: Personal Details -->
+        <div class="orbital-item">
+          <div class="item app-dark">
+
+            <h6>Personal<br>Details</h6>
+            <ul style="color: var(--text-muted); font-size: 12px; padding-left: 0; list-style: none;">
               <li>• Name</li>
               <li>• Phone</li>
               <li>• Address</li>
@@ -1508,14 +2326,12 @@
           </div>
         </div>
 
-        <!-- Business Details -->
-        <div class="col-lg-3 offset-lg-2 col-md-6" data-ui-animate data-delay="0.2">
-          <div class="item bg-light main-colorbg mt-60px app-lime">
-            <div class="w-60px mb-30px">
-              <span style="font-size:40px;">🏢</span>
-            </div>
-            <h6 class="mb-40px">Business <br> Details</h6>
-            <ul style="color: #000; font-size: 14px; padding-left: 0; list-style: none;">
+        <!-- Planet 4: Business Details -->
+        <div class="orbital-item">
+          <div class="item app-lime">
+
+            <h6>Business<br>Details</h6>
+            <ul style="color: #000; font-size: 12px; padding-left: 0; list-style: none;">
               <li>• Website</li>
               <li>• Location</li>
               <li>• Product</li>
@@ -1524,20 +2340,17 @@
           </div>
         </div>
 
-        <!-- Reports -->
-        <div class="col-lg-3 offset-lg-3 col-md-6" data-ui-animate data-delay="0.2">
-          <div class="item mt-60px app-dark">
-            <div class="w-60px mb-30px">
-              <span style="font-size:40px;">📊</span>
-            </div>
-            <h6 class="mb-40px">Reports</h6>
-            <p>Generate reports and create daily, weekly or monthly information for your business.</p>
+        <!-- Planet 5: Reports -->
+        <div class="orbital-item">
+          <div class="item app-dark">
+
+            <h6>Reports</h6>
+            <p style="font-size: 12px;">Generate reports and create daily, weekly or monthly information.</p>
           </div>
         </div>
 
       </div>
-
-
+    </div>
   </section>
   <!-- ==================== End Features ==================== -->
 
@@ -1548,7 +2361,7 @@
     <div class="pricing-grid">
       <!-- Individual Cards -->
       <div class="pricing-card">
-        <div class="pricing-image">💳</div>
+
         <div class="pricing-content">
           <h3 class="pricing-package">Individual Cards</h3>
           <p class="pricing-subtitle">Customized card for 2 year</p>
@@ -1565,7 +2378,7 @@
 
       <!-- S&M Business Cards -->
       <div class="pricing-card">
-        <div class="pricing-image">🏢</div>
+
         <div class="pricing-content">
           <h3 class="pricing-package">S&M Business</h3>
           <p class="pricing-subtitle">Customized card for 2 year</p>
@@ -1582,7 +2395,7 @@
 
       <!-- Enterprise Cards -->
       <div class="pricing-card">
-        <div class="pricing-image">🏭</div>
+
         <div class="pricing-content">
           <h3 class="pricing-package">Enterprise</h3>
           <p class="pricing-subtitle">Customized card for 2 year</p>
@@ -1599,7 +2412,7 @@
 
       <!-- Corporate Cards -->
       <div class="pricing-card">
-        <div class="pricing-image">🌟</div>
+
         <div class="pricing-content">
           <h3 class="pricing-package">Corporate</h3>
           <p class="pricing-subtitle">Customized card for 2 year</p>
@@ -1725,6 +2538,124 @@
   </script>
 
   <div class="bottom-screen-blur"></div>
+  <!-- CART DRAWER HTML -->
+  <div class="cart-overlay" onclick="toggleCart()"></div>
+  <div class="cart-drawer">
+    <div class="cart-header">
+      <h2>Cart</h2>
+      <div class="close-cart" onclick="toggleCart()">✕</div>
+    </div>
+    <div class="cart-body">
+      <div class="empty-cart-icon">🛒</div>
+      <div class="empty-cart-msg">Your cart is empty</div>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-subtotal">
+        <span>SUBTOTAL</span>
+        <span>$0.00</span>
+      </div>
+      <button class="checkout-btn">
+        Check out
+
+      </button>
+    </div>
+  </div>
+
+  <script>
+    function toggleCart() {
+      const drawer = document.querySelector('.cart-drawer');
+      const overlay = document.querySelector('.cart-overlay');
+      drawer.classList.toggle('open');
+      overlay.classList.toggle('open');
+    }
+  </script>
+  <!-- SCROLL PROGRESS BUTTON -->
+  <div class="scroll-progress" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    <svg width="50" height="50" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="45" pathLength="1" class="progress-bg"></circle>
+      <circle cx="50" cy="50" r="45" pathLength="1" class="progress-bar"></circle>
+    </svg>
+    <div class="scroll-arrow">↑</div>
+  </div>
+
+  <style>
+    .scroll-progress {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      background: #111;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .scroll-progress.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .scroll-progress svg {
+      transform: rotate(-90deg);
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .scroll-progress circle {
+      fill: none;
+      stroke-width: 8;
+      stroke-linecap: round;
+    }
+
+    .progress-bg {
+      stroke: rgba(255, 255, 255, 0.1);
+    }
+
+    .progress-bar {
+      stroke: #fff;
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      transition: stroke-dashoffset 0.1s linear;
+    }
+
+    .scroll-arrow {
+      color: #fff;
+      font-size: 20px;
+      font-weight: bold;
+      z-index: 2;
+    }
+  </style>
+
+  <script>
+    // Scroll Progress Logic
+    window.addEventListener('scroll', () => {
+      const scrollProgress = document.querySelector('.scroll-progress');
+      const progressBar = document.querySelector('.progress-bar');
+
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = scrollTop / docHeight;
+
+      // Update progress circle
+      progressBar.style.strokeDashoffset = 1 - scrollPercent;
+
+      // Toggle visibility (hide in first 500px/Hero section)
+      if (scrollTop > 500) {
+        scrollProgress.classList.add('visible');
+      } else {
+        scrollProgress.classList.remove('visible');
+      }
+    });
+  </script>
 </body>
 
 </html>
