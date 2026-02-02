@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -10,2128 +10,23 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
     rel="stylesheet">
 
-  <style>
-    :root {
-      --bg: #0d0d0d;
-      --text: #ffffff;
-      --text-muted: #aaaaaa;
-      --accent: #b5ff4a;
-      /* Green Brand Color */
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    /* HEADER */
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      padding: 20px 60px;
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
-      z-index: 1000;
-      background: transparent;
-    }
-
-    .logo {
-      font-size: 28px;
-      font-weight: 800;
-      justify-self: start;
-      color: #fff;
-    }
-
-    .cart-icon {
-      justify-self: end;
-    }
-
-    nav {
-      justify-self: center;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 5px;
-      background: rgba(30, 30, 30, 0.95);
-      padding: 8px 12px;
-      border-radius: 50px;
-      font-weight: 500;
-      text-transform: uppercase;
-      font-size: 12px;
-      letter-spacing: 0.5px;
-    }
-
-    nav ul li a {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      padding: 10px 18px;
-      border-radius: 50px;
-      transition: all 0.3s ease;
-      color: #999;
-    }
-
-    nav ul li a:hover {
-      background: rgba(255, 255, 255, 0.08);
-      color: #fff;
-    }
-
-    nav ul li a::after {
-      content: '▼';
-      font-size: 7px;
-      opacity: 0.5;
-    }
-
-    .dark-toggle {
-      justify-self: end;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: rgba(30, 30, 30, 0.95);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 18px;
-      transition: all 0.3s ease;
-    }
-
-    .dark-toggle:hover {
-      background: rgba(50, 50, 50, 0.95);
-    }
-
-    /* HERO */
-    .hero {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 180px 100px 0;
-      gap: 25px;
-      position: relative;
-    }
-
-    .hero-text {
-      max-width: 900px;
-    }
-
-    .hero-text h1 {
-      font-size: 95px;
-      font-weight: 900;
-      line-height: 1.05;
-    }
-
-    /* TAP ANIMATION */
-    .tap-animation {
-      display: inline-block;
-      position: relative;
-      width: 140px;
-      height: 100px;
-      vertical-align: middle;
-    }
-
-    .tap-phone {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 85px;
-      height: 55px;
-      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-      border-radius: 10px;
-      border: 2px solid #3a3a3a;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-    }
-
-    .tap-phone::before {
-      content: '';
-      position: absolute;
-      top: 8px;
-      left: 8px;
-      right: 8px;
-      bottom: 8px;
-      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-      border-radius: 4px;
-    }
-
-    .tap-phone::after {
-      content: '📱';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 24px;
-      z-index: 1;
-    }
-
-    .tap-card {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60px;
-      height: 38px;
-      background: linear-gradient(135deg, var(--accent) 0%, #7ed321 100%);
-      border-radius: 6px;
-      box-shadow: 0 2px 10px rgba(181, 255, 74, 0.4);
-      animation: cardTap 2.5s ease-in-out infinite;
-      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-    }
-
-    .tap-card::before {
-      content: '💳';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 22px;
-    }
-
-    .ripple {
-      position: absolute;
-      top: 55%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      border: 2px solid var(--accent);
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .ripple:nth-child(3) {
-      animation: rippleEffect 2.5s ease-out infinite;
-    }
-
-    .ripple:nth-child(4) {
-      animation: rippleEffect 2.5s ease-out 0.5s infinite;
-    }
-
-    .ripple:nth-child(5) {
-      animation: rippleEffect 2.5s ease-out 1s infinite;
-    }
-
-    @keyframes cardTap {
-
-      0%,
-      100% {
-        transform: translateX(-50%) translateY(0);
-      }
-
-      15% {
-        transform: translateX(-50%) translateY(25px);
-      }
-
-      25% {
-        transform: translateX(-50%) translateY(22px);
-      }
-
-      35%,
-      80% {
-        transform: translateX(-50%) translateY(0);
-      }
-    }
-
-    @keyframes rippleEffect {
-      0% {
-        width: 30px;
-        height: 30px;
-        opacity: 0;
-      }
-
-      15% {
-        opacity: 0.8;
-      }
-
-      50% {
-        width: 100px;
-        height: 100px;
-        opacity: 0;
-      }
-
-      100% {
-        width: 100px;
-        height: 100px;
-        opacity: 0;
-      }
-    }
-
-    .sliding {
-      margin-top: 25px;
-      position: relative;
-      height: 90px;
-    }
-
-    .sliding span {
-      position: absolute;
-      font-size: 85px;
-      font-weight: 900;
-      opacity: 0;
-      transition: opacity 0.6s ease;
-    }
-
-    .sliding span.active {
-      opacity: 1;
-    }
-
-    .hero p {
-      max-width: 450px;
-      font-size: 19px;
-      color: var(--text-muted);
-      margin-top: 25px;
-    }
-
-    /* SEAMLESS SCROLLING TEXT */
-    .bottom-fade {
-      position: absolute;
-      bottom: 60px;
-      left: 0;
-      width: 100%;
-      overflow: hidden;
-      pointer-events: none;
-    }
-
-    .bottom-fade-content {
-      display: flex;
-      width: max-content;
-      animation: slideLeft 20s linear infinite;
-    }
-
-    .bottom-fade-content span {
-      font-size: 150px;
-      font-weight: 900;
-      color: rgba(255, 255, 255, 0.05);
-      white-space: nowrap;
-      padding-right: 100px;
-    }
-
-    @keyframes slideLeft {
-      0% {
-        transform: translateX(0);
-      }
-
-      100% {
-        transform: translateX(-50%);
-      }
-    }
-
-    /* SERVICES STACKING CARDS - MIVON STYLE */
-    .services-section {
-      padding: 100px 0;
-      padding-bottom: 400vh;
-      position: relative;
-    }
-
-    .services-section .container {
-      max-width: 100%;
-      margin: 0 auto;
-      padding: 0;
-    }
-
-    .sec-head {
-      text-align: center;
-      margin-bottom: 80px;
-      padding: 0 60px;
-    }
-
-    /* STACKING CARDS SECTION */
-    .stacking-cards-section {
-      padding: 50vh 0;
-      position: relative;
-    }
-
-    .service-badge {
-      display: inline-block;
-      padding: 8px 20px;
-      background: rgba(181, 255, 74, 0.1);
-      border: 1px solid var(--accent);
-      border-radius: 20px;
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 20px;
-      color: var(--accent);
-    }
-
-    .service-title {
-      font-size: 60px;
-      font-weight: 400;
-      margin: 0;
-    }
-
-    .service-card {
-      position: sticky;
-      top: 100px;
-      min-height: 520px;
-      border-radius: 40px;
-      width: 98%;
-      margin: 0 auto 40vh auto;
-      overflow: hidden;
-      transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
-      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      transform-origin: top center;
-      will-change: transform;
-    }
-
-    /* CARD 1: DARK */
-    .service-card.card-1 {
-      background: #111111;
-      color: #ffffff;
-      z-index: 1;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    /* CARD 2: LIME GREEN */
-    .service-card.card-2 {
-      background: #daf933;
-      color: #1a1a1a;
-      z-index: 2;
-      border: none;
-    }
-
-    /* CARD 3: WHITE */
-    .service-card.card-3 {
-      background: #ffffff;
-      color: #1a1a1a;
-      z-index: 3;
-      border: none;
-    }
-
-    /* CARD 4: BLUE */
-    .service-card.card-4 {
-      background: #bde0fe;
-      color: #1a1a1a;
-      z-index: 4;
-      border: none;
-    }
-
-    .service-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      gap: 40px;
-      padding: 60px 80px;
-      height: 100%;
-    }
-
-    .service-text {
-      display: flex;
-      flex-direction: column;
-      gap: 30px;
-    }
-
-    .service-number {
-      font-size: 18px;
-      font-weight: 600;
-      margin-bottom: 10px;
-      display: block;
-    }
-
-    .card-1 .service-number {
-      color: #aaaaaa;
-    }
-
-    .card-2 .service-number,
-    .card-3 .service-number,
-    .card-4 .service-number {
-      color: #333333;
-    }
-
-    .service-heading {
-      font-size: 72px;
-      font-weight: 800;
-      margin: 0;
-      line-height: 1.05;
-      letter-spacing: -2px;
-    }
-
-    .service-description {
-      font-size: 18px;
-      line-height: 1.6;
-      max-width: 450px;
-      font-weight: 400;
-    }
-
-    .card-1 .service-description {
-      color: #bbbbbb;
-    }
-
-    .card-2 .service-description,
-    .card-3 .service-description,
-    .card-4 .service-description {
-      color: #444444;
-    }
-
-    .service-visual {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 400px;
-    }
-
-    .service-icon-img {
-      width: 100%;
-      max-width: 450px;
-      height: auto;
-      object-fit: contain;
-      filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.2));
-      transition: transform 0.5s ease;
-    }
-
-    .service-card:hover .service-icon-img {
-      transform: scale(1.05) translateY(-10px) rotate(2deg);
-    }
-
-
-
-    /* GLOBAL BOTTOM BLUR */
-    .bottom-screen-blur {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 150px;
-      z-index: 9999;
-      pointer-events: none;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      mask-image: linear-gradient(to top, black, transparent);
-      -webkit-mask-image: linear-gradient(to top, black, transparent);
-    }
-
-    /* APPROACH / FEATURES SECTION */
-    .features-section {
-      padding: 30px 0;
-      position: relative;
-      background: var(--bg);
-      isolation: isolate;
-      overflow: visible;
-    }
-
-    .tap-watermark {
-      position: sticky;
-      top: 50vh;
-      left: 0;
-      width: 100%;
-      height: 0;
-      z-index: 1;
-      pointer-events: none;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 60px;
-      transform: translateY(-50%);
-    }
-
-    .tap-watermark::before {
-      content: 'TAP';
-      font-size: 40vw;
-      font-weight: 700;
-      color: #ffffff;
-      white-space: nowrap;
-      user-select: none;
-      font-family: 'Inter', sans-serif;
-      text-transform: uppercase;
-      letter-spacing: -10px;
-      line-height: 0.8;
-      opacity: 0.3;
-    }
-
-    /* MIVON ITEM STYLES */
-    .item {
-      padding: 50px 40px;
-      border-radius: 30px;
-      transition: all 0.4s ease;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: 450px;
-      position: relative;
-      z-index: 10;
-      /* Above watermark */
-    }
-
-    .item:hover {
-      transform: translateY(-10px);
-    }
-
-    /* UTILITIES (Mivon Spacing) */
-    .mb-60px {
-      margin-bottom: 60px !important;
-    }
-
-    .mt-60px {
-      margin-top: 60px !important;
-    }
-
-    .mb-30px {
-      margin-bottom: 30px !important;
-    }
-
-    .mb-40px {
-      margin-bottom: 40px !important;
-    }
-
-    .mb-80px {
-      margin-bottom: 80px !important;
-    }
-
-    .w-60px {
-      width: 60px;
-      height: 60px;
-      display: flex;
-      align-items: center;
-    }
-
-    .w-60px img {
-      width: 100%;
-      height: auto;
-      object-fit: contain;
-    }
-
-    /* VARIANTS */
-    .app-dark {
-      background: #111;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: #fff;
-    }
-
-    .app-white {
-      background: #ffffff;
-      color: #000 !important;
-    }
-
-    .app-white h6,
-    .app-white p,
-    .app-white .mb-40px {
-      color: #000 !important;
-    }
-
-    .app-lime {
-      background: #daf933;
-      color: #000 !important;
-    }
-
-    .app-lime h6,
-    .app-lime p {
-      color: #000 !important;
-    }
-
-    /* REMOVED OLD GRID CSS (relying on Bootstrap .col-lg-3 now) */
-
-
-    .app-lime {
-      background: #daf933;
-      color: #000 !important;
-    }
-
-    .app-lime h6,
-    .app-lime p {
-      color: #000 !important;
-    }
-
-    /* Features Section */
-    .features-section {
-      position: relative;
-      /* For Watermark */
-      padding: 100px 0;
-    }
-
-    .service-badge {
-      display: inline-block;
-      padding: 8px 16px;
-      border-radius: 50px;
-      background: rgba(255, 255, 255, 0.1);
-      font-size: 12px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 20px;
-      color: var(--accent);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .sec-head {
-      text-align: center;
-      position: relative;
-      z-index: 2;
-      margin-bottom: 80px;
-    }
-
-    /* BOOTSTRAP-STYLE GRID */
-    .container {
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 15px;
-      position: relative;
-      z-index: 10;
-    }
-
-    .row {
-      display: flex;
-      flex-wrap: wrap;
-      margin: 0 -15px;
-    }
-
-    .col-lg-3,
-    .col-md-6 {
-      position: relative;
-      width: 100%;
-      padding: 0 15px;
-    }
-
-    @media (min-width: 768px) {
-      .col-md-6 {
-        flex: 0 0 50%;
-        max-width: 50%;
-      }
-    }
-
-    @media (min-width: 992px) {
-      .col-lg-3 {
-        flex: 0 0 25%;
-        max-width: 25%;
-      }
-
-      .offset-lg-2 {
-        margin-left: 16.666667%;
-      }
-
-      .offset-lg-3 {
-        margin-left: 25%;
-      }
-
-      .offset-lg-5 {
-        margin-left: 41.666667%;
-      }
-
-      .offset-lg-6 {
-        margin-left: 50%;
-      }
-    }
-
-    .sec-head {
-      text-align: center;
-      position: relative;
-      z-index: 10;
-      margin-bottom: 80px;
-    }
-
-    .service-title {
-      font-size: 48px;
-      font-weight: 700;
-      margin: 0;
-      background: linear-gradient(to right, #fff, #888);
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 991px) {
-      .approach-grid {
-        display: flex;
-        flex-direction: column;
-      }
-
-      .approach-item {
-        width: 100%;
-        margin-top: 0 !important;
-        margin-bottom: 30px;
-      }
-    }
-
-    /* TYPOGRAPHY */
-    .app-icon-box {
-      margin-bottom: 30px;
-      height: 60px;
-      display: flex;
-      align-items: center;
-    }
-
-    .app-icon-box img {
-      height: 100%;
-      width: auto;
-      object-fit: contain;
-    }
-
-    .app-title {
-      font-size: 28px;
-      font-weight: 700;
-      margin-bottom: 20px;
-      line-height: 1.2;
-    }
-
-    .app-desc {
-      font-size: 16px;
-      color: #aaa;
-      line-height: 1.6;
-    }
-
-    /* ORBITAL FEATURES LAYOUT - SUN & PLANETS */
-    .orbital-features {
-      position: relative;
-      width: 100%;
-      min-height: 600px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .orbital-center {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 10;
-      width: 320px;
-      height: 320px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: radial-gradient(circle, rgba(181, 255, 74, 0.15) 0%, transparent 70%);
-      border-radius: 50%;
-      animation: pulse-glow 3s ease-in-out infinite;
-    }
-
-    @keyframes pulse-glow {
-
-      0%,
-      100% {
-        box-shadow: 0 0 60px rgba(181, 255, 74, 0.3);
-      }
-
-      50% {
-        box-shadow: 0 0 100px rgba(181, 255, 74, 0.5);
-      }
-    }
-
-    .orbital-center img {
-      max-width: 280px;
-      width: 100%;
-      height: auto;
-      object-fit: contain;
-      filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
-    }
-
-    .orbital-item {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 220px;
-      transform-origin: center center;
-      z-index: 5;
-    }
-
-    .orbital-item .item {
-      min-height: 280px;
-      padding: 30px 25px;
-      font-size: 14px;
-    }
-
-    .orbital-item .item h6 {
-      font-size: 18px;
-      margin-bottom: 15px;
-    }
-
-    .orbital-item .item ul,
-    .orbital-item .item p {
-      font-size: 12px;
-    }
-
-    /* Position 5 planets around the sun - evenly distributed at 72 degrees apart */
-    .orbital-item:nth-child(2) {
-      transform: translate(-50%, -50%) rotate(0deg) translateY(-380px) rotate(0deg);
-    }
-
-    .orbital-item:nth-child(3) {
-      transform: translate(-50%, -50%) rotate(72deg) translateY(-380px) rotate(-72deg);
-    }
-
-    .orbital-item:nth-child(4) {
-      transform: translate(-50%, -50%) rotate(144deg) translateY(-380px) rotate(-144deg);
-    }
-
-    .orbital-item:nth-child(5) {
-      transform: translate(-50%, -50%) rotate(216deg) translateY(-380px) rotate(-216deg);
-    }
-
-    .orbital-item:nth-child(6) {
-      transform: translate(-50%, -50%) rotate(288deg) translateY(-380px) rotate(-288deg);
-    }
-
-    /* Orbit ring decoration */
-    .orbital-features::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 760px;
-      height: 760px;
-      border: 1px dashed rgba(181, 255, 74, 0.2);
-      border-radius: 50%;
-      pointer-events: none;
-    }
-
-    /* Responsive - Stack on mobile */
-    @media (max-width: 1200px) {
-      .orbital-features {
-        min-height: auto;
-        flex-direction: column;
-        padding: 60px 20px;
-      }
-
-      .orbital-center {
-        position: relative;
-        top: auto;
-        left: auto;
-        transform: none;
-        margin-bottom: 40px;
-      }
-
-      .orbital-item {
-        position: relative;
-        top: auto;
-        left: auto;
-        transform: none !important;
-        width: 100%;
-        max-width: 350px;
-        margin: 15px auto;
-      }
-
-      .orbital-item .item {
-        min-height: auto;
-      }
-
-      .orbital-features::before {
-        display: none;
-      }
-    }
-
-    /* WHAT IS IT SECTION */
-    .what-is-it-section {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      align-items: center;
-      padding: 2rem 2rem;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .what-is-it-text {
-      color: #fff;
-    }
-
-    .what-is-it-text h2 {
-      font-size: 3.5rem;
-      margin-bottom: 30px;
-      font-weight: 800;
-      line-height: 1.1;
-    }
-
-    .what-is-it-text p {
-      font-size: 1.1rem;
-      line-height: 1.7;
-      margin-bottom: 25px;
-      color: var(--text-muted);
-    }
-
-    .what-is-it-image {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .what-is-it-image img {
-      width: 100%;
-      height: auto;
-      max-height: 600px;
-      object-fit: contain;
-      filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
-      animation: float 6s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0% {
-        transform: translateY(0px);
-      }
-
-      50% {
-        transform: translateY(-20px);
-      }
-
-      100% {
-        transform: translateY(0px);
-      }
-    }
-
-    @media (max-width: 991px) {
-      .what-is-it-section {
-        grid-template-columns: 1fr;
-        padding: 4rem 2rem;
-        text-align: center;
-      }
-
-      .what-is-it-image {
-        margin-top: 40px;
-      }
-    }
-
-    /* WHAT YOU'LL GET SECTION */
-    .purchase-section {
-      display: grid;
-      grid-template-columns: 0.8fr 1.2fr;
-      gap: 2rem;
-      align-items: start;
-      padding: 2rem 2rem;
-    }
-
-    .what-text {
-      color: #fff;
-      position: sticky;
-      top: 120px;
-    }
-
-    .what-text h2 {
-      font-size: 4rem;
-      margin-bottom: 1rem;
-      font-weight: 900;
-      line-height: 1.1;
-      text-transform: uppercase;
-    }
-
-    .what-text p {
-      line-height: 1.7;
-      margin-bottom: 1rem;
-      opacity: 0.9;
-      color: var(--text-muted);
-    }
-
-    /* Purchase Grid Layout */
-    .purchase-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .purchase-hero {
-      position: relative;
-      border-radius: 20px;
-      overflow: hidden;
-      background: linear-gradient(135deg, #1a1a2e 0%, #0d0d0d 100%);
-      padding: 40px;
-      min-height: 350px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .purchase-hero-content {
-      position: relative;
-      z-index: 2;
-    }
-
-    .purchase-hero h3 {
-      font-size: 2.5rem;
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 15px;
-    }
-
-    .purchase-hero h3 span {
-      color: var(--accent);
-    }
-
-    .purchase-hero p {
-      font-size: 1rem;
-      color: var(--text-muted);
-      max-width: 350px;
-      line-height: 1.6;
-    }
-
-    .purchase-hero-image {
-      position: absolute;
-      right: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 45%;
-      max-width: 280px;
-    }
-
-    .purchase-hero-image img {
-      width: 100%;
-      height: auto;
-      filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
-    }
-
-    .purchase-features {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-    }
-
-    .purchase-feature {
-      position: relative;
-      border-radius: 20px;
-      overflow: hidden;
-      min-height: 280px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 25px;
-      background-size: cover;
-      background-position: center;
-    }
-
-    .purchase-feature::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, transparent 60%);
-      z-index: 1;
-    }
-
-    .purchase-feature-content {
-      position: relative;
-      z-index: 2;
-    }
-
-    .purchase-feature h4 {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 10px;
-    }
-
-    .purchase-feature p {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-
-    @media (max-width: 1100px) {
-      .what-section {
-        grid-template-columns: 1fr;
-      }
-
-      .what-text {
-        position: relative;
-        top: auto;
-        text-align: center;
-      }
-
-      .what-text h2 {
-        font-size: 2.5rem;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .purchase-features {
-        grid-template-columns: 1fr;
-      }
-
-      .purchase-hero {
-        min-height: auto;
-        padding: 30px;
-      }
-
-      .purchase-hero-image {
-        position: relative;
-        right: auto;
-        top: auto;
-        transform: none;
-        width: 100%;
-        max-width: 200px;
-        margin: 20px auto 0;
-      }
-    }
-
-    /* PLATFORM SECURITY SECTION */
-    .security-section {
-      padding: 50px 0;
-      background: var(--bg);
-      position: relative;
-    }
-
-    .security-header {
-      text-align: center;
-      margin-bottom: 60px;
-      padding: 0 20px;
-    }
-
-    .security-header h2 {
-      font-size: 48px;
-      font-weight: 800;
-      color: #fff;
-      line-height: 1.1;
-      text-transform: uppercase;
-      margin-bottom: 40px;
-    }
-
-    /* Secure URL Bar Visual */
-    .secure-url-visual {
-      max-width: 800px;
-      margin: 0 auto 80px;
-      background: #1a1a1a;
-      border-radius: 12px;
-      padding: 15px 20px;
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-      position: relative;
-    }
-
-    .url-dots {
-      display: flex;
-      gap: 6px;
-    }
-
-    .url-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    .url-dot:nth-child(1) {
-      background: #ff5f56;
-    }
-
-    .url-dot:nth-child(2) {
-      background: #ffbd2e;
-    }
-
-    .url-dot:nth-child(3) {
-      background: #27c93f;
-    }
-
-    .url-bar {
-      flex: 1;
-      background: #000;
-      border-radius: 6px;
-      padding: 10px 15px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: #27c93f;
-      /* Secure Green */
-      font-family: monospace;
-      font-size: 14px;
-      overflow: hidden;
-      white-space: nowrap;
-    }
-
-    .url-lock {
-      font-size: 14px;
-    }
-
-    .url-text span {
-      color: #fff;
-    }
-
-    /* Security Grid */
-    .security-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 30px;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    .security-card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 20px;
-      padding: 30px;
-      transition: transform 0.3s ease;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .security-card:hover {
-      transform: translateY(-5px);
-      background: rgba(255, 255, 255, 0.05);
-      border-color: rgba(181, 255, 74, 0.3);
-    }
-
-    .security-icon {
-      font-size: 32px;
-      margin-bottom: 20px;
-      color: var(--accent);
-    }
-
-    .security-card h3 {
-      font-size: 20px;
-      font-weight: 700;
-      margin-bottom: 15px;
-      color: #fff;
-    }
-
-    .security-card p {
-      font-size: 14px;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    @media (max-width: 1024px) {
-      .security-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 600px) {
-      .security-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .security-header h2 {
-        font-size: 32px;
-      }
-
-      .secure-url-visual {
-        margin: 0 20px 60px;
-      }
-    }
-
-    /* HOW IT WORKS SECTION - 3D PERSPECTIVE CARDS */
-    .how-it-works {
-      padding: 30px 20px;
-      background: var(--bg);
-      text-align: center;
-      position: relative;
-      overflow: visible;
-    }
-
-    .how-title {
-      font-size: 72px;
-      font-weight: 900;
-      margin-bottom: 80px;
-      text-transform: uppercase;
-      letter-spacing: -2px;
-      color: #fff;
-    }
-
-    .steps-container {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      max-width: 1200px;
-      margin: 0 auto;
-      perspective: 1000px;
-      position: relative;
-    }
-
-    .step-card {
-      position: relative;
-      width: 320px;
-      height: 480px;
-      transition: all 0.5s ease;
-      transform: rotateX(45deg) scale(0.85);
-      perspective: 1000px;
-      box-shadow: 0px 20px 50px rgba(0, 0, 0, 0.5);
-      border-radius: 20px;
-      overflow: hidden;
-      cursor: pointer;
-      animation: cardEntry 1s ease-out;
-    }
-
-    .step-card:nth-child(1) {
-      background: linear-gradient(to bottom, #1a3a2f 30%, #0d1f1a 100%);
-      z-index: 3;
-    }
-
-    .step-card:nth-child(2) {
-      background: linear-gradient(to bottom, #2d1f4e 30%, #1a1232 100%);
-      z-index: 2;
-    }
-
-    .step-card:nth-child(3) {
-      background: linear-gradient(to bottom, #3a2a1a 30%, #1f1610 100%);
-      z-index: 1;
-    }
-
-    .step-card:hover {
-      transform: rotate(0deg) scale(1) translateY(-20px);
-      z-index: 100;
-      box-shadow: 0px 40px 100px rgba(181, 255, 74, 0.2);
-    }
-
-    @keyframes cardEntry {
-      0% {
-        opacity: 0;
-        transform: rotateX(60deg) scale(0.7) translateY(-50px);
-      }
-
-      100% {
-        opacity: 1;
-        transform: rotateX(45deg) scale(0.85);
-      }
-    }
-
-    .step-card:nth-child(1) {
-      animation-delay: 0s;
-    }
-
-    .step-card:nth-child(2) {
-      animation-delay: 0.2s;
-    }
-
-    .step-card:nth-child(3) {
-      animation-delay: 0.4s;
-    }
-
-    .step-image {
-      position: relative;
-      width: 100%;
-      height: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .step-card:nth-child(1) .step-image {
-      background: linear-gradient(to top, #1a3a2f 0%, #2d5a4a 100%);
-    }
-
-    .step-card:nth-child(2) .step-image {
-      background: linear-gradient(to top, #2d1f4e 0%, #4a3a6e 100%);
-    }
-
-    .step-card:nth-child(3) .step-image {
-      background: linear-gradient(to top, #3a2a1a 0%, #5a4a3a 100%);
-    }
-
-    .step-image-placeholder {
-      font-size: 100px;
-      transition: all 0.5s ease;
-      filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
-    }
-
-    .step-card:hover .step-image-placeholder {
-      transform: scale(1.3) translateY(-10px);
-    }
-
-    .step-number {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      font-size: 80px;
-      font-weight: 900;
-      color: rgba(255, 255, 255, 0.1);
-      line-height: 1;
-      z-index: 5;
-    }
-
-    .step-content {
-      position: relative;
-      width: 100%;
-      height: 50%;
-      padding: 30px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      z-index: 10;
-    }
-
-    .step-title {
-      font-size: 26px;
-      font-weight: 700;
-      margin-bottom: 15px;
-      color: #fff;
-      text-align: center;
-      text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
-    }
-
-    .step-description {
-      font-size: 14px;
-      color: rgba(255, 255, 255, 0.8);
-      line-height: 1.7;
-      text-align: center;
-      padding: 0 10px;
-    }
-
-    .step-hint {
-      position: absolute;
-      bottom: 20px;
-      left: 0;
-      width: 100%;
-      text-align: center;
-      font-size: 12px;
-      color: rgba(255, 255, 255, 0.4);
-      letter-spacing: 1px;
-    }
-
-    @media (max-width: 991px) {
-      .steps-container {
-        flex-direction: column;
-        align-items: center;
-        gap: 40px;
-        perspective: none;
-      }
-
-      .step-card {
-        transform: rotateX(0deg) scale(1);
-        width: 90%;
-        max-width: 350px;
-      }
-
-      .step-card:hover {
-        transform: scale(1.02) translateY(-10px);
-      }
-
-      @keyframes cardEntry {
-        0% {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-
-        100% {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .how-title {
-        font-size: 48px;
-      }
-    }
-
-
-    /* PRICING SECTION */
-    .pricing-section {
-      padding: 120px 40px;
-      background: var(--bg);
-      overflow: visible;
-    }
-
-    .pricing-title {
-      font-size: 72px;
-      font-weight: 900;
-      margin-bottom: 80px;
-      text-align: center;
-      text-transform: uppercase;
-      letter-spacing: -2px;
-      padding-left: 0;
-    }
-
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      max-width: 1600px;
-      margin: 0 auto;
-      padding: 0 40px;
-    }
-
-    .pricing-card {
-      background: #111;
-      border-radius: 30px;
-      overflow: hidden;
-      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-      cursor: pointer;
-      position: relative;
-      min-height: 350px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .pricing-card:hover {
-      transform: scale(1.05);
-      z-index: 10;
-      border-color: var(--accent);
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
-    }
-
-    .pricing-content {
-      padding: 40px;
-      transition: all 0.5s ease;
-      width: 100%;
-    }
-
-    .pricing-package {
-      font-size: 32px;
-      font-weight: 700;
-      margin-bottom: 10px;
-      color: #fff;
-    }
-
-    .pricing-subtitle {
-      font-size: 14px;
-      color: var(--text-muted);
-      margin-bottom: 20px;
-    }
-
-    .pricing-details {
-      opacity: 0;
-      max-height: 0;
-      overflow: hidden;
-      transition: all 0.5s ease;
-    }
-
-    .pricing-card:hover .pricing-details {
-      opacity: 1;
-      max-height: 300px;
-    }
-
-    .pricing-item {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 15px;
-      padding-top: 15px;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .pricing-label {
-      font-size: 14px;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .pricing-value {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--accent);
-    }
-
-    .pricing-price {
-      font-size: 32px;
-      font-weight: 900;
-      color: var(--accent);
-      margin-top: 20px;
-    }
-
-    .pricing-note {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-top: 15px;
-      font-style: italic;
-    }
-
-    @media (max-width: 1200px) {
-      .pricing-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 30px;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .pricing-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .pricing-title {
-        font-size: 48px;
-      }
-
-      .pricing-card:hover {
-        transform: scale(1.05);
-      }
-    }
-
-
-    /* FOOTER STYLES */
-    footer {
-      background: #0a0a0a;
-      padding: 40px 0 20px;
-      margin-top: 50px;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 60px 60px 0 0;
-    }
-
-    .footer-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 40px;
-    }
-
-    .footer-main {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 60px;
-      margin-bottom: 60px;
-    }
-
-    .footer-brand h2 {
-      font-size: 32px;
-      font-weight: 700;
-      margin-bottom: 20px;
-      color: var(--accent);
-    }
-
-    .footer-brand p {
-      color: var(--text-muted);
-      line-height: 1.8;
-      margin-bottom: 30px;
-      max-width: 350px;
-    }
-
-    .footer-social {
-      display: flex;
-      gap: 15px;
-    }
-
-    .footer-social a {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.05);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      font-size: 18px;
-    }
-
-    .footer-social a:hover {
-      background: var(--accent);
-      color: #000;
-      transform: translateY(-3px);
-    }
-
-    .footer-links h4 {
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 25px;
-      color: #fff;
-    }
-
-    .footer-links ul {
-      list-style: none;
-    }
-
-    .footer-links ul li {
-      margin-bottom: 12px;
-    }
-
-    .footer-links ul li a {
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color 0.3s ease;
-      font-size: 15px;
-    }
-
-    .footer-links ul li a:hover {
-      color: var(--accent);
-    }
-
-    .footer-contact p {
-      color: var(--text-muted);
-      margin-bottom: 12px;
-      font-size: 15px;
-    }
-
-    .footer-contact a {
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    .footer-contact a:hover {
-      color: var(--accent);
-    }
-
-    .footer-bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 30px;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      color: var(--text-muted);
-      font-size: 14px;
-    }
-
-    .footer-legal {
-      display: flex;
-      gap: 30px;
-    }
-
-    .footer-legal a {
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    .footer-legal a:hover {
-      color: var(--accent);
-    }
-
-    @media (max-width: 991px) {
-      .footer-main {
-        grid-template-columns: 1fr 1fr;
-        gap: 40px;
-      }
-    }
-
-    @media (max-width: 576px) {
-      .footer-main {
-        grid-template-columns: 1fr;
-      }
-
-      .footer-bottom {
-        flex-direction: column;
-        gap: 20px;
-        text-align: center;
-      }
-    }
-
-    /* CART DRAWER STYLES */
-    .cart-icon {
-      cursor: pointer;
-      font-size: 24px;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.1);
-      transition: all 0.3s ease;
-    }
-
-    .cart-icon:hover {
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    .cart-count {
-      position: absolute;
-      top: -5px;
-      right: -5px;
-      background: var(--accent);
-      color: #000;
-      font-size: 10px;
-      font-weight: bold;
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .cart-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(5px);
-      z-index: 9998;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-    }
-
-    .cart-overlay.open {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .cart-drawer {
-      position: fixed;
-      top: 0;
-      right: 0;
-      width: 100%;
-      max-width: 450px;
-      height: 100%;
-      background: #0a0a0a;
-      z-index: 9999;
-      transform: translateX(100%);
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      border-left: 1px solid rgba(255, 255, 255, 0.1);
-      display: flex;
-      flex-direction: column;
-      box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
-    }
-
-    .cart-drawer.open {
-      transform: translateX(0);
-    }
-
-    .cart-header {
-      padding: 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .cart-header h2 {
-      font-size: 28px;
-      margin: 0;
-      font-weight: 700;
-    }
-
-    .close-cart {
-      cursor: pointer;
-      font-size: 24px;
-      color: var(--text-muted);
-      transition: color 0.3s ease;
-    }
-
-    .close-cart:hover {
-      color: #fff;
-    }
-
-    .cart-body {
-      padding: 30px;
-      flex: 1;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-
-    .empty-cart-msg {
-      color: var(--text-muted);
-      font-size: 16px;
-    }
-
-    .empty-cart-icon {
-      font-size: 48px;
-      margin-bottom: 20px;
-      opacity: 0.5;
-    }
-
-    .cart-footer {
-      padding: 30px;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      background: #111;
-    }
-
-    .cart-subtotal {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      font-size: 18px;
-      font-weight: 700;
-    }
-
-    .checkout-btn {
-      width: 100%;
-      padding: 16px;
-      background: #fff;
-      color: #000;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: background 0.3s ease;
-    }
-
-    .checkout-btn:hover {
-      background: var(--accent);
-    }
-
-    @media (max-width: 500px) {
-      .cart-drawer {
-        width: 100%;
-        max-width: none;
-      }
-    }
-
-    /* LOGO CAROUSEL */
-    .logo-carousel-section {
-      padding: 40px 0;
-      background: var(--bg);
-      position: relative;
-      overflow: hidden;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      margin-top: -60px;
-      /* Overlap/adjust to fit seamlessly if needed */
-      z-index: 5;
-    }
-
-    .logo-track {
-      display: flex;
-      width: max-content;
-      animation: logoScroll 40s linear infinite;
-    }
-
-    .logo-slide {
-      display: flex;
-      gap: 100px;
-      /* Spacing between logos */
-      padding-right: 100px;
-      /* Match gap for seamless loop */
-      align-items: center;
-    }
-
-    .logo-item {
-      opacity: 0.4;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
-    }
-
-    .logo-item:hover {
-      opacity: 1;
-      transform: scale(1.05);
-      filter: drop-shadow(0 0 10px rgba(181, 255, 74, 0.5));
-    }
-
-    .logo-item svg {
-      height: 35px;
-      width: auto;
-      fill: #fff;
-    }
-
-    .logo-text {
-      font-size: 18px;
-      font-weight: 700;
-      color: #fff;
-      display: inline-block;
-    }
-
-    /* Gradient Masks */
-    .logo-carousel-section::before,
-    .logo-carousel-section::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      width: 150px;
-      height: 100%;
-      z-index: 2;
-      pointer-events: none;
-    }
-
-    .logo-carousel-section::before {
-      left: 0;
-      background: linear-gradient(to right, var(--bg), transparent);
-    }
-
-    .logo-carousel-section::after {
-      right: 0;
-      background: linear-gradient(to left, var(--bg), transparent);
-    }
-
-    @keyframes logoScroll {
-      0% {
-        transform: translateX(0);
-      }
-
-      100% {
-        transform: translateX(-50%);
-      }
-    }
-
-    @media (max-width: 768px) {
-      .logo-slide {
-        gap: 60px;
-        padding-right: 60px;
-      }
-
-      .logo-item svg {
-        height: 25px;
-      }
-
-      .logo-text {
-        font-size: 14px;
-      }
-    }
-
-    /* CUSTOM CURSOR */
-    body,
-    a,
-    button,
-    .clickable,
-    .service-card,
-    .step-card,
-    .logo-item,
-    .footer-social a {
-      cursor: none !important;
-    }
-
-    .cursor-dot,
-    .cursor-outline {
-      position: fixed;
-      top: 0;
-      left: 0;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      z-index: 9999;
-      pointer-events: none;
-    }
-
-    .cursor-dot {
-      width: 8px;
-      height: 8px;
-      background-color: var(--accent);
-      box-shadow: 0 0 10px var(--accent);
-    }
-
-    .cursor-outline {
-      width: 40px;
-      height: 40px;
-      border: 1px solid rgba(181, 255, 74, 0.5);
-      transition: width 0.2s, height 0.2s, background-color 0.2s;
-    }
-
-    /* Hover State */
-    body.hovering .cursor-outline {
-      width: 70px;
-      height: 70px;
-      background-color: rgba(181, 255, 74, 0.1);
-      border-color: var(--accent);
-      backdrop-filter: blur(2px);
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
   <header>
-    <div class="logo">Tap.et</div>
-    <nav>
+    <div class="logo">
+      <img src="images/tap_dark-removebg-preview.png" alt="Tap Logo">
+    </div>
+    <button class="hamburger" aria-label="Toggle menu" onclick="toggleMobileNav()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <nav class="nav-menu">
       <ul>
-        <li><a href="#">Tap Store</a></li>
+        <li><a href="store.html">Tap Store</a></li>
         <li><a href="#">Features</a></li>
         <li><a href="#">Pricing</a></li>
         <li><a href="#">Contact Us</a></li>
@@ -2175,6 +70,7 @@
     </div>
   </section>
 
+
   <!-- ==================== WHAT IS IT SECTION ==================== -->
   <section class="what-is-it-section">
     <div class="what-is-it-text">
@@ -2190,6 +86,8 @@
     </div>
   </section>
   <!-- ==================== END WHAT IS IT SECTION ==================== -->
+
+
 
   <!-- ==================== HOW IT WORKS SECTION ==================== -->
   <section class="how-it-works">
@@ -2238,6 +136,30 @@
   </section>
   <!-- ==================== END HOW IT WORKS SECTION ==================== -->
 
+  <!-- ==================== FROM PAPER TO PRESENCE SECTION ==================== -->
+  <section class="transition-section">
+    <div class="transition-sticky-wrapper">
+      <!-- BEFORE STATE -->
+      <div class="state state-before">
+        <img src="images/paper_mess_before.png" alt="Old Paper Business Cards">
+        <div class="state-content">
+          <div class="state-title">Before</div>
+          <div class="state-headline">Messy. Static. Outdated.</div>
+        </div>
+      </div>
+
+      <!-- AFTER STATE -->
+      <div class="state state-after">
+        <img src="images/digital_clean_after.png" alt="New Tap Digital Card">
+        <div class="state-content">
+          <div class="state-title">After</div>
+          <div class="state-headline">Clean. Digital. Always Ready.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ==================== END FROM PAPER TO PRESENCE SECTION ==================== -->
+
 
 
   <!-- ==================== WHAT YOU'LL GET SECTION ==================== -->
@@ -2248,43 +170,26 @@
 
     <!-- Purchase Grid -->
     <div class="purchase-grid">
-      <!-- Hero Card -->
+      <!-- Hero Card (A.png) -->
       <div class="purchase-hero">
-        <div class="purchase-hero-content">
-          <h3>Branded<br><span>NFC Card</span></h3>
-          <p>More than just a business card, create memorable experiences with a simple 'tap' or scan</p>
-        </div>
-        <div class="purchase-hero-image">
-          <img src="images/A.png" alt="TAP NFC Card">
-        </div>
+        <img src="images/A.png" alt="TAP NFC Card" class="card-bg">
       </div>
 
-      <!-- Three Feature Cards -->
+      <!-- Three Feature Cards (B, C, D) -->
       <div class="purchase-features">
-        <!-- Profile Page -->
-        <div class="purchase-feature" style="background-image: url('images/B.png');">
-          <div class="purchase-feature-content">
-            <h4>Profile page</h4>
-            <p>A dedicated digital profile where you can store, share and update relevant contact information and files
-              instantly.</p>
-          </div>
+        <!-- Profile Page (B.png) -->
+        <div class="purchase-feature">
+          <img src="images/B.png" alt="Profile Page" class="card-bg">
         </div>
 
-        <!-- Dashboard -->
-        <div class="purchase-feature" style="background-image: url('images/C.png');">
-          <div class="purchase-feature-content">
-            <h4>Dashboard</h4>
-            <p>A personalized dashboard that enables you to manage and edit all Tap cards, receive insights and optimize
-              them.</p>
-          </div>
+        <!-- Dashboard (C.png) -->
+        <div class="purchase-feature">
+          <img src="images/C.png" alt="Dashboard" class="card-bg">
         </div>
 
-        <!-- Design Support -->
-        <div class="purchase-feature" style="background-image: url('images/D.png');">
-          <div class="purchase-feature-content">
-            <h4>Design Support</h4>
-            <p>Our in-house design team is at your disposal to assist you in creating eye-catching designs.</p>
-          </div>
+        <!-- Design Support (D.png) -->
+        <div class="purchase-feature">
+          <img src="images/D.png" alt="Design Support" class="card-bg">
         </div>
       </div>
     </div>
@@ -2316,32 +221,59 @@
     <div class="security-grid">
       <!-- Feature 1 -->
       <div class="security-card">
-        <div class="security-icon">🔐</div>
-        <h3>User Authentication</h3>
-        <p>We implement the most secured way of authentication. Only password hashes are stored in the database.</p>
+        <div class="security-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            <path d="m9 12 2 2 4-4"></path>
+          </svg>
+        </div>
+        <h3>Secure Authentication</h3>
+        <p>Advanced cryptographic hashing ensures your credentials are never stored in plain text.</p>
       </div>
 
       <!-- Feature 2 -->
       <div class="security-card">
-        <div class="security-icon">🛡️</div>
-        <h3>Encryption in motion</h3>
-        <p>All communication to and from Tap.et servers enforce HTTPS using TLS 1.2. Non HTTPS traffic is not allowed.
-        </p>
+        <div class="security-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z">
+            </path>
+            <path d="M5 3v4"></path>
+            <path d="M19 17v4"></path>
+            <path d="M3 5h4"></path>
+            <path d="M17 19h4"></path>
+          </svg>
+        </div>
+        <h3>Encrypted Transit</h3>
+        <p>All data moves through military-grade TLS 1.2 tunnels. Non-HTTPS traffic is prohibited.</p>
       </div>
 
       <!-- Feature 3 -->
       <div class="security-card">
-        <div class="security-icon">☁️</div>
-        <h3>Hosting</h3>
-        <p>All system data is stored and hosted in Ethiotelecom hosting, in Ethiopia.</p>
+        <div class="security-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+        </div>
+        <h3>Local Hosting</h3>
+        <p>System data is hosted locally on enterprise-certified infrastructure within Ethiopia.</p>
       </div>
 
       <!-- Feature 4 -->
       <div class="security-card">
-        <div class="security-icon">👁️</div>
-        <h3>Privacy</h3>
-        <p>User and Organization names and details stored within the Tap.et system is governed by Tap.et's Privacy
-          Policy</p>
+        <div class="security-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+        </div>
+        <h3>Privacy First</h3>
+        <p>Your data is protected by strict privacy policies and managed with absolute transparency.</p>
       </div>
     </div>
   </section>
@@ -2406,7 +338,7 @@
   <!-- ==================== END STACKING CARDS SECTION ==================== -->
 
   <!-- ==================== Start Features Section ==================== -->
-  <section class="features-section">
+  <section class="features-section" id="features">
     <div class="tap-watermark"></div>
     <div class="container" style="max-width: 1400px;">
       <div class="sec-head">
@@ -2490,8 +422,33 @@
   </section>
   <!-- ==================== End Features ==================== -->
 
+  <!-- ==================== PINNED VIDEO NARRATIVE SECTION ==================== -->
+  <section class="narrative-section">
+    <div class="sticky-wrapper">
+      <div class="video-container" id="narrativeVideo">
+        <!-- Placeholder Video / Background -->
+        <div class="video-fallback"></div>
+        <!-- Actual Video Tag -->
+        <video src="images/Tapzo%20Smart%20Business%20Card%20-%203D%20Product%20Animation%20Video.mp4" autoplay muted
+          loop playsinline></video>
+        <div class="video-overlay"></div>
+      </div>
+
+      <div class="scrolling-content">
+        <!-- Block 1 -->
+        <div class="narrative-block" data-zoom="1" data-brightness="100">
+          <div class="narrative-text">
+            <h3>Seamless<br>Connection</h3>
+            <p>Experience the future of networking. No apps using pure NFC technology.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ==================== END PINNED VIDEO NARRATIVE SECTION ==================== -->
+
   <!-- ==================== PRICING SECTION ==================== -->
-  <section class="pricing-section">
+  <section class="pricing-section" id="pricing">
     <h2 class="pricing-title">Pricing</h2>
 
     <div class="pricing-grid">
@@ -2664,7 +621,9 @@
 
 
 
-  <footer>
+
+
+  <footer id="contact">
     <div class="footer-container">
       <div class="footer-main">
         <!-- Brand & Social -->
@@ -2728,8 +687,6 @@
     const words = document.querySelectorAll(".sliding span");
     let index = 0;
     setInterval(() => {
-      words[index].classList.remove("active");
-      index = (index + 1) % words.length;
       words[index].classList.add("active");
     }, 2000);
 
@@ -2769,6 +726,9 @@
         }
       });
     });
+
+
+
   </script>
 
   <div class="bottom-screen-blur"></div>
@@ -2788,20 +748,29 @@
         <span>SUBTOTAL</span>
         <span>$0.00</span>
       </div>
-      <button class="checkout-btn">
+      <button class="checkout-btn" onclick="checkout()">
         Check out
-
       </button>
     </div>
   </div>
 
+  <script src="js/cart.js"></script>
   <script>
-    function toggleCart() {
-      const drawer = document.querySelector('.cart-drawer');
-      const overlay = document.querySelector('.cart-overlay');
-      drawer.classList.toggle('open');
-      overlay.classList.toggle('open');
+    function toggleMobileNav() {
+      const nav = document.querySelector('.nav-menu');
+      const hamburger = document.querySelector('.hamburger');
+      if (nav && hamburger) {
+        nav.classList.toggle('open');
+        hamburger.classList.toggle('open');
+        document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
+      }
     }
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+      link.addEventListener('click', () => toggleMobileNav());
+    });
+    document.querySelector('.nav-menu')?.addEventListener('click', function(e) {
+      if (e.target === this) toggleMobileNav();
+    });
   </script>
   <!-- SCROLL PROGRESS BUTTON -->
   <div class="scroll-progress" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
@@ -2812,62 +781,7 @@
     <div class="scroll-arrow">↑</div>
   </div>
 
-  <style>
-    .scroll-progress {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      cursor: pointer;
-      z-index: 999;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-      background: #111;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
 
-    .scroll-progress.visible {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .scroll-progress svg {
-      transform: rotate(-90deg);
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-
-    .scroll-progress circle {
-      fill: none;
-      stroke-width: 8;
-      stroke-linecap: round;
-    }
-
-    .progress-bg {
-      stroke: rgba(255, 255, 255, 0.1);
-    }
-
-    .progress-bar {
-      stroke: #fff;
-      stroke-dasharray: 1;
-      stroke-dashoffset: 1;
-      transition: stroke-dashoffset 0.1s linear;
-    }
-
-    .scroll-arrow {
-      color: #fff;
-      font-size: 20px;
-      font-weight: bold;
-      z-index: 2;
-    }
-  </style>
 
   <script>
     // Scroll Progress Logic
@@ -2945,6 +859,98 @@
     el.addEventListener("mouseleave", () => {
       document.body.classList.remove("hovering");
     });
+  });
+
+  /* SCROLL NARRATIVE ANIMATION */
+  const videoContainer = document.getElementById('narrativeVideo');
+  const narrativeBlocks = document.querySelectorAll('.narrative-block');
+
+  const observerOptions = {
+    root: null,
+    rootMargin: '-40% 0px -40% 0px', // Trigger when element is near center
+    threshold: 0
+  };
+
+  const narrativeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Add active class for text animation
+        entry.target.classList.add('active');
+
+        // Update Video Effect
+        const zoom = entry.target.dataset.zoom;
+        const brightness = entry.target.dataset.brightness;
+
+        if (videoContainer) {
+          videoContainer.style.transform = `scale(${zoom})`;
+          videoContainer.style.filter = `brightness(${brightness}%)`;
+        }
+      } else {
+        entry.target.classList.remove('active');
+      }
+    });
+  }, observerOptions);
+
+  narrativeBlocks.forEach(block => {
+    narrativeObserver.observe(block);
+  });
+
+
+  /* TRANSITION SECTION ANIMATION */
+  const transitionSection = document.querySelector('.transition-section');
+  const afterState = document.querySelector('.state-after');
+
+  if (transitionSection && afterState) {
+    window.addEventListener('scroll', () => {
+      const rect = transitionSection.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      const scrollDistance = rect.height - viewportHeight;
+      const scrolled = -rect.top;
+
+      if (scrollDistance > 0) {
+        let progress = scrolled / scrollDistance;
+        // Clamp progress between 0 and 1
+        if (progress < 0) progress = 0;
+        if (progress > 1) progress = 1;
+
+        const insetVal = 100 - (progress * 100);
+        afterState.style.clipPath = `inset(0 0 0 ${insetVal}%)`;
+      }
+    });
+  }
+</script>
+<script>
+  /* ==================== SMART NAVBAR SCROLL LOGIC ==================== */
+  let lastScrollY = window.scrollY;
+  // Threshold to prevent jitter (e.g., 15px diff required to trigger hide/show)
+  const threshold = 15;
+  const header = document.querySelector('header');
+
+  window.addEventListener('scroll', () => {
+    const currentScrollY = window.scrollY;
+
+    // Always show at very top
+    if (currentScrollY <= 0) {
+      header.classList.remove('nav-hidden');
+      lastScrollY = currentScrollY;
+      return;
+    }
+
+    // Calculate difference
+    const diff = Math.abs(currentScrollY - lastScrollY);
+
+    // Only act if difference exceeds threshold
+    if (diff > threshold) {
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling DOWN -> Hide
+        header.classList.add('nav-hidden');
+      } else {
+        // Scrolling UP -> Show
+        header.classList.remove('nav-hidden');
+      }
+      // Update lastScrollY only when threshold exceeded to avoid small jitters accumulating
+      lastScrollY = currentScrollY;
+    }
   });
 </script>
 </body>

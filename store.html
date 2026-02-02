@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TAP Store - The Collection</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            <a href="tap_new.html">
+                <img src="images/tap_dark-removebg-preview.png" alt="Tap Logo">
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="store.html" class="active">Tap Store</a></li>
+                <li><a href="tap_new.html#features">Features</a></li>
+                <li><a href="tap_new.html#pricing">Pricing</a></li>
+                <li><a href="tap_new.html#contact">Contact Us</a></li>
+            </ul>
+        </nav>
+        <div class="cart-icon" onclick="toggleCart()">
+            🛒 <span class="cart-count">0</span>
+        </div>
+    </header>
+
+    <section class="store-section">
+        <div class="store-header">
+            <h2>The Collection</h2>
+            <p>Timeless tools for the modern networker.</p>
+        </div>
+
+        <div class="store-grid">
+            <!-- Product 1 -->
+            <div class="product-card" onclick="openProduct('tap_classic')">
+                <div class="product-image">
+                    <img src="images/A.png" alt="Tap Classic Black">
+                </div>
+                <div class="product-info">
+                    <h3>Tap Classic</h3>
+                    <p class="product-desc">Matte Black Finish. NFC Enabled.</p>
+                    <div class="product-action">
+                        <span class="price">$29.99</span>
+                        <button class="add-btn"
+                            onclick="event.stopPropagation(); addToCart('tap_classic', 'Tap Classic', 29.99, 'images/A.png')">Add
+                            to
+                            Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card" onclick="openProduct('tap_white')">
+                <div class="product-image">
+                    <img src="images/B.png" alt="Tap White Edition">
+                </div>
+                <div class="product-info">
+                    <h3>Tap White</h3>
+                    <p class="product-desc">Pristine White. Minimalist Design.</p>
+                    <div class="product-action">
+                        <span class="price">$29.99</span>
+                        <button class="add-btn"
+                            onclick="event.stopPropagation(); addToCart('tap_white', 'Tap White', 29.99, 'images/B.png')">Add
+                            to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== PRODUCT DETAIL VIEW ==================== -->
+    <section class="product-detail-section" id="product-detail" style="display: none;">
+        <div class="detail-container">
+            <!-- Back Button -->
+            <button onclick="closeProduct()" class="back-btn">← Back to Collection</button>
+
+            <div class="detail-grid">
+                <!-- Left: Image -->
+                <div class="detail-gallery">
+                    <img id="detail-img" src="images/A.png" alt="Product Image" class="detail-main-img">
+                </div>
+
+                <!-- Right: Info -->
+                <div class="detail-info">
+                    <h1 id="detail-title">Product Name</h1>
+                    <span id="detail-price" class="detail-price">$0.00</span>
+                    <p id="detail-desc" class="detail-desc">Description goes here.</p>
+
+                    <button id="detail-add-btn" class="add-btn-large">Add to Cart</button>
+
+                    <!-- Accordions -->
+                    <div class="detail-accordion">
+                        <div class="accordion-item">
+                            <button class="accordion-header" onclick="toggleAccordion(this)">
+                                <span>On-going fees?</span>
+                                <span class="icon">+</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p>No subscription required. You pay once for the card, and it's yours forever.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-header" onclick="toggleAccordion(this)">
+                                <span>How do I customize my card?</span>
+                                <span class="icon">+</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p>Once you receive your card, simply tap it to your phone to activate and set up your
+                                    profile instantly.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-header" onclick="toggleAccordion(this)">
+                                <span>What can I customize in my digital profile?</span>
+                                <span class="icon">+</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p>You can add your photo, contact details, social media links, websites, payments, and
+                                    much more.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CART DRAWER HTML -->
+    <div class="cart-overlay" onclick="toggleCart()"></div>
+    <div class="cart-drawer">
+        <div class="cart-header">
+            <h2>Cart</h2>
+            <div class="close-cart" onclick="toggleCart()">✕</div>
+        </div>
+        <div class="cart-body">
+            <div class="empty-cart-icon">🛒</div>
+            <div class="empty-cart-msg">Your cart is empty</div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-subtotal">
+                <span>SUBTOTAL</span>
+                <span>$0.00</span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">
+                Check out
+            </button>
+        </div>
+    </div>
+
+    <script>
+        /* Product Data */
+        const products = {
+            'tap_classic': {
+                id: 'tap_classic',
+                name: 'Tap Classic',
+                price: 29.99,
+                image: 'images/A.png',
+                desc: 'Sleek and streamlined, this no-fuss digital business card is the perfect way to instantly connect with your network. Matte Black Finish with premium NFC technology embedded.'
+            },
+            'tap_white': {
+                id: 'tap_white',
+                name: 'Tap White',
+                price: 29.99,
+                image: 'images/B.png',
+                desc: 'Pristine White edition. Minimalist design meeting maximum efficiency. Stand out with a clean look while sharing your digital profile instantly.'
+            }
+        };
+
+        function openProduct(id) {
+            const product = products[id];
+            if (!product) return;
+
+            // Populate Data
+            document.getElementById('detail-title').textContent = product.name;
+            document.getElementById('detail-price').textContent = '$' + product.price.toFixed(2);
+            document.getElementById('detail-desc').textContent = product.desc;
+            document.getElementById('detail-img').src = product.image;
+
+            // Setup Add to Cart Button
+            const addBtn = document.getElementById('detail-add-btn');
+            addBtn.onclick = () => addToCart(product.id, product.name, product.price, product.image);
+
+            // Toggle Views
+            document.querySelector('.store-grid').style.display = 'none';
+            document.querySelector('.store-header').style.display = 'none';
+            document.getElementById('product-detail').style.display = 'block';
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function closeProduct() {
+            document.getElementById('product-detail').style.display = 'none';
+            document.querySelector('.store-grid').style.display = 'flex';
+            document.querySelector('.store-header').style.display = 'block';
+        }
+
+        function toggleAccordion(header) {
+            const item = header.parentElement;
+            item.classList.toggle('active');
+        }
+    </script>
+    <script src="js/cart.js"></script>
+
+    <!-- Cursor Elements -->
+    <div class="cursor-dot" data-cursor-dot></div>
+    <div class="cursor-outline" data-cursor-outline></div>
+
+    <script>
+        /* Cursor Logic */
+        const cursorDot = document.querySelector("[data-cursor-dot]");
+        const cursorOutline = document.querySelector("[data-cursor-outline]");
+        let cursorX = -100, cursorY = -100, outlineX = -100, outlineY = -100;
+
+        window.addEventListener("mousemove", function (e) {
+            cursorX = e.clientX;
+            cursorY = e.clientY;
+            cursorDot.style.left = `${cursorX}px`;
+            cursorDot.style.top = `${cursorY}px`;
+        });
+
+        function animateCursor() {
+            let distX = cursorX - outlineX;
+            let distY = cursorY - outlineY;
+            outlineX += distX * 0.15;
+            outlineY += distY * 0.15;
+            cursorOutline.style.left = `${outlineX}px`;
+            cursorOutline.style.top = `${outlineY}px`;
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        /* Hover Effects for Cards */
+        const interactiveElements = document.querySelectorAll("a, button, .product-card");
+        interactiveElements.forEach(el => {
+            el.addEventListener("mouseenter", () => document.body.classList.add("hovering"));
+            el.addEventListener("mouseleave", () => document.body.classList.remove("hovering"));
+        });
+    </script>
+</body>
+
+</html>
