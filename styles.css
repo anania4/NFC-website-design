@@ -623,8 +623,15 @@ nav {
 }
 
 @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-8px); }
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
 }
 
 /* CARD 1 - TAP EFFECT */
@@ -665,8 +672,15 @@ nav {
 }
 
 @keyframes ripple {
-    0% { transform: scale(0.5); opacity: 1; }
-    100% { transform: scale(1.5); opacity: 0; }
+    0% {
+        transform: scale(0.5);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
 }
 
 /* CARD 2 - CHART BARS */
@@ -684,14 +698,36 @@ nav {
     animation: grow 2s ease-in-out infinite;
 }
 
-.bar-1 { height: 40px; animation-delay: 0s; }
-.bar-2 { height: 60px; animation-delay: 0.3s; }
-.bar-3 { height: 35px; animation-delay: 0.6s; }
-.bar-4 { height: 70px; animation-delay: 0.9s; }
+.bar-1 {
+    height: 40px;
+    animation-delay: 0s;
+}
+
+.bar-2 {
+    height: 60px;
+    animation-delay: 0.3s;
+}
+
+.bar-3 {
+    height: 35px;
+    animation-delay: 0.6s;
+}
+
+.bar-4 {
+    height: 70px;
+    animation-delay: 0.9s;
+}
 
 @keyframes grow {
-    0%, 100% { transform: scaleY(0.7); }
-    50% { transform: scaleY(1.1); }
+
+    0%,
+    100% {
+        transform: scaleY(0.7);
+    }
+
+    50% {
+        transform: scaleY(1.1);
+    }
 }
 
 /* CARD 3 - ECO ELEMENTS */
@@ -732,13 +768,25 @@ nav {
 }
 
 @keyframes sway {
-    0%, 100% { transform: rotate(-5deg); }
-    50% { transform: rotate(5deg); }
+
+    0%,
+    100% {
+        transform: rotate(-5deg);
+    }
+
+    50% {
+        transform: rotate(5deg);
+    }
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 /* CARD 4 - SECURITY ELEMENTS */
@@ -786,17 +834,36 @@ nav {
     animation: blink 1.5s ease-in-out infinite;
 }
 
-.lock-dots .dot:nth-child(2) { animation-delay: 0.3s; }
-.lock-dots .dot:nth-child(3) { animation-delay: 0.6s; }
+.lock-dots .dot:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.lock-dots .dot:nth-child(3) {
+    animation-delay: 0.6s;
+}
 
 @keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
 }
 
 @keyframes blink {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 1; }
+
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 1;
+    }
 }
 
 .service-text {
@@ -823,18 +890,19 @@ nav {
 }
 
 .service-heading {
-    font-size: 84px;
-    font-weight: 800;
+    font-size: 100px;
+    font-weight: 900;
     margin: 0;
-    line-height: 1.05;
-    letter-spacing: -2px;
+    line-height: 1;
+    letter-spacing: -3px;
+    text-transform: uppercase;
 }
 
 .service-description {
-    font-size: 20px;
-    line-height: 1.6;
-    max-width: 450px;
-    font-weight: 400;
+    font-size: 24px;
+    line-height: 1.5;
+    max-width: 500px;
+    font-weight: 500;
 }
 
 .card-1 .service-description {
@@ -1755,22 +1823,22 @@ nav {
         min-height: 80vh;
         padding: 1rem;
     }
-    
+
     .what-is-it-text {
         max-width: 90%;
     }
-    
+
     .what-is-it-text h2 {
         font-size: 2rem;
         margin-bottom: 20px;
         letter-spacing: 1px;
     }
-    
+
     .what-is-it-text p {
         font-size: 1rem;
         line-height: 1.6;
     }
-    
+
     .what-is-it-image img {
         opacity: 0.3;
     }
@@ -1780,7 +1848,7 @@ nav {
     .what-is-it-text h2 {
         font-size: 1.8rem;
     }
-    
+
     .what-is-it-text p {
         font-size: 0.95rem;
     }
@@ -2022,10 +2090,11 @@ nav {
         font-size: 0.8rem;
     }
 }
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 25px;
+
+display: flex;
+flex-direction: column;
+justify-content: flex-end;
+padding: 25px;
 }
 
 .purchase-feature-content {
@@ -2170,6 +2239,7 @@ nav {
 
 .url-text {
     flex: 1;
+    text-align: left;
 }
 
 /* Security Grid */
@@ -2554,7 +2624,7 @@ footer {
 
 .footer-main {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr;
     gap: 60px;
     margin-bottom: 60px;
 }
@@ -3482,6 +3552,44 @@ body.hovering .cursor-outline {
     }
 }
 
+@media (max-width: 576px) {
+    .store-section {
+        padding: 90px 15px 30px;
+    }
+
+    .store-header h2 {
+        font-size: 32px;
+    }
+
+    .product-card {
+        height: 380px;
+        max-width: 100%;
+        border-radius: 20px;
+    }
+
+    .product-info {
+        padding: 15px;
+    }
+
+    .product-info h3 {
+        font-size: 20px;
+    }
+
+    .product-desc {
+        font-size: 13px;
+        margin-bottom: 10px;
+    }
+
+    .price {
+        font-size: 18px;
+    }
+
+    .add-btn {
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+}
+
 /* ==================== CART ITEM STYLES ==================== */
 .cart-item {
     display: flex;
@@ -3937,7 +4045,7 @@ body.hovering .cursor-outline {
 
     /* MOBILE HERO - LEFT ALIGNED AND BIGGER */
     .hero {
-        padding: 140px 20px 0;
+        padding: 120px 20px 0;
         justify-content: center;
         align-items: flex-start;
         text-align: left;
@@ -3951,55 +4059,55 @@ body.hovering .cursor-outline {
         width: 100%;
         margin: 0;
         z-index: 2;
-        margin-top: 60px;
+        margin-top: 40px;
         position: relative;
     }
 
     .hero-text h1 {
-        font-size: clamp(60px, 20vw, 120px);
-        line-height: 1.05;
+        font-size: clamp(48px, 14vw, 80px);
+        line-height: 1.1;
         letter-spacing: -1px;
         font-weight: 900;
-        margin: 0 0 40px 0;
+        margin: 0 0 10px 0;
         position: relative;
         z-index: 3;
     }
 
     /* Animation positioned properly inline with "One" */
     .tap-animation {
-        transform: scale(0.8);
+        transform: scale(0.65);
         transform-origin: left center;
-        margin: 0 -10px -8px 5px;
+        margin: 0 -5px -2px 5px;
         display: inline-block;
         vertical-align: middle;
-        width: 120px;
-        height: 80px;
+        width: 90px;
+        height: 60px;
         position: relative;
     }
 
     .tap-phone {
-        width: 75px;
-        height: 48px;
+        width: 60px;
+        height: 38px;
     }
 
     .tap-card {
-        width: 55px;
-        height: 35px;
+        width: 44px;
+        height: 28px;
     }
 
     /* Sliding text left aligned and bigger */
     .sliding {
         position: relative;
         height: auto;
-        margin: 10px 0 5px 0;
+        margin: 0;
         width: 100%;
         overflow: visible;
-        min-height: 150px;
+        min-height: 120px;
         text-align: left;
     }
 
     .sliding span {
-        font-size: clamp(60px, 20vw, 120px);
+        font-size: clamp(48px, 14vw, 80px);
         letter-spacing: -1px;
         text-align: left;
         color: #fff;
@@ -4007,7 +4115,7 @@ body.hovering .cursor-outline {
         position: absolute;
         left: 0;
         top: 0;
-        line-height: 1.05;
+        line-height: 1.1;
         width: 100%;
     }
 
@@ -4071,6 +4179,7 @@ body.hovering .cursor-outline {
     .service-heading {
         font-size: 42px;
         text-align: center;
+        line-height: 1.1;
     }
 
     .service-description {
@@ -4235,130 +4344,132 @@ body.hovering .cursor-outline {
         width: 92%;
         margin-bottom: 12vh;
     }
-        margin-bottom: 20vh;
-        border-radius: 24px;
-    }
 
-    .service-content {
-        padding: 28px 20px;
-    }
+    margin-bottom: 20vh;
+    border-radius: 24px;
+}
 
-    .service-heading {
-        font-size: 32px;
-    }
+.service-content {
+    padding: 28px 20px;
+}
 
-    .service-description {
-        font-size: 14px;
-    }
+.service-heading {
+    font-size: 32px;
+    line-height: 1.1;
+}
 
-    .how-title {
-        font-size: 32px;
-        margin-bottom: 35px;
-    }
+.service-description {
+    font-size: 14px;
+}
 
-    .steps-container {
-        gap: 25px;
-    }
+.how-title {
+    font-size: 32px;
+    margin-bottom: 35px;
+}
 
-    .step-card {
-        width: 95%;
-        height: 420px;
-    }
+.steps-container {
+    gap: 25px;
+}
 
-    .step-title {
-        font-size: 22px;
-    }
+.step-card {
+    width: 95%;
+    height: 420px;
+}
 
-    .step-description {
-        font-size: 13px;
-    }
+.step-title {
+    font-size: 22px;
+}
 
-    .step-number {
-        font-size: 60px;
-    }
+.step-description {
+    font-size: 13px;
+}
 
-    .state-headline {
-        font-size: 28px;
-    }
+.step-number {
+    font-size: 60px;
+}
 
-    .what-text h2 {
-        font-size: 1.8rem;
-    }
+.state-headline {
+    font-size: 28px;
+}
 
-    .security-header h2 {
-        font-size: 28px;
-    }
+.what-text h2 {
+    font-size: 1.8rem;
+}
 
-    .secure-url-visual {
-        padding: 12px 16px;
-        margin: 0 16px 50px;
-    }
+.security-header h2 {
+    font-size: 28px;
+}
 
-    .url-bar {
-        font-size: 11px;
-    }
+.secure-url-visual {
+    padding: 12px 16px;
+    margin: 0 16px 50px;
+}
 
-    .security-card {
-        padding: 32px 24px;
-    }
+.url-bar {
+    font-size: 11px;
+}
 
-    .pricing-section {
-        padding: 80px 16px;
-    }
+.security-card {
+    padding: 32px 24px;
+}
 
-    .pricing-title {
-        font-size: 36px;
-        margin-bottom: 50px;
-    }
+.pricing-section {
+    padding: 80px 16px;
+}
 
-    .pricing-grid {
-        padding: 0 16px;
-        gap: 16px;
-    }
+.pricing-title {
+    font-size: 36px;
+    margin-bottom: 50px;
+}
 
-    .pricing-card {
-        min-height: 300px;
-    }
+.pricing-grid {
+    padding: 0 16px;
+    gap: 16px;
+}
 
-    .pricing-content {
-        padding: 28px 24px;
-    }
+.pricing-card {
+    min-height: 300px;
+}
 
-    .pricing-package {
-        font-size: 24px;
-    }
+.pricing-content {
+    padding: 28px 24px;
+}
 
-    .footer-container {
-        padding: 0 20px;
-    }
+.pricing-package {
+    font-size: 24px;
+}
 
-    .footer-brand h2 {
-        font-size: 28px;
-    }
+.footer-container {
+    padding: 0 20px;
+}
 
-    .footer-brand p {
-        font-size: 14px;
-    }
+.footer-brand h2 {
+    font-size: 28px;
+}
 
-    .narrative-text h3 {
-        font-size: 1.6rem;
-    }
+.footer-brand p {
+    font-size: 14px;
+}
 
-    .narrative-text p {
-        font-size: 0.9rem;
-    }
+.narrative-text h3 {
+    font-size: 1.6rem;
+}
 
-    .narrative-text {
-        padding: 24px 20px;
-    }
+.narrative-text p {
+    font-size: 0.9rem;
+}
 
-    .features-section .service-title {
-        font-size: 40px;
-    }
+.narrative-text {
+    padding: 24px 20px;
+}
 
-    .stacking-cards-section {
-        padding: 30px 0;
-    }
+.features-section .service-title {
+    font-size: 40px;
+}
+
+.stacking-cards-section {
+    padding: 30px 0;
+}
 }
 
 /* ==================== RESPONSIVE: VERY SMALL PHONE (up to 380px) ==================== */
@@ -4451,4 +4562,47 @@ body.hovering .cursor-outline {
     min-height: 280px;
     padding: 32px 28px;
     border-radius: 16px;
+}
+
+/* ==================== FOOTER SOCIAL ICONS STYLING ==================== */
+.footer-social a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    transition: all 0.3s ease;
+    margin-right: 12px;
+}
+
+.footer-social a:hover {
+    background: var(--accent);
+    color: #000;
+    transform: translateY(-2px);
+}
+
+.footer-social a svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+.footer-social a:last-child {
+    margin-right: 0;
+}
+
+/* ==================== PLATFORM SECURITY - SIMPLE ICONS ==================== */
+.security-text-icon {
+    font-size: 24px;
+    color: var(--accent);
+    display: inline-block;
+}
+
+.security-icon {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
 }
