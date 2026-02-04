@@ -105,42 +105,105 @@ header.nav-hidden {
     transform: rotate(-45deg) translate(5px, -5px);
 }
 
+/* NAVIGATION */
 nav {
     justify-self: center;
 }
 
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 5px;
-    background: rgba(30, 30, 30, 0.95);
-    padding: 8px 12px;
-    border-radius: 50px;
-    font-weight: 500;
-    text-transform: uppercase;
-    font-size: 12px;
-    letter-spacing: 0.5px;
+/* DESKTOP NAV (Pill Shape) */
+@media (min-width: 992px) {
+    nav ul {
+        list-style: none;
+        display: flex;
+        gap: 5px;
+        background: rgba(30, 30, 30, 0.95);
+        padding: 8px 12px;
+        border-radius: 50px;
+        font-weight: 500;
+        text-transform: uppercase;
+        font-size: 12px;
+        letter-spacing: 0.5px;
+    }
+
+    nav ul li a {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 10px 18px;
+        border-radius: 50px;
+        transition: all 0.3s ease;
+        color: #999;
+    }
+
+    nav ul li a:hover {
+        background: rgba(255, 255, 255, 0.08);
+        color: #fff;
+    }
+
+    nav ul li a::after {
+        content: '▼';
+        font-size: 7px;
+        opacity: 0.5;
+    }
 }
 
-nav ul li a {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    padding: 10px 18px;
-    border-radius: 50px;
-    transition: all 0.3s ease;
-    color: #999;
-}
+/* MOBILE NAV (Glassmorphism Overlay) */
+@media (max-width: 991px) {
+    .hamburger {
+        display: flex !important;
+        /* Force show hamburger */
+        z-index: 2000;
+        /* Above overlay */
+    }
 
-nav ul li a:hover {
-    background: rgba(255, 255, 255, 0.08);
-    color: #fff;
-}
+    nav.nav-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        z-index: 1500;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
 
-nav ul li a::after {
-    content: '▼';
-    font-size: 7px;
-    opacity: 0.5;
+    nav.nav-menu.open {
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        text-align: center;
+        transform: translateY(30px);
+        transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    nav.nav-menu.open ul {
+        transform: translateY(0);
+    }
+
+    nav ul li a {
+        font-size: 32px;
+        font-weight: 800;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: -1px;
+    }
+
+    nav ul li a:hover {
+        color: var(--accent);
+    }
 }
 
 .dark-toggle {
@@ -173,6 +236,28 @@ nav ul li a::after {
     position: relative;
 }
 
+@media (max-width: 991px) {
+    .hero {
+        padding: 140px 40px 0;
+        height: auto;
+        min-height: 100vh;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 140px 20px 0;
+        justify-content: flex-start;
+        align-items: flex-start;
+        text-align: left;
+        min-height: 100vh;
+        gap: 0;
+        position: relative;
+    }
+}
+
+
+
 .hero-text {
     max-width: 900px;
 }
@@ -190,6 +275,26 @@ nav ul li a::after {
     width: 140px;
     height: 100px;
     vertical-align: middle;
+}
+
+/* Responsive tap animation */
+@media (max-width: 768px) {
+    .tap-animation {
+        transform: scale(0.6);
+        transform-origin: left center;
+        margin: 0 -20px -10px 10px;
+        width: 120px;
+        height: 80px;
+    }
+}
+
+@media (max-width: 576px) {
+    .tap-animation {
+        transform: scale(0.5);
+        margin: 0 -25px -15px 5px;
+        width: 100px;
+        height: 70px;
+    }
 }
 
 .tap-phone {
@@ -337,6 +442,29 @@ nav ul li a::after {
     opacity: 1;
 }
 
+@media (max-width: 768px) {
+    .sliding {
+        position: relative;
+        height: auto;
+        margin: 0 0 25px 0;
+        width: 100%;
+        overflow: hidden;
+        min-height: 80px;
+    }
+
+    .sliding span {
+        font-size: 18vw;
+        letter-spacing: -2px;
+        text-align: left;
+        color: #fff;
+        font-weight: 900;
+        position: absolute;
+        left: 0;
+        top: 0;
+        line-height: 0.9;
+    }
+}
+
 .hero p {
     max-width: 450px;
     font-size: 19px;
@@ -391,12 +519,6 @@ nav ul li a::after {
     padding: 0;
 }
 
-.sec-head {
-    text-align: center;
-    margin-bottom: 80px;
-    padding: 0 60px;
-}
-
 /* STACKING CARDS SECTION */
 .stacking-cards-section {
     padding: 50vh 0;
@@ -428,7 +550,7 @@ nav ul li a::after {
     min-height: 520px;
     border-radius: 40px;
     width: 98%;
-    margin: 0 auto 40vh auto;
+    margin: 0 auto 20vh auto;
     overflow: hidden;
     transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
     box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
@@ -480,6 +602,203 @@ nav ul li a::after {
     height: 100%;
 }
 
+/* SERVICE VISUAL ELEMENTS */
+.service-visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.service-icon {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    margin-bottom: 25px;
+    animation: float 4s ease-in-out infinite;
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+}
+
+/* CARD 1 - TAP EFFECT */
+.tap-effect {
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+
+.tap-circle {
+    position: absolute;
+    border: 3px solid var(--accent);
+    border-radius: 50%;
+    animation: ripple 2s ease-out infinite;
+}
+
+.tap-circle:nth-child(1) {
+    width: 25px;
+    height: 25px;
+    top: 37px;
+    left: 37px;
+}
+
+.tap-circle:nth-child(2) {
+    width: 50px;
+    height: 50px;
+    top: 25px;
+    left: 25px;
+    animation-delay: 0.5s;
+}
+
+.tap-circle:nth-child(3) {
+    width: 75px;
+    height: 75px;
+    top: 12px;
+    left: 12px;
+    animation-delay: 1s;
+}
+
+@keyframes ripple {
+    0% { transform: scale(0.5); opacity: 1; }
+    100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* CARD 2 - CHART BARS */
+.chart-bars {
+    display: flex;
+    align-items: end;
+    gap: 12px;
+    height: 80px;
+}
+
+.bar {
+    width: 16px;
+    background: var(--accent);
+    border-radius: 3px;
+    animation: grow 2s ease-in-out infinite;
+}
+
+.bar-1 { height: 40px; animation-delay: 0s; }
+.bar-2 { height: 60px; animation-delay: 0.3s; }
+.bar-3 { height: 35px; animation-delay: 0.6s; }
+.bar-4 { height: 70px; animation-delay: 0.9s; }
+
+@keyframes grow {
+    0%, 100% { transform: scaleY(0.7); }
+    50% { transform: scaleY(1.1); }
+}
+
+/* CARD 3 - ECO ELEMENTS */
+.eco-elements {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.leaf {
+    position: absolute;
+    font-size: 40px;
+    animation: sway 3s ease-in-out infinite;
+    color: var(--accent);
+    font-weight: bold;
+}
+
+.leaf-1 {
+    top: 10px;
+    left: 10px;
+    animation-delay: 0s;
+}
+
+.leaf-2 {
+    bottom: 10px;
+    right: 10px;
+    animation-delay: 1.5s;
+}
+
+.recycle-symbol {
+    font-size: 50px;
+    animation: spin 8s linear infinite;
+    color: var(--accent);
+    font-weight: bold;
+}
+
+@keyframes sway {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* CARD 4 - SECURITY ELEMENTS */
+.security-elements {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.shield {
+    font-size: 50px;
+    animation: pulse 2s ease-in-out infinite;
+    color: var(--accent);
+    font-weight: bold;
+}
+
+.key {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 28px;
+    animation: float 3s ease-in-out infinite;
+    animation-delay: 1s;
+    color: var(--accent);
+    font-weight: bold;
+}
+
+.lock-dots {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 4px;
+}
+
+.lock-dots .dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: blink 1.5s ease-in-out infinite;
+}
+
+.lock-dots .dot:nth-child(2) { animation-delay: 0.3s; }
+.lock-dots .dot:nth-child(3) { animation-delay: 0.6s; }
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
 .service-text {
     display: flex;
     flex-direction: column;
@@ -487,9 +806,9 @@ nav ul li a::after {
 }
 
 .service-number {
-    font-size: 18px;
+    font-size: 24px;
     font-weight: 600;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     display: block;
 }
 
@@ -504,7 +823,7 @@ nav ul li a::after {
 }
 
 .service-heading {
-    font-size: 72px;
+    font-size: 84px;
     font-weight: 800;
     margin: 0;
     line-height: 1.05;
@@ -512,7 +831,7 @@ nav ul li a::after {
 }
 
 .service-description {
-    font-size: 18px;
+    font-size: 20px;
     line-height: 1.6;
     max-width: 450px;
     font-weight: 400;
@@ -657,14 +976,32 @@ nav ul li a::after {
 
 /* VARIANTS */
 .app-dark {
-    background: #111;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #fff;
+    background: rgba(17, 17, 17, 0.95) !important;
+    color: #fff !important;
+    border: 2px solid rgba(218, 249, 51, 0.3) !important;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    border-radius: 16px;
+}
+
+.app-dark:hover {
+    border-color: var(--accent);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(218, 249, 51, 0.2);
 }
 
 .app-white {
-    background: #ffffff;
+    background: #ffffff !important;
     color: #000 !important;
+    border: 2px solid rgba(218, 249, 51, 0.4) !important;
+    transition: all 0.3s ease;
+    border-radius: 16px;
+}
+
+.app-white:hover {
+    border-color: var(--accent);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(218, 249, 51, 0.15);
 }
 
 .app-white h6,
@@ -795,16 +1132,244 @@ nav ul li a::after {
 }
 
 /* RESPONSIVE */
+/* RESPONSIVE - HORIZONTAL SCROLL ENFORCEMENT */
+
+/* GLOBAL HORIZONTAL SCROLL UTILITIES */
+.scroll-x-container {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 20px;
+    padding-bottom: 20px;
+    /* Space for scrollbar if visible, or touch area */
+    width: 100%;
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.scroll-x-container::-webkit-scrollbar {
+    display: none;
+    /* Chrome/Safari */
+}
+
+.scroll-item {
+    scroll-snap-align: center;
+    flex: 0 0 85%;
+    /* Show 85% of card to hint at more content */
+    max-width: 350px;
+    /* Keep max width */
+}
+
 @media (max-width: 991px) {
+
+    /* APPROACH / FEATURES - HORIZONTAL SCROLL */
     .approach-grid {
         display: flex;
-        flex-direction: column;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding-bottom: 30px;
+        gap: 20px;
     }
 
     .approach-item {
+        flex: 0 0 85%;
+        margin-bottom: 0;
+        scroll-snap-align: center;
+    }
+
+    /* WHAT IS IT - KEEP SIDE BY SIDE OR STACK? User said "No vertical stacking please just keep the design layout in the pc view"
+       But for "What Is It", it's text + image. Vertical is standard.
+       I will LEAVE text/image stacking as it's not a "list" of cards, but content flow.
+       However, grid-template-columns: 1fr is standard behavior for content.
+       I will focus on CARDS lists for the horizontal scroll.
+    */
+}
+
+/* ORBITAL FEATURES - PRESERVE CIRCLE via SCALING */
+@media (max-width: 1200px) {
+    .orbital-features {
+        /* Remove the stacking logic */
+        /* flex-direction: column;  <-- REMOVED */
+        /* padding: 60px 20px; */
+
+        /* Scale down to fit */
+        transform: scale(0.6);
+        transform-origin: center center;
+        /* Ensure it takes up less space visually if scaled, or negative margins */
+        margin: -150px 0;
+        min-height: 500px;
         width: 100%;
-        margin-top: 0 !important;
-        margin-bottom: 30px;
+        overflow: visible;
+    }
+
+    .orbital-center,
+    .orbital-item {
+        /* Reset any previous mobile overrides if they existed, 
+           but since I'm overwriting the block, I just won't include them. */
+    }
+
+    /* Keep the ring */
+    .orbital-features::before {
+        display: block !important;
+        /* Force show */
+    }
+}
+
+@media (max-width: 600px) {
+    .orbital-features {
+        transform: scale(0.4);
+        margin: -200px 0;
+    }
+}
+
+
+/* PRICING - HORIZONTAL SCROLL */
+@media (max-width: 1200px) {
+    .pricing-grid {
+        display: flex;
+        /* Override grid */
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 20px;
+        padding: 20px 0 40px 0;
+        scrollbar-width: none;
+    }
+
+    .pricing-grid::-webkit-scrollbar {
+        display: none;
+    }
+
+    .pricing-card {
+        flex: 0 0 85%;
+        /* Mobile-app like peek */
+        min-width: 280px;
+        scroll-snap-align: center;
+        margin-bottom: 0;
+        /* Remove stack margin */
+    }
+}
+
+@media (max-width: 768px) {
+
+    /* Ensure styles persist and aren't overwritten by the 768px block */
+    .pricing-grid {
+        grid-template-columns: none;
+        /* Disable grid */
+        display: flex;
+    }
+
+    .pricing-title {
+        font-size: 48px;
+    }
+}
+
+
+/* PURCHASE FEATURES (What You Get) - HORIZONTAL SCROLL */
+@media (max-width: 1100px) {
+    .what-section {
+        /* Grid was here */
+        /* Text on top, cards below? Or side-by-side? 
+           User wants "PC view". PC is 0.8fr 1.2fr. 
+           On mobile, fitting text + grid side-by-side is impossible readability-wise.
+           I will stack certain MAJOR sections (Text vs Content), but the CONTENT (Cards) will scroll horizontally.
+        */
+        grid-template-columns: 1fr;
+    }
+
+    .purchase-features {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 15px;
+        padding-bottom: 20px;
+    }
+
+    .purchase-feature,
+    .purchase-hero {
+        flex: 0 0 70%;
+        min-width: 250px;
+        scroll-snap-align: center;
+    }
+
+    .purchase-grid {
+        /* The parent of features. PC: Flex col gap 1rem. */
+        /* We need the features row to scroll. */
+    }
+}
+
+@media (max-width: 768px) {
+    .purchase-features {
+        /* Reinforce header */
+        grid-template-columns: none;
+    }
+}
+
+
+/* HOW IT WORKS - HORIZONTAL SCROLL */
+@media (max-width: 991px) {
+    .steps-container {
+        display: flex;
+        flex-direction: row;
+        /* FORCE ROW */
+        overflow-x: auto;
+        align-items: stretch;
+        /* Match height */
+        justify-content: flex-start;
+        /* Start from left */
+        padding: 40px 20px;
+        gap: 20px;
+        perspective: none;
+        /* Remove 3D for clarity on small screens or keep? */
+        /* User likes PC view. PC has perspective. 
+           Mobile 3D perspective might be weird if scrolling. 
+           I'll remove perspective for touch usability but keep layout horiz. */
+        scroll-snap-type: x mandatory;
+    }
+
+    .step-card {
+        flex: 0 0 85%;
+        max-width: 320px;
+        transform: none !important;
+        /* Reset the 3D tilt for scrolling */
+        margin: 0;
+        scroll-snap-align: center;
+    }
+
+    .step-card:hover {
+        transform: none;
+        /* No hover effects on touch usually */
+    }
+}
+
+
+/* SECURITY GRID - HORIZONTAL SCROLL */
+@media (max-width: 1024px) {
+    .security-grid {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 20px;
+        padding-bottom: 30px;
+    }
+
+    .security-card {
+        flex: 0 0 80%;
+        min-width: 280px;
+        scroll-snap-align: center;
+    }
+}
+
+@media (max-width: 600px) {
+    .security-grid {
+        /* Reinforce */
+        grid-template-columns: none;
     }
 }
 
@@ -957,73 +1522,175 @@ nav ul li a::after {
     pointer-events: none;
 }
 
-/* Responsive - Stack on mobile */
-@media (max-width: 1200px) {
-    .orbital-features {
-        min-height: auto;
-        flex-direction: column;
-        padding: 60px 20px;
-    }
 
-    .orbital-center {
-        position: relative;
-        top: auto;
-        left: auto;
-        transform: none;
-        margin-bottom: 40px;
-    }
-
-    .orbital-item {
-        position: relative;
-        top: auto;
-        left: auto;
-        transform: none !important;
-        width: 100%;
-        max-width: 350px;
-        margin: 15px auto;
-    }
-
-    .orbital-item .item {
-        min-height: auto;
-    }
-
-    .orbital-features::before {
-        display: none;
-    }
-}
-
-
-/* WHAT IS IT SECTION */
-.what-is-it-section {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    align-items: center;
-    padding: 2rem 2rem;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-.what-is-it-text {
-    color: #fff;
-}
-
-.what-is-it-text h2 {
-    font-size: 3.5rem;
+/* TYPOGRAPHY */
+.app-icon-box {
     margin-bottom: 30px;
-    font-weight: 800;
-    line-height: 1.1;
+    height: 60px;
+    display: flex;
+    align-items: center;
 }
 
-.what-is-it-text p {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    margin-bottom: 25px;
-    color: var(--text-muted);
+.app-icon-box img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+}
+
+.app-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.app-desc {
+    font-size: 16px;
+    color: #aaa;
+    line-height: 1.6;
+}
+
+/* ORBITAL FEATURES LAYOUT - SUN & PLANETS */
+.orbital-features {
+    position: relative;
+    width: 100%;
+    min-height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.orbital-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    width: 320px;
+    height: 320px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle, rgba(181, 255, 74, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: pulse-glow 3s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 60px rgba(181, 255, 74, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 100px rgba(181, 255, 74, 0.5);
+    }
+}
+
+.orbital-center img {
+    max-width: 280px;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
+}
+
+.app-dark {
+    background: rgba(255, 255, 255, 0.03) !important;
+    color: #fff !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.app-white {
+    background: #fff !important;
+    color: #000 !important;
+}
+
+.app-lime {
+    background: var(--accent) !important;
+    color: #000 !important;
+}
+
+.orbital-item {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 220px;
+    transform-origin: center center;
+    z-index: 5;
+}
+
+.orbital-item .item {
+    min-height: 280px;
+    padding: 30px 25px;
+    font-size: 14px;
+}
+
+.orbital-item .item h6 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.orbital-item .item ul,
+.orbital-item .item p {
+    font-size: 12px;
+}
+
+/* Position 5 planets around the sun - evenly distributed at 72 degrees apart */
+.orbital-item:nth-child(2) {
+    transform: translate(-50%, -50%) rotate(0deg) translateY(-380px) rotate(0deg);
+}
+
+.orbital-item:nth-child(3) {
+    transform: translate(-50%, -50%) rotate(72deg) translateY(-380px) rotate(-72deg);
+}
+
+.orbital-item:nth-child(4) {
+    transform: translate(-50%, -50%) rotate(144deg) translateY(-380px) rotate(-144deg);
+}
+
+.orbital-item:nth-child(5) {
+    transform: translate(-50%, -50%) rotate(216deg) translateY(-380px) rotate(-216deg);
+}
+
+.orbital-item:nth-child(6) {
+    transform: translate(-50%, -50%) rotate(288deg) translateY(-380px) rotate(-288deg);
+}
+
+/* Orbit ring decoration */
+.orbital-features::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 760px;
+    height: 760px;
+    border: 1px dashed rgba(181, 255, 74, 0.2);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+
+/* WHAT IS IT SECTION - OVERLAY DESIGN */
+.what-is-it-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    overflow: hidden;
 }
 
 .what-is-it-image {
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1034,6 +1701,7 @@ nav ul li a::after {
     height: auto;
     max-height: 600px;
     object-fit: contain;
+    opacity: 0.4;
     filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
     animation: float 6s ease-in-out infinite;
 }
@@ -1052,26 +1720,79 @@ nav ul li a::after {
     }
 }
 
-@media (max-width: 991px) {
-    .what-is-it-section {
-        grid-template-columns: 1fr;
-        padding: 4rem 2rem;
-        text-align: center;
-    }
+.what-is-it-text {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+    text-align: center;
+    max-width: 600px;
+    padding: 0;
+    background: none;
+    backdrop-filter: none;
+    border-radius: 0;
+    border: none;
+}
 
-    .what-is-it-image {
-        margin-top: 40px;
+.what-is-it-text h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    font-weight: 800;
+    line-height: 1.1;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.what-is-it-text p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 0;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 400;
+}
+
+@media (max-width: 768px) {
+    .what-is-it-section {
+        min-height: 80vh;
+        padding: 1rem;
+    }
+    
+    .what-is-it-text {
+        max-width: 90%;
+    }
+    
+    .what-is-it-text h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+        letter-spacing: 1px;
+    }
+    
+    .what-is-it-text p {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+    
+    .what-is-it-image img {
+        opacity: 0.3;
     }
 }
 
-/* WHAT YOU'LL GET SECTION */
+@media (max-width: 576px) {
+    .what-is-it-text h2 {
+        font-size: 1.8rem;
+    }
+    
+    .what-is-it-text p {
+        font-size: 0.95rem;
+    }
+}
+
+/* WHAT YOU'LL GET SECTION - CAROUSEL DESIGN */
 .purchase-section {
     display: grid;
     grid-template-columns: 0.8fr 1.2fr;
     gap: 2rem;
-    align-items: start;
+    align-items: center;
     padding: 150px 2rem 2rem;
-    /* Increased top padding */
 }
 
 .what-text {
@@ -1088,59 +1809,219 @@ nav ul li a::after {
     text-transform: uppercase;
 }
 
-.what-text p {
-    line-height: 1.7;
-    margin-bottom: 1rem;
-    opacity: 0.9;
-    color: var(--text-muted);
-}
-
-/* Purchase Grid Layout */
-.purchase-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.purchase-hero {
+/* Carousel Container */
+.purchase-carousel-container {
     position: relative;
-    border-radius: 20px;
-    overflow: hidden;
-    min-height: 350px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 30px;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
 }
 
-/* Common style for all cards (Hero + Features) */
-.purchase-hero img.card-bg,
-.purchase-feature img.card-bg {
+.purchase-carousel {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.purchase-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 24px;
+    overflow: hidden;
+}
+
+.purchase-card.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.purchase-card.prev {
+    transform: translateX(-100%);
+}
+
+.purchase-card img.card-bg {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    z-index: 0;
+    z-index: 1;
 }
 
-/* Hide original hero image container if it exists */
-.purchase-hero-image {
-    display: none;
+.card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 30px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+    color: white;
+    z-index: 2;
 }
 
-.purchase-features {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+.card-content h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #fff;
 }
 
-.purchase-feature {
-    position: relative;
-    border-radius: 20px;
-    overflow: hidden;
-    min-height: 280px;
+.card-content p {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.4;
+    margin: 0;
+}
+
+/* Navigation Dots */
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dot.active {
+    background: var(--accent);
+    transform: scale(1.2);
+}
+
+.dot:hover {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+/* Navigation Arrows */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-btn.prev {
+    left: 16px;
+}
+
+.carousel-btn.next {
+    right: 16px;
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+    .purchase-section {
+        grid-template-columns: 1fr;
+        padding: 80px 20px 2rem;
+        gap: 3rem;
+    }
+
+    .what-text {
+        position: relative;
+        top: auto;
+        text-align: center;
+    }
+
+    .what-text h2 {
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        line-height: 1.2;
+    }
+
+    .purchase-carousel {
+        height: 350px;
+        border-radius: 20px;
+    }
+
+    .card-content {
+        padding: 24px;
+    }
+
+    .card-content h3 {
+        font-size: 1.3rem;
+    }
+
+    .card-content p {
+        font-size: 0.85rem;
+    }
+
+    .carousel-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+    }
+
+    .carousel-btn.prev {
+        left: 12px;
+    }
+
+    .carousel-btn.next {
+        right: 12px;
+    }
+}
+
+@media (max-width: 576px) {
+    .purchase-section {
+        padding: 60px 16px 2rem;
+        gap: 2rem;
+    }
+
+    .what-text h2 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .purchase-carousel {
+        height: 300px;
+        border-radius: 16px;
+    }
+
+    .card-content {
+        padding: 20px;
+    }
+
+    .card-content h3 {
+        font-size: 1.2rem;
+    }
+
+    .card-content p {
+        font-size: 0.8rem;
+    }
+}
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -1213,6 +2094,9 @@ nav ul li a::after {
     text-align: center;
     margin-bottom: 60px;
     padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .security-header h2 {
@@ -1227,7 +2111,8 @@ nav ul li a::after {
 /* Secure URL Bar Visual */
 .secure-url-visual {
     max-width: 800px;
-    margin: 0 auto 80px;
+    width: 100%;
+    margin: 0 0 80px 0;
     background: #1a1a1a;
     border-radius: 12px;
     padding: 15px 20px;
@@ -1279,12 +2164,12 @@ nav ul li a::after {
     white-space: nowrap;
 }
 
-.url-lock {
-    font-size: 14px;
-}
-
 .url-text span {
     color: #fff;
+}
+
+.url-text {
+    flex: 1;
 }
 
 /* Security Grid */
@@ -1346,17 +2231,8 @@ nav ul li a::after {
     font-weight: 400;
 }
 
-@media (max-width: 1024px) {
-    .security-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
 
 @media (max-width: 600px) {
-    .security-grid {
-        grid-template-columns: 1fr;
-    }
-
     .security-header h2 {
         font-size: 32px;
     }
@@ -1535,36 +2411,8 @@ nav ul li a::after {
     letter-spacing: 1px;
 }
 
+
 @media (max-width: 991px) {
-    .steps-container {
-        flex-direction: column;
-        align-items: center;
-        gap: 40px;
-        perspective: none;
-    }
-
-    .step-card {
-        transform: rotateX(0deg) scale(1);
-        width: 90%;
-        max-width: 350px;
-    }
-
-    .step-card:hover {
-        transform: scale(1.02) translateY(-10px);
-    }
-
-    @keyframes cardEntry {
-        0% {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        100% {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
     .how-title {
         font-size: 48px;
     }
@@ -1686,27 +2534,6 @@ nav ul li a::after {
     color: var(--text-muted);
     margin-top: 15px;
     font-style: italic;
-}
-
-@media (max-width: 1200px) {
-    .pricing-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 30px;
-    }
-}
-
-@media (max-width: 768px) {
-    .pricing-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .pricing-title {
-        font-size: 48px;
-    }
-
-    .pricing-card:hover {
-        transform: scale(1.05);
-    }
 }
 
 
@@ -2947,7 +3774,7 @@ body.hovering .cursor-outline {
 }
 
 /* ==================== RESPONSIVE: TABLET (768px - 1024px) ==================== */
-@media (max-width: 1024px) {
+@media (max-width: 1024px) and (min-width: 769px) {
     header {
         padding: 16px 30px;
     }
@@ -2966,8 +3793,12 @@ body.hovering .cursor-outline {
         padding: 8px 14px;
     }
 
+    /* TABLET HERO */
     .hero {
         padding: 140px 50px 0;
+        justify-content: center;
+        align-items: flex-start;
+        text-align: left;
     }
 
     .hero-text h1 {
@@ -2977,6 +3808,8 @@ body.hovering .cursor-outline {
     .tap-animation {
         width: 110px;
         height: 80px;
+        transform: scale(0.8);
+        margin: 0 5px -5px 5px;
     }
 
     .tap-phone {
@@ -2991,6 +3824,7 @@ body.hovering .cursor-outline {
 
     .sliding {
         height: 70px;
+        margin-top: 20px;
     }
 
     .sliding span {
@@ -2999,6 +3833,7 @@ body.hovering .cursor-outline {
 
     .hero p {
         font-size: 17px;
+        margin-top: 20px;
     }
 
     .bottom-fade-content span {
@@ -3100,58 +3935,115 @@ body.hovering .cursor-outline {
         width: 95px;
     }
 
+    /* MOBILE HERO - LEFT ALIGNED AND BIGGER */
     .hero {
-        padding: 120px 24px 0;
-        gap: 20px;
+        padding: 140px 20px 0;
+        justify-content: center;
+        align-items: flex-start;
+        text-align: left;
+        min-height: 100vh;
+        gap: 0;
+        position: relative;
+    }
+
+    .hero-text {
+        text-align: left;
+        width: 100%;
+        margin: 0;
+        z-index: 2;
+        margin-top: 60px;
+        position: relative;
     }
 
     .hero-text h1 {
-        font-size: 52px;
+        font-size: clamp(60px, 20vw, 120px);
+        line-height: 1.05;
+        letter-spacing: -1px;
+        font-weight: 900;
+        margin: 0 0 40px 0;
+        position: relative;
+        z-index: 3;
     }
 
+    /* Animation positioned properly inline with "One" */
     .tap-animation {
-        width: 90px;
-        height: 65px;
+        transform: scale(0.8);
+        transform-origin: left center;
+        margin: 0 -10px -8px 5px;
+        display: inline-block;
+        vertical-align: middle;
+        width: 120px;
+        height: 80px;
+        position: relative;
     }
 
     .tap-phone {
-        width: 55px;
-        height: 36px;
-    }
-
-    .tap-phone::after {
-        font-size: 18px;
+        width: 75px;
+        height: 48px;
     }
 
     .tap-card {
-        width: 40px;
-        height: 26px;
+        width: 55px;
+        height: 35px;
     }
 
-    .tap-card::before {
-        font-size: 16px;
-    }
-
+    /* Sliding text left aligned and bigger */
     .sliding {
-        height: 55px;
+        position: relative;
+        height: auto;
+        margin: 10px 0 5px 0;
+        width: 100%;
+        overflow: visible;
+        min-height: 150px;
+        text-align: left;
     }
 
     .sliding span {
-        font-size: 44px;
+        font-size: clamp(60px, 20vw, 120px);
+        letter-spacing: -1px;
+        text-align: left;
+        color: #fff;
+        font-weight: 900;
+        position: absolute;
+        left: 0;
+        top: 0;
+        line-height: 1.05;
+        width: 100%;
     }
 
     .hero p {
-        font-size: 15px;
-        max-width: 100%;
+        margin: -30px 0 0 0;
+        max-width: 90%;
+        font-size: clamp(16px, 4vw, 19px);
+        opacity: 0.8;
+        font-weight: 400;
+        color: var(--text-muted);
+        display: block;
+        position: relative;
+        z-index: 5;
+        line-height: 1.6;
+        text-align: left;
     }
 
+    /* Background scrolling text - consistent positioning */
     .bottom-fade {
-        bottom: 30px;
+        bottom: 120px;
+        opacity: 1;
+        height: auto;
+        display: flex;
+        align-items: center;
+        position: absolute;
+        left: 0;
+        width: 100%;
+        z-index: 1;
     }
 
     .bottom-fade-content span {
-        font-size: 70px;
-        padding-right: 60px;
+        font-size: clamp(80px, 25vw, 150px);
+        color: rgba(255, 255, 255, 0.05);
+        font-weight: 900;
+        letter-spacing: -3px;
+        white-space: nowrap;
     }
 
     .sec-head {
@@ -3166,7 +4058,7 @@ body.hovering .cursor-outline {
     .service-card {
         min-height: 360px;
         width: 94%;
-        margin-bottom: 25vh;
+        margin-bottom: 15vh;
     }
 
     .service-content {
@@ -3275,53 +4167,51 @@ body.hovering .cursor-outline {
         height: 36px;
     }
 
+    /* SMALL MOBILE HERO ADJUSTMENTS - CONSISTENT */
     .hero {
-        padding: 100px 16px 0;
-        gap: 16px;
+        padding: 120px 16px 0;
+    }
+
+    .hero-text {
+        margin-top: 50px;
     }
 
     .hero-text h1 {
-        font-size: 38px;
-    }
-
-    .tap-animation {
-        width: 70px;
-        height: 52px;
-    }
-
-    .tap-phone {
-        width: 45px;
-        height: 30px;
-    }
-
-    .tap-phone::after {
-        font-size: 14px;
-    }
-
-    .tap-card {
-        width: 32px;
-        height: 20px;
-    }
-
-    .tap-card::before {
-        font-size: 12px;
+        font-size: clamp(50px, 22vw, 100px);
+        line-height: 1.05;
+        margin-bottom: 35px;
     }
 
     .sliding {
-        height: 45px;
+        margin: 10px 0 5px 0;
+        min-height: 130px;
+        overflow: visible;
     }
 
     .sliding span {
-        font-size: 34px;
+        font-size: clamp(50px, 22vw, 100px);
     }
 
     .hero p {
-        font-size: 14px;
+        font-size: clamp(14px, 4vw, 17px);
+        max-width: 95%;
+        margin: -30px 0 0 0;
+    }
+
+    .bottom-fade {
+        bottom: 100px;
     }
 
     .bottom-fade-content span {
-        font-size: 50px;
-        padding-right: 40px;
+        font-size: clamp(70px, 27vw, 130px);
+    }
+
+    .bottom-fade {
+        bottom: 20vh;
+    }
+
+    .bottom-fade-content span {
+        font-size: 24vw;
     }
 
     .what-is-it-section {
@@ -3343,6 +4233,8 @@ body.hovering .cursor-outline {
     .service-card {
         min-height: 320px;
         width: 92%;
+        margin-bottom: 12vh;
+    }
         margin-bottom: 20vh;
         border-radius: 24px;
     }
@@ -3471,17 +4363,7 @@ body.hovering .cursor-outline {
 
 /* ==================== RESPONSIVE: VERY SMALL PHONE (up to 380px) ==================== */
 @media (max-width: 380px) {
-    .hero-text h1 {
-        font-size: 32px;
-    }
-
-    .sliding span {
-        font-size: 28px;
-    }
-
-    .bottom-fade-content span {
-        font-size: 40px;
-    }
+    /* Hero overrides removed to use fluid sizing */
 
     .service-heading {
         font-size: 26px;
@@ -3494,4 +4376,79 @@ body.hovering .cursor-outline {
     .pricing-package {
         font-size: 20px;
     }
+}
+
+/* ==================== FEATURES SECTION - MINIMAL BORDER CARDS ==================== */
+.app-lime {
+    background: var(--accent) !important;
+    color: #000 !important;
+    border: 2px solid rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.3s ease;
+    border-radius: 16px;
+}
+
+.app-lime:hover {
+    border-color: rgba(0, 0, 0, 0.3);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(218, 249, 51, 0.3);
+}
+
+/* Clean feature list styling */
+.feature-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.feature-list li {
+    position: relative;
+    padding-left: 16px;
+    margin-bottom: 8px;
+}
+
+.feature-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+}
+
+.app-dark .feature-list li::before {
+    background: var(--accent);
+}
+
+.app-white .feature-list li::before {
+    background: var(--accent);
+}
+
+.app-lime .feature-list li::before {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.feature-description {
+    font-size: 13px;
+    line-height: 1.6;
+    margin: 0;
+    opacity: 0.9;
+}
+
+/* Improved typography for feature cards */
+.orbital-item .item h6 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.3;
+}
+
+.orbital-item .item {
+    min-height: 280px;
+    padding: 32px 28px;
+    border-radius: 16px;
 }

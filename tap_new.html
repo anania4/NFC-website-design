@@ -168,30 +168,57 @@
       <h2>What You'll<br>Get With<br>Every<br>Purchase</h2>
     </div>
 
-    <!-- Purchase Grid -->
-    <div class="purchase-grid">
-      <!-- Hero Card (A.png) -->
-      <div class="purchase-hero">
-        <img src="images/A.png" alt="TAP NFC Card" class="card-bg">
-      </div>
-
-      <!-- Three Feature Cards (B, C, D) -->
-      <div class="purchase-features">
-        <!-- Profile Page (B.png) -->
-        <div class="purchase-feature">
-          <img src="images/B.png" alt="Profile Page" class="card-bg">
+    <!-- Purchase Carousel -->
+    <div class="purchase-carousel-container">
+      <div class="purchase-carousel">
+        <!-- Card 1 (A.png) -->
+        <div class="purchase-card active" data-card="0">
+          <img src="images/A.png" alt="TAP NFC Card" class="card-bg">
+          <div class="card-content">
+            <h3>TAP NFC Card</h3>
+            <p>Premium NFC-enabled business card with sleek design</p>
+          </div>
         </div>
 
-        <!-- Dashboard (C.png) -->
-        <div class="purchase-feature">
-          <img src="images/C.png" alt="Dashboard" class="card-bg">
+        <!-- Card 2 (B.png) -->
+        <div class="purchase-card" data-card="1">
+          <img src="images/B.png" alt="Digital Profile" class="card-bg">
+          <div class="card-content">
+            <h3>Digital Profile</h3>
+            <p>Customizable online profile with all your information</p>
+          </div>
         </div>
 
-        <!-- Design Support (D.png) -->
-        <div class="purchase-feature">
+        <!-- Card 3 (C.png) -->
+        <div class="purchase-card" data-card="2">
+          <img src="images/C.png" alt="Analytics Dashboard" class="card-bg">
+          <div class="card-content">
+            <h3>Analytics Dashboard</h3>
+            <p>Track views, taps, and engagement with detailed insights</p>
+          </div>
+        </div>
+
+        <!-- Card 4 (D.png) -->
+        <div class="purchase-card" data-card="3">
           <img src="images/D.png" alt="Design Support" class="card-bg">
+          <div class="card-content">
+            <h3>Design Support</h3>
+            <p>Professional design assistance and customization</p>
+          </div>
         </div>
       </div>
+
+      <!-- Navigation Dots -->
+      <div class="carousel-dots">
+        <span class="dot active" data-slide="0"></span>
+        <span class="dot" data-slide="1"></span>
+        <span class="dot" data-slide="2"></span>
+        <span class="dot" data-slide="3"></span>
+      </div>
+
+      <!-- Navigation Arrows (optional) -->
+      <button class="carousel-btn prev" onclick="changeSlide(-1)">‹</button>
+      <button class="carousel-btn next" onclick="changeSlide(1)">›</button>
     </div>
   </section>
   <!-- ==================== END WHAT YOU'LL GET SECTION ==================== -->
@@ -222,11 +249,7 @@
       <!-- Feature 1 -->
       <div class="security-card">
         <div class="security-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-            stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-            <path d="m9 12 2 2 4-4"></path>
-          </svg>
+          <span style="font-size: 28px;">🛡️</span>
         </div>
         <h3>Secure Authentication</h3>
         <p>Advanced cryptographic hashing ensures your credentials are never stored in plain text.</p>
@@ -235,16 +258,7 @@
       <!-- Feature 2 -->
       <div class="security-card">
         <div class="security-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-            stroke-linecap="round" stroke-linejoin="round">
-            <path
-              d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z">
-            </path>
-            <path d="M5 3v4"></path>
-            <path d="M19 17v4"></path>
-            <path d="M3 5h4"></path>
-            <path d="M17 19h4"></path>
-          </svg>
+          <span style="font-size: 28px;">🔐</span>
         </div>
         <h3>Encrypted Transit</h3>
         <p>All data moves through military-grade TLS 1.2 tunnels. Non-HTTPS traffic is prohibited.</p>
@@ -253,11 +267,7 @@
       <!-- Feature 3 -->
       <div class="security-card">
         <div class="security-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-            stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-            <circle cx="12" cy="10" r="3"></circle>
-          </svg>
+          <span style="font-size: 28px;">🏠</span>
         </div>
         <h3>Local Hosting</h3>
         <p>System data is hosted locally on enterprise-certified infrastructure within Ethiopia.</p>
@@ -266,11 +276,7 @@
       <!-- Feature 4 -->
       <div class="security-card">
         <div class="security-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-            stroke-linecap="round" stroke-linejoin="round">
-            <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
-            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-          </svg>
+          <span style="font-size: 28px;">🔒</span>
         </div>
         <h3>Privacy First</h3>
         <p>Your data is protected by strict privacy policies and managed with absolute transparency.</p>
@@ -290,12 +296,20 @@
     <div class="service-card card-1">
       <div class="service-content">
         <div class="service-text">
-          <span class="service-number">001</span>
           <h2 class="service-heading">Instant<br>Sharing</h2>
           <p class="service-description">Share your contact details, social profiles, and websites with a single tap. No
             app required.</p>
         </div>
-
+        <div class="service-visual">
+          <div class="service-icon">TAP</div>
+          <div class="service-graphic">
+            <div class="tap-effect">
+              <div class="tap-circle"></div>
+              <div class="tap-circle"></div>
+              <div class="tap-circle"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -303,11 +317,20 @@
     <div class="service-card card-2">
       <div class="service-content">
         <div class="service-text">
-          <span class="service-number">002</span>
           <h2 class="service-heading">Real-Time<br>Analytics</h2>
           <p class="service-description">Track who views your card and from where. Gain insights instantly.</p>
         </div>
-
+        <div class="service-visual">
+          <div class="service-icon">DATA</div>
+          <div class="service-graphic">
+            <div class="chart-bars">
+              <div class="bar bar-1"></div>
+              <div class="bar bar-2"></div>
+              <div class="bar bar-3"></div>
+              <div class="bar bar-4"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -315,11 +338,19 @@
     <div class="service-card card-3">
       <div class="service-content">
         <div class="service-text">
-          <span class="service-number">003</span>
           <h2 class="service-heading">Eco-Friendly<br>Solution</h2>
           <p class="service-description">Save paper and help the planet. One card lasts a lifetime.</p>
         </div>
-
+        <div class="service-visual">
+          <div class="service-icon">ECO</div>
+          <div class="service-graphic">
+            <div class="eco-elements">
+              <div class="leaf leaf-1">~</div>
+              <div class="leaf leaf-2">~</div>
+              <div class="recycle-symbol">○</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -327,11 +358,23 @@
     <div class="service-card card-4">
       <div class="service-content">
         <div class="service-text">
-          <span class="service-number">004</span>
           <h2 class="service-heading">Bank-Grade<br>Security</h2>
           <p class="service-description">Your data is encrypted and safe. We prioritize your privacy.</p>
         </div>
-
+        <div class="service-visual">
+          <div class="service-icon">SAFE</div>
+          <div class="service-graphic">
+            <div class="security-elements">
+              <div class="shield">▲</div>
+              <div class="key">+</div>
+              <div class="lock-dots">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -341,10 +384,6 @@
   <section class="features-section" id="features">
     <div class="tap-watermark"></div>
     <div class="container" style="max-width: 1400px;">
-      <div class="sec-head">
-
-        <h2 class="service-title" style="text-align: center; margin-bottom: 60px;">Features</h2>
-      </div>
 
       <!-- Orbital Layout: Sun (Image) + 5 Planets (Cards) -->
       <div class="orbital-features">
@@ -357,12 +396,11 @@
         <!-- Planet 1: Lead Generation -->
         <div class="orbital-item">
           <div class="item app-dark">
-
             <h6>Lead<br>Generation</h6>
-            <ul style="color: var(--text-muted); font-size: 12px; padding-left: 0; list-style: none;">
-              <li>🟢 Appointment</li>
-              <li>🟡 Inquiry</li>
-              <li>🟢 Gallery</li>
+            <ul class="feature-list">
+              <li>Appointment</li>
+              <li>Inquiry</li>
+              <li>Gallery</li>
             </ul>
           </div>
         </div>
@@ -370,12 +408,11 @@
         <!-- Planet 2: Admin Panel -->
         <div class="orbital-item">
           <div class="item app-white">
-
             <h6>Admin Panel<br>& Analytics</h6>
-            <ul style="color: #333; font-size: 12px; padding-left: 0; list-style: none;">
-              <li>🟢 User Management</li>
-              <li>🔴 Log in assign</li>
-              <li>🔴 Design Approval</li>
+            <ul class="feature-list">
+              <li>User Management</li>
+              <li>Log in assign</li>
+              <li>Design Approval</li>
             </ul>
           </div>
         </div>
@@ -383,13 +420,12 @@
         <!-- Planet 3: Personal Details -->
         <div class="orbital-item">
           <div class="item app-dark">
-
             <h6>Personal<br>Details</h6>
-            <ul style="color: var(--text-muted); font-size: 12px; padding-left: 0; list-style: none;">
-              <li>• Name</li>
-              <li>• Phone</li>
-              <li>• Address</li>
-              <li>• Social Links</li>
+            <ul class="feature-list">
+              <li>Name</li>
+              <li>Phone</li>
+              <li>Address</li>
+              <li>Social Links</li>
             </ul>
           </div>
         </div>
@@ -397,13 +433,12 @@
         <!-- Planet 4: Business Details -->
         <div class="orbital-item">
           <div class="item app-lime">
-
             <h6>Business<br>Details</h6>
-            <ul style="color: #000; font-size: 12px; padding-left: 0; list-style: none;">
-              <li>• Website</li>
-              <li>• Location</li>
-              <li>• Product</li>
-              <li>• Service</li>
+            <ul class="feature-list">
+              <li>Website</li>
+              <li>Location</li>
+              <li>Product</li>
+              <li>Service</li>
             </ul>
           </div>
         </div>
@@ -411,9 +446,8 @@
         <!-- Planet 5: Reports -->
         <div class="orbital-item">
           <div class="item app-dark">
-
             <h6>Reports</h6>
-            <p style="font-size: 12px;">Generate reports and create daily, weekly or monthly information.</p>
+            <p class="feature-description">Generate reports and create daily, weekly or monthly information.</p>
           </div>
         </div>
 
@@ -686,10 +720,95 @@
   <script>
     const words = document.querySelectorAll(".sliding span");
     let index = 0;
-    setInterval(() => {
-      words[index].classList.add("active");
-    }, 2000);
 
+    function showNextWord() {
+      // Remove active class from all words
+      words.forEach(word => word.classList.remove("active"));
+
+      // Add active class to current word
+      words[index].classList.add("active");
+
+      // Move to next word
+      index = (index + 1) % words.length;
+    }
+
+    // Show first word immediately
+    showNextWord();
+
+    // Then cycle through words every 2 seconds
+    setInterval(showNextWord, 2000);
+
+    // CAROUSEL FUNCTIONALITY
+    let currentSlide = 0;
+    const cards = document.querySelectorAll('.purchase-card');
+    const dots = document.querySelectorAll('.dot');
+    const totalSlides = cards.length;
+
+    function showSlide(n) {
+      // Remove active class from all cards and dots
+      cards.forEach(card => {
+        card.classList.remove('active', 'prev');
+      });
+      dots.forEach(dot => dot.classList.remove('active'));
+
+      // Calculate new slide index
+      currentSlide = (n + totalSlides) % totalSlides;
+
+      // Show current slide
+      cards[currentSlide].classList.add('active');
+      dots[currentSlide].classList.add('active');
+
+      // Add prev class to previous slide for animation
+      const prevSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+      cards[prevSlide].classList.add('prev');
+    }
+
+    function changeSlide(direction) {
+      showSlide(currentSlide + direction);
+    }
+
+    // Dot navigation
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        showSlide(index);
+      });
+    });
+
+    // Auto-play carousel (optional)
+    setInterval(() => {
+      changeSlide(1);
+    }, 4000); // Change slide every 4 seconds
+
+    // Touch/swipe support for mobile
+    let startX = 0;
+    let endX = 0;
+
+    const carousel = document.querySelector('.purchase-carousel');
+
+    carousel.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+    });
+
+    carousel.addEventListener('touchend', (e) => {
+      endX = e.changedTouches[0].clientX;
+      handleSwipe();
+    });
+
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      const diff = startX - endX;
+
+      if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+          changeSlide(1); // Swipe left - next slide
+        } else {
+          changeSlide(-1); // Swipe right - previous slide
+        }
+      }
+    }
+  </script>
+
+  <script>
     // STACKING CARDS SCALE ANIMATION
     const cards = document.querySelectorAll('.service-card');
 
@@ -726,84 +845,81 @@
         }
       });
     });
-
-
-
   </script>
 
-  <div class="bottom-screen-blur"></div>
-  <!-- CART DRAWER HTML -->
-  <div class="cart-overlay" onclick="toggleCart()"></div>
-  <div class="cart-drawer">
-    <div class="cart-header">
-      <h2>Cart</h2>
-      <div class="close-cart" onclick="toggleCart()">✕</div>
-    </div>
-    <div class="cart-body">
-      <div class="empty-cart-icon">🛒</div>
-      <div class="empty-cart-msg">Your cart is empty</div>
-    </div>
-    <div class="cart-footer">
-      <div class="cart-subtotal">
-        <span>SUBTOTAL</span>
-        <span>$0.00</span>
+      <div class="bottom-screen-blur"></div>
+      <!-- CART DRAWER HTML -->
+      <div class="cart-overlay" onclick="toggleCart()"></div>
+      <div class="cart-drawer">
+        <div class="cart-header">
+          <h2>Cart</h2>
+          <div class="close-cart" onclick="toggleCart()">✕</div>
+        </div>
+        <div class="cart-body">
+          <div class="empty-cart-icon">🛒</div>
+          <div class="empty-cart-msg">Your cart is empty</div>
+        </div>
+        <div class="cart-footer">
+          <div class="cart-subtotal">
+            <span>SUBTOTAL</span>
+            <span>$0.00</span>
+          </div>
+          <button class="checkout-btn" onclick="checkout()">
+            Check out
+          </button>
+        </div>
       </div>
-      <button class="checkout-btn" onclick="checkout()">
-        Check out
-      </button>
-    </div>
-  </div>
 
-  <script src="js/cart.js"></script>
-  <script>
-    function toggleMobileNav() {
-      const nav = document.querySelector('.nav-menu');
-      const hamburger = document.querySelector('.hamburger');
-      if (nav && hamburger) {
-        nav.classList.toggle('open');
-        hamburger.classList.toggle('open');
-        document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
-      }
-    }
-    document.querySelectorAll('.nav-menu a').forEach(link => {
-      link.addEventListener('click', () => toggleMobileNav());
-    });
-    document.querySelector('.nav-menu')?.addEventListener('click', function(e) {
-      if (e.target === this) toggleMobileNav();
-    });
-  </script>
-  <!-- SCROLL PROGRESS BUTTON -->
-  <div class="scroll-progress" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-    <svg width="50" height="50" viewBox="0 0 100 100">
-      <circle cx="50" cy="50" r="45" pathLength="1" class="progress-bg"></circle>
-      <circle cx="50" cy="50" r="45" pathLength="1" class="progress-bar"></circle>
-    </svg>
-    <div class="scroll-arrow">↑</div>
-  </div>
+      <script src="js/cart.js"></script>
+      <script>
+        function toggleMobileNav() {
+          const nav = document.querySelector('.nav-menu');
+          const hamburger = document.querySelector('.hamburger');
+          if (nav && hamburger) {
+            nav.classList.toggle('open');
+            hamburger.classList.toggle('open');
+            document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
+          }
+        }
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+          link.addEventListener('click', () => toggleMobileNav());
+        });
+        document.querySelector('.nav-menu')?.addEventListener('click', function (e) {
+          if (e.target === this) toggleMobileNav();
+        });
+      </script>
+      <!-- SCROLL PROGRESS BUTTON -->
+      <div class="scroll-progress" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <svg width="50" height="50" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="45" pathLength="1" class="progress-bg"></circle>
+          <circle cx="50" cy="50" r="45" pathLength="1" class="progress-bar"></circle>
+        </svg>
+        <div class="scroll-arrow">↑</div>
+      </div>
 
 
 
-  <script>
-    // Scroll Progress Logic
-    window.addEventListener('scroll', () => {
-      const scrollProgress = document.querySelector('.scroll-progress');
-      const progressBar = document.querySelector('.progress-bar');
+      <script>
+        // Scroll Progress Logic
+        window.addEventListener('scroll', () => {
+          const scrollProgress = document.querySelector('.scroll-progress');
+          const progressBar = document.querySelector('.progress-bar');
 
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollPercent = scrollTop / docHeight;
+          const scrollTop = window.scrollY;
+          const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+          const scrollPercent = scrollTop / docHeight;
 
-      // Update progress circle
-      progressBar.style.strokeDashoffset = 1 - scrollPercent;
+          // Update progress circle
+          progressBar.style.strokeDashoffset = 1 - scrollPercent;
 
-      // Toggle visibility (hide in first 500px/Hero section)
-      if (scrollTop > 500) {
-        scrollProgress.classList.add('visible');
-      } else {
-        scrollProgress.classList.remove('visible');
-      }
-    });
-  </script>
+          // Toggle visibility (hide in first 500px/Hero section)
+          if (scrollTop > 500) {
+            scrollProgress.classList.add('visible');
+          } else {
+            scrollProgress.classList.remove('visible');
+          }
+        });
+      </script>
 </body>
 
 <!-- Cursor Elements -->
