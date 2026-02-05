@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TAP - Checkout</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .checkout-section {
+            padding: 120px 40px;
+            background: var(--bg);
+            min-height: 100vh;
+        }
+
+        .checkout-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #111;
+            padding: 50px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .checkout-header {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .checkout-header h1 {
+            font-size: 36px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .checkout-header p {
+            color: var(--text-muted);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 15px;
+            background: #1a1a1a;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: #222;
+        }
+
+        .uploader-group {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px dashed rgba(255, 255, 255, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .uploader-group:hover {
+            border-color: var(--accent);
+        }
+
+        .uploader-group input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .uploader-icon {
+            font-size: 24px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .uploader-text {
+            font-size: 14px;
+            color: #888;
+        }
+
+        .social-link-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 20px;
+            background: var(--accent);
+            color: #000;
+            border: none;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 40px;
+        }
+
+        .checkout-btn:hover {
+            transform: scale(1.02);
+            background: #fff;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent);
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .checkout-container {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            <a href="tap_new.html">
+                <img src="images/tap_dark-removebg-preview.png" alt="Tap Logo">
+            </a>
+        </div>
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="store.html">Tap Store</a></li>
+                <li><a href="tap_new.html#features">Features</a></li>
+                <li><a href="tap_new.html#pricing">Pricing</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="checkout-section">
+        <div class="checkout-container">
+            <div class="checkout-header">
+                <h1>Complete Your Profile</h1>
+                <p>Tell us how you want your TAP card to be personalized.</p>
+            </div>
+
+            <!-- Personalization & Chapa Form -->
+            <form id="checkoutForm" method="POST" action="https://api.chapa.co/v1/hosted/pay">
+                <div class="section-title">Personal Information</div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" name="first_name" placeholder="e.g. Anania" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" name="last_name" placeholder="e.g. Minda" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" placeholder="e.g. CEO" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" name="email" placeholder="e.g. user@example.com" required>
+                    </div>
+                </div>
+
+                <div class="section-title">Visual Identity</div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Profile Picture</label>
+                        <div class="uploader-group">
+                            <span class="uploader-icon">👤</span>
+                            <span class="uploader-text">Upload Personal Image</span>
+                            <input type="file" accept="image/*">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Company Logo</label>
+                        <div class="uploader-group">
+                            <span class="uploader-icon">🏢</span>
+                            <span class="uploader-text">Upload Company Logo</span>
+                            <input type="file" accept="image/*">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-title">Links & Socials</div>
+                <div class="form-group">
+                    <label>Personal Website / Link</label>
+                    <input type="url" placeholder="https://yourwebsite.com">
+                </div>
+
+                <div id="socialLinksContainer">
+                    <div class="form-group">
+                        <label>Add Social Media</label>
+                        <select id="socialSelector" onchange="addSocialField()">
+                            <option value="">Choose a platform...</option>
+                            <option value="LinkedIn">LinkedIn</option>
+                            <option value="Twitter">Twitter / X</option>
+                            <option value="Instagram">Instagram</option>
+                            <option value="Facebook">Facebook</option>
+                            <option value="TikTok">TikTok</option>
+                        </select>
+                    </div>
+                    <!-- Dynamic fields will appear here -->
+                </div>
+
+                <!-- Hidden Chapa Form Fields -->
+                <input type="hidden" name="public_key" value="CHAPUBK_TEST-tEXRymkZG8rnunHG93FcGPeA09BiIj2c" />
+                <input type="hidden" name="tx_ref" value="tx-1111" />
+                <input type="hidden" name="amount" value="3900" id="finalAmount" />
+                <input type="hidden" name="currency" value="ETB" />
+                <input type="hidden" name="return_url" value="http://127.0.0.1:5502/tap_new.html" />
+
+                <button type="submit" class="checkout-btn">Pay With Chapa</button>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        // Platform icon map using Font Awesome classes
+        const platformIcons = {
+            'LinkedIn': '<i class="fa-brands fa-linkedin" style="color: #0A66C2;"></i>',
+            'Twitter': '<i class="fa-brands fa-x-twitter" style="color: #fff;"></i>',
+            'Instagram': '<i class="fa-brands fa-instagram" style="color: #E4405F;"></i>',
+            'Facebook': '<i class="fa-brands fa-facebook" style="color: #1877F2;"></i>',
+            'TikTok': '<i class="fa-brands fa-tiktok" style="color: #fff;"></i>'
+        };
+
+        function addSocialField() {
+            const selector = document.getElementById('socialSelector');
+            const platform = selector.value;
+            if (!platform) return;
+
+            const container = document.getElementById('socialLinksContainer');
+            const icon = platformIcons[platform] || '🔗';
+
+            // Create field wrapper matching other form-group styles
+            const div = document.createElement('div');
+            div.className = 'form-group social-link-item';
+            div.innerHTML = `
+                <label>${icon} ${platform}</label>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <input type="text" placeholder="e.g. https://${platform.toLowerCase()}.com/yourprofile" style="flex: 1;" required>
+                    <button type="button" onclick="this.parentElement.parentElement.remove()" style="background: #222; border: 1px solid rgba(255,255,255,0.1); color: #ff4a4a; cursor: pointer; font-size: 16px; padding: 15px; border-radius: 12px;">✕</button>
+                </div>
+            `;
+
+            container.appendChild(div);
+
+            // Reset selector
+            selector.value = "";
+        }
+
+        // Load amount from cart if available
+        document.addEventListener('DOMContentLoaded', () => {
+            const cart = JSON.parse(localStorage.getItem('tap_cart')) || [];
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            if (total > 0) {
+                document.getElementById('finalAmount').value = total;
+            }
+        });
+    </script>
+
+    <!-- Cursor Elements -->
+    <div class="cursor-dot" data-cursor-dot></div>
+    <div class="cursor-outline" data-cursor-outline></div>
+
+    <script>
+        const cursorDot = document.querySelector("[data-cursor-dot]");
+        const cursorOutline = document.querySelector("[data-cursor-outline]");
+        let cursorX = -100, cursorY = -100, outlineX = -100, outlineY = -100;
+
+        window.addEventListener("mousemove", (e) => {
+            cursorX = e.clientX;
+            cursorY = e.clientY;
+            cursorDot.style.left = `${cursorX}px`;
+            cursorDot.style.top = `${cursorY}px`;
+        });
+
+        function animateCursor() {
+            let distX = cursorX - outlineX;
+            let distY = cursorY - outlineY;
+            outlineX += distX * 0.15;
+            outlineY += distY * 0.15;
+            cursorOutline.style.left = `${outlineX}px`;
+            cursorOutline.style.top = `${outlineY}px`;
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+    </script>
+</body>
+
+</html>

@@ -1395,24 +1395,27 @@ nav {
     }
 
     .step-card {
-        flex: 0 0 calc(85vw);
-        /* Use viewport width for better control */
-        max-width: 280px;
+        flex: 0 0 280px;
+        width: 280px;
         height: 400px;
         margin: 0;
-        scroll-snap-align: center;
-        /* Center is safer for singular card view */
+        scroll-snap-align: start;
+        /* Guarantee start alignment */
 
-        /* FORCE VISIBILITY ON MOBILE */
         opacity: 1 !important;
+        visibility: visible !important;
         animation: none !important;
-        /* Kill the desktop animation */
 
-        transform: scale(0.9) rotateX(0deg);
-        /* Flatten for visibility */
+        transform: scale(1) rotateX(0deg);
+        /* Full visibility */
         transition: all 0.4s ease;
 
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .step-card:first-child {
+        margin-left: 20px;
+        /* Buffer for first card visibility */
     }
 
     /* Make them pop on touch/active */
@@ -2620,6 +2623,29 @@ nav {
 
 
 /* FOOTER STYLES */
+.pricing-btn {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin-top: 25px;
+    background: var(--accent);
+    color: #000;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 14px;
+}
+
+.pricing-btn:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 20px rgba(181, 255, 74, 0.2);
+    background: #fff;
+}
+
 footer {
     background: #0a0a0a;
     padding: 40px 0 20px;

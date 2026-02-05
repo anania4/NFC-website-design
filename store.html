@@ -137,26 +137,12 @@
                 <span>SUBTOTAL</span>
                 <span>$0.00</span>
             </div>
-            <form method="POST" action="https://api.chapa.co/v1/hosted/pay">
-                <input type="hidden" name="public_key" value="CHAPUBK_TEST-tEXRymkZG8rnunHG93FcGPeA09BiIj2c" />
-                <input type="hidden" name="tx_ref" value="tx-1111" />
-                <input type="hidden" name="amount" value="1000" />
-                <input type="hidden" name="currency" value="ETB" />
-                <input type="hidden" name="email" value="ananiaminda@gmail.com" />
-                <input type="hidden" name="first_name" value="Anania" />
-                <input type="hidden" name="last_name" value="Minda" />
-                <input type="hidden" name="return_url" value="http://127.0.0.1:5502/store.html" />
-
-                    <button type="submit">Pay with Chapa</button>
-            </form>
-
-
-
+            <button type="submit" class="checkout-btn" onclick="checkout()">Checkout</button>
         </div>
     </div>
 
     <script>
-        // Mobile Nav Togglecheckout-btn
+        // Mobile Nav Toggle
         function toggleMobileNav() {
             const hamburger = document.querySelector('.hamburger');
             const navMenu = document.querySelector('.nav-menu');

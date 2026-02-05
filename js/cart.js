@@ -43,7 +43,7 @@ function addToCart(id, name, price, image) {
 
     saveCart();
     updateCartUI();
-    
+
     // Open cart to show user
     const drawer = getCartDrawer();
     if (drawer && !drawer.classList.contains('open')) {
@@ -119,11 +119,11 @@ function updateCartUI() {
     }
 }
 
-// Checkout Placeholder
+// Checkout Flow
 function checkout() {
     if (cart.length === 0) {
         alert('Your cart is empty!');
         return;
     }
-    alert('Proceeding to Checkout...\nTotal: ' + getCartSubtotal().textContent);
+    window.location.href = 'checkout.html';
 }
