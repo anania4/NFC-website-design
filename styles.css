@@ -890,18 +890,17 @@ nav {
 }
 
 .service-heading {
-    font-size: 100px;
-    font-weight: 900;
+    font-size: 72px;
+    font-weight: 800;
     margin: 0;
-    line-height: 1;
-    letter-spacing: -3px;
-    text-transform: uppercase;
+    line-height: 1.1;
+    letter-spacing: -2px;
 }
 
 .service-description {
-    font-size: 24px;
-    line-height: 1.5;
-    max-width: 500px;
+    font-size: 18px;
+    line-height: 1.6;
+    max-width: 480px;
     font-weight: 500;
 }
 
@@ -954,7 +953,7 @@ nav {
 
 /* APPROACH / FEATURES SECTION */
 .features-section {
-    padding: 30px 0;
+    padding: 160px 0;
     position: relative;
     background: var(--bg);
     isolation: isolate;
@@ -1105,7 +1104,7 @@ nav {
 .features-section {
     position: relative;
     /* For Watermark */
-    padding: 100px 0;
+    padding: 160px 0;
 }
 
 .service-badge {
@@ -1274,11 +1273,7 @@ nav {
         overflow: visible;
     }
 
-    .orbital-center,
-    .orbital-item {
-        /* Reset any previous mobile overrides if they existed, 
-           but since I'm overwriting the block, I just won't include them. */
-    }
+    /* No empty ruleset here */
 
     /* Keep the ring */
     .orbital-features::before {
@@ -1365,10 +1360,7 @@ nav {
         scroll-snap-align: center;
     }
 
-    .purchase-grid {
-        /* The parent of features. PC: Flex col gap 1rem. */
-        /* We need the features row to scroll. */
-    }
+    /* No empty ruleset here */
 }
 
 @media (max-width: 768px) {
@@ -1379,39 +1371,58 @@ nav {
 }
 
 
-/* HOW IT WORKS - HORIZONTAL SCROLL */
+/* HOW IT WORKS - HORIZONTAL SCROLL WITH ZOOM */
 @media (max-width: 991px) {
     .steps-container {
         display: flex;
         flex-direction: row;
-        /* FORCE ROW */
         overflow-x: auto;
-        align-items: stretch;
-        /* Match height */
-        justify-content: flex-start;
-        /* Start from left */
+        overflow-y: visible;
+        /* Allow pop-up hover */
         padding: 40px 20px;
         gap: 20px;
         perspective: none;
-        /* Remove 3D for clarity on small screens or keep? */
-        /* User likes PC view. PC has perspective. 
-           Mobile 3D perspective might be weird if scrolling. 
-           I'll remove perspective for touch usability but keep layout horiz. */
+        /* Simplify for mobile to prevent clipping */
+        align-items: center;
         scroll-snap-type: x mandatory;
+        justify-content: flex-start;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .steps-container::-webkit-scrollbar {
+        display: none;
     }
 
     .step-card {
-        flex: 0 0 85%;
-        max-width: 320px;
-        transform: none !important;
-        /* Reset the 3D tilt for scrolling */
+        flex: 0 0 calc(85vw);
+        /* Use viewport width for better control */
+        max-width: 280px;
+        height: 400px;
         margin: 0;
         scroll-snap-align: center;
+        /* Center is safer for singular card view */
+
+        /* FORCE VISIBILITY ON MOBILE */
+        opacity: 1 !important;
+        animation: none !important;
+        /* Kill the desktop animation */
+
+        transform: scale(0.9) rotateX(0deg);
+        /* Flatten for visibility */
+        transition: all 0.4s ease;
+
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     }
 
+    /* Make them pop on touch/active */
+    .step-card:active,
+    .step-card:focus,
     .step-card:hover {
-        transform: none;
-        /* No hover effects on touch usually */
+        transform: scale(1.02) translateY(-10px);
+        opacity: 1 !important;
+        z-index: 10;
+        box-shadow: 0 20px 40px rgba(181, 255, 74, 0.15);
     }
 }
 
@@ -2089,12 +2100,13 @@ nav {
     .card-content p {
         font-size: 0.8rem;
     }
-}
 
-display: flex;
-flex-direction: column;
-justify-content: flex-end;
-padding: 25px;
+    .purchase-feature {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 25px;
+    }
 }
 
 .purchase-feature-content {
@@ -2745,6 +2757,28 @@ footer {
 @media (max-width: 576px) {
     .footer-main {
         grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .footer-brand {
+        grid-column: 1 / -1;
+    }
+
+    .footer-links,
+    .footer-contact {
+        grid-column: auto;
+    }
+
+    /* Create a sub-grid for Product and Contact to be side by side */
+    .footer-main {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
+        gap: 30px;
+    }
+
+    .footer-brand {
+        grid-column: 1 / -1;
     }
 
     .footer-bottom {
@@ -2920,7 +2954,7 @@ footer {
 
 /* LOGO CAROUSEL */
 .logo-carousel-section {
-    padding: 40px 0;
+    padding: 100px 0;
     background: var(--bg);
     position: relative;
     overflow: hidden;
@@ -2946,31 +2980,34 @@ footer {
 }
 
 .logo-item {
-    opacity: 0.4;
+    opacity: 0.5;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: center;
     cursor: pointer;
+    filter: grayscale(100%) brightness(200%);
+    /* Make them white/silver by default */
 }
 
 .logo-item:hover {
     opacity: 1;
-    transform: scale(1.05);
-    filter: drop-shadow(0 0 10px rgba(181, 255, 74, 0.5));
+    transform: scale(1.1);
+    filter: grayscale(0%) brightness(100%);
+    /* Show original colors on hover */
+    filter: drop-shadow(0 0 15px rgba(181, 255, 74, 0.3));
 }
 
-.logo-item svg {
-    height: 35px;
+.logo-item img {
+    height: 100px;
     width: auto;
-    fill: #fff;
+    object-fit: contain;
+    image-rendering: -webkit-optimize-contrast;
 }
 
 .logo-text {
-    font-size: 18px;
-    font-weight: 700;
-    color: #fff;
-    display: inline-block;
+    display: none;
+    /* Hide text as requested/implied */
 }
 
 /* LOGO CAROUSEL SECTION */
@@ -3360,8 +3397,15 @@ body.hovering .cursor-outline {
 
 /* ==================== FEATURES SECTION TITLE UPDATE ==================== */
 .features-section {
-    padding-top: 0 !important;
-    /* Force section up */
+    padding: 160px 0;
+    /* Standard high spacing for desktop */
+}
+
+@media (max-width: 991px) {
+    .features-section {
+        padding: 60px 0;
+        /* More compact for mobile */
+    }
 }
 
 .features-section .sec-head {
@@ -4164,15 +4208,15 @@ body.hovering .cursor-outline {
     }
 
     .service-card {
-        min-height: 360px;
+        min-height: 240px !important;
         width: 94%;
         margin-bottom: 15vh;
     }
 
     .service-content {
         grid-template-columns: 1fr;
-        padding: 35px 30px;
-        gap: 25px;
+        padding: 25px 20px !important;
+        gap: 15px !important;
         text-align: center;
     }
 
@@ -4340,136 +4384,131 @@ body.hovering .cursor-outline {
     }
 
     .service-card {
-        min-height: 320px;
+        min-height: 220px !important;
         width: 92%;
-        margin-bottom: 12vh;
+        margin-bottom: 20vh;
+        /* Merged from orphan properties */
+        border-radius: 24px;
     }
 
-    margin-bottom: 20vh;
-    border-radius: 24px;
-}
+    .service-content {
+        padding: 20px 15px !important;
+        gap: 12px !important;
+    }
 
-.service-content {
-    padding: 28px 20px;
-}
+    .service-heading {
+        font-size: 32px;
+        line-height: 1.1;
+    }
 
-.service-heading {
-    font-size: 32px;
-    line-height: 1.1;
-}
+    .service-description {
+        font-size: 14px;
+    }
 
-.service-description {
-    font-size: 14px;
-}
+    .how-title {
+        font-size: 32px;
+        margin-bottom: 35px;
+    }
 
-.how-title {
-    font-size: 32px;
-    margin-bottom: 35px;
-}
+    .steps-container {
+        padding: 40px 20px;
+        /* Force consistent padding on small phones */
+    }
 
-.steps-container {
-    gap: 25px;
-}
+    .step-title {
+        font-size: 22px;
+    }
 
-.step-card {
-    width: 95%;
-    height: 420px;
-}
+    .step-description {
+        font-size: 13px;
+    }
 
-.step-title {
-    font-size: 22px;
-}
+    .step-number {
+        font-size: 60px;
+    }
 
-.step-description {
-    font-size: 13px;
-}
+    .state-headline {
+        font-size: 28px;
+    }
 
-.step-number {
-    font-size: 60px;
-}
+    .what-text h2 {
+        font-size: 1.8rem;
+    }
 
-.state-headline {
-    font-size: 28px;
-}
+    .security-header h2 {
+        font-size: 28px;
+    }
 
-.what-text h2 {
-    font-size: 1.8rem;
-}
+    .secure-url-visual {
+        padding: 12px 16px;
+        margin: 0 16px 50px;
+    }
 
-.security-header h2 {
-    font-size: 28px;
-}
+    .url-bar {
+        font-size: 11px;
+    }
 
-.secure-url-visual {
-    padding: 12px 16px;
-    margin: 0 16px 50px;
-}
+    .security-card {
+        padding: 32px 24px;
+    }
 
-.url-bar {
-    font-size: 11px;
-}
+    .pricing-section {
+        padding: 80px 16px;
+    }
 
-.security-card {
-    padding: 32px 24px;
-}
+    .pricing-title {
+        font-size: 36px;
+        margin-bottom: 50px;
+    }
 
-.pricing-section {
-    padding: 80px 16px;
-}
+    .pricing-grid {
+        padding: 0 16px;
+        gap: 16px;
+    }
 
-.pricing-title {
-    font-size: 36px;
-    margin-bottom: 50px;
-}
+    .pricing-card {
+        min-height: 300px;
+    }
 
-.pricing-grid {
-    padding: 0 16px;
-    gap: 16px;
-}
+    .pricing-content {
+        padding: 28px 24px;
+    }
 
-.pricing-card {
-    min-height: 300px;
-}
+    .pricing-package {
+        font-size: 24px;
+    }
 
-.pricing-content {
-    padding: 28px 24px;
-}
+    .footer-container {
+        padding: 0 20px;
+    }
 
-.pricing-package {
-    font-size: 24px;
-}
+    .footer-brand h2 {
+        font-size: 28px;
+    }
 
-.footer-container {
-    padding: 0 20px;
-}
+    .footer-brand p {
+        font-size: 14px;
+    }
 
-.footer-brand h2 {
-    font-size: 28px;
-}
+    .narrative-text h3 {
+        font-size: 1.6rem;
+    }
 
-.footer-brand p {
-    font-size: 14px;
-}
+    .narrative-text p {
+        font-size: 0.9rem;
+    }
 
-.narrative-text h3 {
-    font-size: 1.6rem;
-}
+    .narrative-text {
+        padding: 24px 20px;
+    }
 
-.narrative-text p {
-    font-size: 0.9rem;
-}
+    .features-section .service-title {
+        font-size: 40px;
+    }
 
-.narrative-text {
-    padding: 24px 20px;
-}
-
-.features-section .service-title {
-    font-size: 40px;
-}
-
-.stacking-cards-section {
-    padding: 30px 0;
-}
+    .stacking-cards-section {
+        padding: 30px 0;
+    }
 }
 
 /* ==================== RESPONSIVE: VERY SMALL PHONE (up to 380px) ==================== */
