@@ -1,0 +1,404 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}TAP - Checkout{% endblock %}
+
+{% block font_awesome %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .checkout-section {
+        padding: 120px 40px;
+        background: var(--bg);
+        min-height: 100vh;
+    }
+
+    .checkout-container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: #111;
+        padding: 50px;
+        border-radius: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .checkout-header {
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+    .checkout-header h1 {
+        font-size: 36px;
+        font-weight: 800;
+        color: #fff;
+        margin-bottom: 10px;
+    }
+
+    .checkout-header p {
+        color: var(--text-muted);
+    }
+
+    .form-group {
+        margin-bottom: 25px;
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .form-group input,
+    .form-group select {
+        width: 100%;
+        padding: 15px;
+        background: #1a1a1a;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        color: #fff;
+        font-size: 16px;
+        transition: all 0.3s ease;
+    }
+
+    .form-group input:focus {
+        outline: none;
+        border-color: var(--accent);
+        background: #222;
+    }
+
+    .uploader-group {
+        background: #1a1a1a;
+        padding: 20px;
+        border-radius: 12px;
+        border: 2px dashed rgba(255, 255, 255, 0.1);
+        text-align: center;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        position: relative;
+    }
+
+    .uploader-group:hover {
+        border-color: var(--accent);
+    }
+
+    .uploader-group input[type="file"] {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .uploader-icon {
+        font-size: 24px;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .uploader-text {
+        font-size: 14px;
+        color: #888;
+    }
+
+    .social-link-item {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 15px;
+        animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .checkout-btn {
+        width: 100%;
+        padding: 20px;
+        background: var(--accent);
+        color: #000;
+        border: none;
+        border-radius: 12px;
+        font-weight: 800;
+        font-size: 18px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-top: 40px;
+    }
+
+    .checkout-btn:hover {
+        transform: scale(1.02);
+        background: #fff;
+    }
+
+    .section-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--accent);
+        margin: 40px 0 20px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .error-message {
+        color: #ff4a4a;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+
+    .success-message {
+        color: var(--accent);
+        font-size: 14px;
+        margin-top: 5px;
+    }
+
+    @media (max-width: 768px) {
+        .form-row {
+            grid-template-columns: 1fr;
+        }
+
+        .checkout-container {
+            padding: 30px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="checkout-section">
+    <div class="checkout-container">
+        <div class="checkout-header">
+            <h1>Complete Your Profile</h1>
+            <p>Tell us how you want your TAP card to be personalized.</p>
+        </div>
+
+        <!-- Django Messages -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <!-- Personalization Form -->
+        <form id="checkoutForm" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="section-title">Personal Information</div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="{{ form.first_name.id_for_label }}">First Name</label>
+                    {{ form.first_name }}
+                    {% if form.first_name.errors %}
+                        {% for error in form.first_name.errors %}
+                            <div class="error-message">{{ error }}</div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.last_name.id_for_label }}">Last Name</label>
+                    {{ form.last_name }}
+                    {% if form.last_name.errors %}
+                        {% for error in form.last_name.errors %}
+                            <div class="error-message">{{ error }}</div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="{{ form.title.id_for_label }}">Title</label>
+                    {{ form.title }}
+                    {% if form.title.errors %}
+                        {% for error in form.title.errors %}
+                            <div class="error-message">{{ error }}</div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.email.id_for_label }}">Email</label>
+                    {{ form.email }}
+                    {% if form.email.errors %}
+                        {% for error in form.email.errors %}
+                            <div class="error-message">{{ error }}</div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="section-title">Visual Identity</div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="{{ form.profile_picture.id_for_label }}">Profile Picture</label>
+                    <div class="uploader-group">
+                        <span class="uploader-icon">👤</span>
+                        <span class="uploader-text">Upload Personal Image</span>
+                        {{ form.profile_picture }}
+                    </div>
+                    {% if form.profile_picture.errors %}
+                        {% for error in form.profile_picture.errors %}
+                            <div class="error-message">{{ error }}</div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.company_logo.id_for_label }}">Company Logo</label>
+                    <div class="uploader-group">
+                        <span class="uploader-icon">🏢</span>
+                        <span class="uploader-text">Upload Company Logo</span>
+                        {{ form.company_logo }}
+                    </div>
+                    {% if form.company_logo.errors %}
+                        {% for error in form.company_logo.errors %}
+                            <div class="error-message">{{ error }}</div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="section-title">Links & Socials</div>
+            <div class="form-group">
+                <label for="{{ form.personal_website.id_for_label }}">Personal Website / Link</label>
+                {{ form.personal_website }}
+                {% if form.personal_website.errors %}
+                    {% for error in form.personal_website.errors %}
+                        <div class="error-message">{{ error }}</div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <div id="socialLinksContainer">
+                <div class="form-group">
+                    <label>Add Social Media</label>
+                    <select id="socialSelector" onchange="addSocialField()">
+                        <option value="">Choose a platform...</option>
+                        <option value="LinkedIn">LinkedIn</option>
+                        <option value="Twitter">Twitter / X</option>
+                        <option value="Instagram">Instagram</option>
+                        <option value="Facebook">Facebook</option>
+                        <option value="TikTok">TikTok</option>
+                        <option value="Telegram">Telegram</option>
+                        <option value="WhatsApp">WhatsApp</option>
+                    </select>
+                </div>
+                <!-- Dynamic fields will appear here -->
+            </div>
+
+            <!-- Subscription Type and Amount -->
+            <div class="section-title">Subscription Details</div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="{{ form.subscription_type.id_for_label }}">Subscription Type</label>
+                    {{ form.subscription_type }}
+                    {% if form.subscription_type.errors %}
+                        {% for error in form.subscription_type.errors %}
+                            <div class="error-message">{{ error }}</div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.amount.id_for_label }}">Amount (ETB)</label>
+                    {{ form.amount }}
+                    {% if form.amount.errors %}
+                        {% for error in form.amount.errors %}
+                            <div class="error-message">{{ error }}</div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+
+            <button type="submit" class="checkout-btn">Submit Order</button>
+        </form>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Platform icon map using Font Awesome classes
+    const platformIcons = {
+        'LinkedIn': '<i class="fa-brands fa-linkedin" style="color: #0A66C2;"></i>',
+        'Twitter': '<i class="fa-brands fa-x-twitter" style="color: #fff;"></i>',
+        'Instagram': '<i class="fa-brands fa-instagram" style="color: #E4405F;"></i>',
+        'Facebook': '<i class="fa-brands fa-facebook" style="color: #1877F2;"></i>',
+        'TikTok': '<i class="fa-brands fa-tiktok" style="color: #fff;"></i>',
+        'Telegram': '<i class="fa-brands fa-telegram" style="color: #0088cc;"></i>',
+        'WhatsApp': '<i class="fa-brands fa-whatsapp" style="color: #25D366;"></i>'
+    };
+
+    // Platform specific placeholders
+    const platformPlaceholders = {
+        'LinkedIn': 'e.g. https://linkedin.com/in/username',
+        'Twitter': 'e.g. https://x.com/username',
+        'Instagram': 'e.g. https://instagram.com/username',
+        'Facebook': 'e.g. https://facebook.com/username',
+        'TikTok': 'e.g. https://tiktok.com/@username',
+        'Telegram': 'e.g. https://t.me/username',
+        'WhatsApp': 'e.g. https://wa.me/1234567890'
+    };
+
+    function addSocialField() {
+        const selector = document.getElementById('socialSelector');
+        const platform = selector.value;
+        if (!platform) return;
+
+        const container = document.getElementById('socialLinksContainer');
+        const icon = platformIcons[platform] || '🔗';
+        const placeholder = platformPlaceholders[platform] || `e.g. https://${platform.toLowerCase()}.com/username`;
+
+        // Create field wrapper matching other form-group styles
+        const div = document.createElement('div');
+        div.className = 'form-group social-link-item';
+        div.innerHTML = `
+            <label>${icon} ${platform}</label>
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <input type="text" name="social_${platform.toLowerCase()}" placeholder="${placeholder}" style="flex: 1;" required>
+                <button type="button" onclick="this.parentElement.parentElement.remove()" style="background: #222; border: 1px solid rgba(255,255,255,0.1); color: #ff4a4a; cursor: pointer; font-size: 16px; padding: 15px; border-radius: 12px;">✕</button>
+            </div>
+        `;
+
+        container.appendChild(div);
+
+        // Reset selector
+        selector.value = "";
+    }
+
+    // Load amount from cart
+    document.addEventListener('DOMContentLoaded', () => {
+        // Load amount from cart if available
+        const cart = JSON.parse(localStorage.getItem('tap_cart')) || [];
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        if (total > 0) {
+            const amountField = document.getElementById('{{ form.amount.id_for_label }}');
+            if (amountField) {
+                amountField.value = total;
+            }
+        }
+    });
+</script>
+{% endblock %}

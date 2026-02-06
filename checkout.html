@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{% static 'styles.css' %}"
     <style>
         .checkout-section {
             padding: 120px 40px;
@@ -182,16 +183,16 @@
 
     <header>
         <div class="logo">
-            <a href="tap_new.html">
-                <img src="images/tap_dark-removebg-preview.png" alt="Tap Logo">
+            <a href="{% url 'home' %}">
+                <img src="{% static 'images/tap_dark-removebg-preview.png' %}" alt="Tap Logo">
             </a>
         </div>
         <nav class="nav-menu">
             <ul>
-                <li><a href="store.html">Tap Store</a></li>
-                <li><a href="tap_new.html#features">Features</a></li>
-                <li><a href="tap_new.html#pricing">Pricing</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="{% url 'store' %}">Tap Store</a></li>
+                <li><a href="{% url 'home' %}#features">Features</a></li>
+                <li><a href="{% url 'home' %}#pricing">Pricing</a></li>
+                <li><a href="{% url 'contact' %}">Contact Us</a></li>
             </ul>
         </nav>
     </header>

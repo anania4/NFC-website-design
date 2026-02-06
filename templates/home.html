@@ -1,0 +1,816 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}TAP - Digital Business Card{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-text">
+        <h1>
+            One
+            <span class="tap-animation">
+                <div class="tap-phone"></div>
+                <div class="tap-card"></div>
+                <div class="ripple"></div>
+                <div class="ripple"></div>
+                <div class="ripple"></div>
+            </span><br>
+            is all it takes.
+        </h1>
+
+        <div class="sliding">
+            <span class="active">Simple</span>
+            <span>Smart</span>
+            <span>Reliable</span>
+            <span>Fast</span>
+            <span>Ready</span>
+        </div>
+
+        <p>The one card you need.</p>
+    </div>
+
+    <div class="bottom-fade">
+        <div class="bottom-fade-content">
+            <span>• Simple • Smart • Reliable • Fast • Ready</span>
+            <span>• Simple • Smart • Reliable • Fast • Ready</span>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== WHAT IS IT SECTION ==================== -->
+<section class="what-is-it-section">
+    <div class="what-is-it-text">
+        <h2>WHAT IS IT?</h2>
+        <p>
+            Tap Card is a modern, reusable business card that lets you share your contact information instantly.
+            Simply tap or scan to send a customizable profile with your links, social media, and other important content.
+            No paper, no hustle—just a smarter, faster way to connect.
+        </p>
+    </div>
+    <div class="what-is-it-image">
+        <img src="{% static 'images/what_is_it.png' %}" alt="What Is Tap">
+    </div>
+</section>
+<!-- ==================== END WHAT IS IT SECTION ==================== -->
+
+<!-- ==================== HOW IT WORKS SECTION ==================== -->
+<section class="how-it-works">
+    <h2 class="how-title">How It Works</h2>
+
+    <div class="steps-container">
+        <!-- Step 1 -->
+        <div class="step-card">
+            <div class="step-number">1</div>
+            <div class="step-image">
+                <img src="{% static 'images/1.png' %}" alt="Tap or Scan" style="max-width: 100%; height: auto; border-radius: 15px;">
+            </div>
+            <div class="step-content">
+                <h3 class="step-title">Tap or Scan</h3>
+                <p class="step-description">Simply tap your TAP card to any smartphone or scan the QR code to instantly share
+                    your digital profile.</p>
+            </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step-card">
+            <div class="step-number">2</div>
+            <div class="step-image">
+                <img src="{% static 'images/2.png' %}" alt="Digital Profile" style="max-width: 100%; height: auto; border-radius: 15px;">
+            </div>
+            <div class="step-content">
+                <h3 class="step-title">Digital Profile</h3>
+                <p class="step-description">Your complete digital business card appears on their phone - no app needed, works
+                    on any device.</p>
+            </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step-card">
+            <div class="step-number">3</div>
+            <div class="step-image">
+                <img src="{% static 'images/3.png' %}" alt="Save and Connect" style="max-width: 100%; height: auto; border-radius: 15px;">
+            </div>
+            <div class="step-content">
+                <h3 class="step-title">Save & Connect</h3>
+                <p class="step-description">They save your contact directly to their phone with one tap. Networking made
+                    effortless.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ==================== END HOW IT WORKS SECTION ==================== -->
+
+<!-- ==================== FROM PAPER TO PRESENCE SECTION ==================== -->
+<section class="transition-section">
+    <div class="transition-sticky-wrapper">
+        <!-- BEFORE STATE -->
+        <div class="state state-before">
+            <img src="{% static 'images/paper_mess_before.png' %}" alt="Old Paper Business Cards">
+            <div class="state-content">
+                <div class="state-title">Before</div>
+                <div class="state-headline">Messy. Static. Outdated.</div>
+            </div>
+        </div>
+
+        <!-- AFTER STATE -->
+        <div class="state state-after">
+            <img src="{% static 'images/digital_clean_after.png' %}" alt="New Tap Digital Card">
+            <div class="state-content">
+                <div class="state-title">After</div>
+                <div class="state-headline">Clean. Digital. Always Ready.</div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ==================== END FROM PAPER TO PRESENCE SECTION ==================== -->
+
+<!-- ==================== WHAT YOU'LL GET SECTION ==================== -->
+<section class="purchase-section">
+    <div class="what-text">
+        <h2>What You'll<br>Get With<br>Every<br>Purchase</h2>
+    </div>
+
+    <!-- Purchase Carousel -->
+    <div class="purchase-carousel-container">
+        <div class="purchase-carousel">
+            <!-- Card 1 (A.png) -->
+            <div class="purchase-card active" data-card="0">
+                <img src="{% static 'images/A.png' %}" alt="TAP NFC Card" class="card-bg">
+                <div class="card-content">
+                    <h3>TAP NFC Card</h3>
+                    <p>Premium NFC-enabled business card with sleek design</p>
+                </div>
+            </div>
+
+            <!-- Card 2 (B.png) -->
+            <div class="purchase-card" data-card="1">
+                <img src="{% static 'images/B.png' %}" alt="Digital Profile" class="card-bg">
+                <div class="card-content">
+                    <h3>Digital Profile</h3>
+                    <p>Customizable online profile with all your information</p>
+                </div>
+            </div>
+
+            <!-- Card 3 (C.png) -->
+            <div class="purchase-card" data-card="2">
+                <img src="{% static 'images/C.png' %}" alt="Analytics Dashboard" class="card-bg">
+                <div class="card-content">
+                    <h3>Analytics Dashboard</h3>
+                    <p>Track views, taps, and engagement with detailed insights</p>
+                </div>
+            </div>
+
+            <!-- Card 4 (D.png) -->
+            <div class="purchase-card" data-card="3">
+                <img src="{% static 'images/D.png' %}" alt="Design Support" class="card-bg">
+                <div class="card-content">
+                    <h3>Design Support</h3>
+                    <p>Professional design assistance and customization</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Dots -->
+        <div class="carousel-dots">
+            <span class="dot active" data-slide="0"></span>
+            <span class="dot" data-slide="1"></span>
+            <span class="dot" data-slide="2"></span>
+            <span class="dot" data-slide="3"></span>
+        </div>
+
+        <!-- Navigation Arrows (optional) -->
+        <button class="carousel-btn prev" onclick="changeSlide(-1)">‹</button>
+        <button class="carousel-btn next" onclick="changeSlide(1)">›</button>
+    </div>
+</section>
+<!-- ==================== END WHAT YOU'LL GET SECTION ==================== -->
+
+<!-- ==================== PLATFORM SECURITY SECTION ==================== -->
+<section class="security-section">
+    <div class="security-header">
+        <h2>Platform Security</h2>
+
+        <!-- Secure URL Bar Visual -->
+        <div class="secure-url-visual">
+            <div class="url-dots">
+                <div class="url-dot"></div>
+                <div class="url-dot"></div>
+                <div class="url-dot"></div>
+            </div>
+            <div class="url-bar">
+                <span class="url-lock">🔒</span>
+                <div class="url-text">
+                    <span>https://</span>tap.SECURED😉.et
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Security Features Grid -->
+    <div class="security-grid">
+        <!-- Feature 1 -->
+        <div class="security-card">
+            <div class="security-icon">
+                <span class="security-text-icon">•</span>
+            </div>
+            <h3>Secure Authentication</h3>
+            <p>Advanced cryptographic hashing ensures your credentials are never stored in plain text.</p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="security-card">
+            <div class="security-icon">
+                <span class="security-text-icon">•</span>
+            </div>
+            <h3>Encrypted Transit</h3>
+            <p>All data moves through military-grade TLS 1.2 tunnels. Non-HTTPS traffic is prohibited.</p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="security-card">
+            <div class="security-icon">
+                <span class="security-text-icon">•</span>
+            </div>
+            <h3>Local Hosting</h3>
+            <p>System data is hosted locally on enterprise-certified infrastructure within Ethiopia.</p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="security-card">
+            <div class="security-icon">
+                <span class="security-text-icon">•</span>
+            </div>
+            <h3>Privacy First</h3>
+            <p>Your data is protected by strict privacy policies and managed with absolute transparency.</p>
+        </div>
+    </div>
+</section>
+<!-- ==================== END PLATFORM SECURITY SECTION ==================== -->
+
+<!-- ==================== STACKING CARDS SECTION ==================== -->
+<section class="stacking-cards-section" style="padding: 30px 0;">
+    <div class="sec-head">
+        <h2 class="service-title">OUR SERVICES</h2>
+    </div>
+
+    <!-- Card 1: Instant Sharing -->
+    <div class="service-card card-1">
+        <div class="service-content">
+            <div class="service-text">
+                <h2 class="service-heading">Instant<br>Sharing</h2>
+                <p class="service-description">Share your contact details, social profiles, and websites with a single tap. No
+                    app required.</p>
+            </div>
+            <div class="service-visual">
+                <div class="service-icon">TAP</div>
+                <div class="service-graphic">
+                    <div class="tap-effect">
+                        <div class="tap-circle"></div>
+                        <div class="tap-circle"></div>
+                        <div class="tap-circle"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card 2: Real-Time Analytics -->
+    <div class="service-card card-2">
+        <div class="service-content">
+            <div class="service-text">
+                <h2 class="service-heading">Real-Time<br>Analytics</h2>
+                <p class="service-description">Track who views your card and from where. Gain insights instantly.</p>
+            </div>
+            <div class="service-visual">
+                <div class="service-icon">DATA</div>
+                <div class="service-graphic">
+                    <div class="chart-bars">
+                        <div class="bar bar-1"></div>
+                        <div class="bar bar-2"></div>
+                        <div class="bar bar-3"></div>
+                        <div class="bar bar-4"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card 3: Eco-Friendly -->
+    <div class="service-card card-3">
+        <div class="service-content">
+            <div class="service-text">
+                <h2 class="service-heading">Eco-Friendly<br>Solution</h2>
+                <p class="service-description">Save paper and help the planet. One card lasts a lifetime.</p>
+            </div>
+            <div class="service-visual">
+                <div class="service-icon">ECO</div>
+                <div class="service-graphic">
+                    <div class="eco-elements">
+                        <div class="leaf leaf-1">~</div>
+                        <div class="leaf leaf-2">~</div>
+                        <div class="recycle-symbol">○</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card 4: Bank-Grade Security -->
+    <div class="service-card card-4">
+        <div class="service-content">
+            <div class="service-text">
+                <h2 class="service-heading">Bank-Grade<br>Security</h2>
+                <p class="service-description">Your data is encrypted and safe. We prioritize your privacy.</p>
+            </div>
+            <div class="service-visual">
+                <div class="service-icon">SAFE</div>
+                <div class="service-graphic">
+                    <div class="security-elements">
+                        <div class="shield">▲</div>
+                        <div class="key">+</div>
+                        <div class="lock-dots">
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ==================== END STACKING CARDS SECTION ==================== -->
+
+<!-- ==================== Start Features Section ==================== -->
+<section class="features-section" id="features">
+    <div class="tap-watermark"></div>
+    <div class="container" style="max-width: 1400px;">
+
+        <!-- Orbital Layout: Sun (Image) + 5 Planets (Cards) -->
+        <div class="orbital-features">
+
+            <!-- Center Image (The Sun) -->
+            <div class="orbital-center">
+                <img src="{% static 'images/Screenshot_2025-12-09_114934-removebg-preview.png' %}" alt="TAP Card">
+            </div>
+
+            <!-- Planet 1: Lead Generation -->
+            <div class="orbital-item">
+                <div class="item app-dark">
+                    <h6>Lead<br>Generation</h6>
+                    <ul class="feature-list">
+                        <li>Appointment</li>
+                        <li>Inquiry</li>
+                        <li>Gallery</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Planet 2: Admin Panel -->
+            <div class="orbital-item">
+                <div class="item app-white">
+                    <h6>Admin Panel<br>& Analytics</h6>
+                    <ul class="feature-list">
+                        <li>User Management</li>
+                        <li>Log in assign</li>
+                        <li>Design Approval</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Planet 3: Personal Details -->
+            <div class="orbital-item">
+                <div class="item app-dark">
+                    <h6>Personal<br>Details</h6>
+                    <ul class="feature-list">
+                        <li>Name</li>
+                        <li>Phone</li>
+                        <li>Address</li>
+                        <li>Social Links</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Planet 4: Business Details -->
+            <div class="orbital-item">
+                <div class="item app-lime">
+                    <h6>Business<br>Details</h6>
+                    <ul class="feature-list">
+                        <li>Website</li>
+                        <li>Location</li>
+                        <li>Product</li>
+                        <li>Service</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Planet 5: Reports -->
+            <div class="orbital-item">
+                <div class="item app-dark">
+                    <h6>Reports</h6>
+                    <p class="feature-description">Generate reports and create daily, weekly or monthly information.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- ==================== End Features ==================== -->
+
+<!-- ==================== PINNED VIDEO NARRATIVE SECTION ==================== -->
+<section class="narrative-section">
+    <div class="sticky-wrapper">
+        <div class="video-container" id="narrativeVideo">
+            <!-- Placeholder Video / Background -->
+            <div class="video-fallback"></div>
+            <!-- Actual Video Tag -->
+            <video src="{% static 'images/Tapzo Smart Business Card - 3D Product Animation Video.mp4' %}" autoplay muted
+                loop playsinline></video>
+            <div class="video-overlay"></div>
+        </div>
+
+        <div class="scrolling-content">
+            <!-- Block 1 -->
+            <div class="narrative-block" data-zoom="1" data-brightness="100">
+                <div class="narrative-text">
+                    <h3>Seamless<br>Connection</h3>
+                    <p>Experience the future of networking. No apps using pure NFC technology.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ==================== END PINNED VIDEO NARRATIVE SECTION ==================== -->
+
+<!-- ==================== PRICING SECTION ==================== -->
+<section class="pricing-section" id="pricing">
+    <h2 class="pricing-title">Pricing</h2>
+
+    <div class="pricing-grid">
+        <!-- Individual Cards -->
+        <div class="pricing-card">
+            <div class="pricing-content">
+                <h3 class="pricing-package">Individual Cards</h3>
+                <p class="pricing-subtitle">Customized card for 2 year</p>
+                <div class="pricing-details">
+                    <div class="pricing-item">
+                        <span class="pricing-label">Quantity</span>
+                        <span class="pricing-value">&lt;10</span>
+                    </div>
+                    <div class="pricing-price">3900 Birr</div>
+                    <p class="pricing-note">*All prices are subject to VAT</p>
+                    <a href="{% url 'card_detail' %}" class="pricing-btn">Get Started</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- S&M Business Cards -->
+        <div class="pricing-card">
+            <div class="pricing-content">
+                <h3 class="pricing-package">S&M Business</h3>
+                <p class="pricing-subtitle">Customized card for 2 year</p>
+                <div class="pricing-details">
+                    <div class="pricing-item">
+                        <span class="pricing-label">Quantity</span>
+                        <span class="pricing-value">&lt;25</span>
+                    </div>
+                    <div class="pricing-price">3600 Birr</div>
+                    <p class="pricing-note">*All prices are subject to VAT</p>
+                    <a href="{% url 'card_detail' %}" class="pricing-btn">Get Started</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Enterprise Cards -->
+        <div class="pricing-card">
+            <div class="pricing-content">
+                <h3 class="pricing-package">Enterprise</h3>
+                <p class="pricing-subtitle">Customized card for 2 year</p>
+                <div class="pricing-details">
+                    <div class="pricing-item">
+                        <span class="pricing-label">Quantity</span>
+                        <span class="pricing-value">&lt;50</span>
+                    </div>
+                    <div class="pricing-price">3200 Birr</div>
+                    <p class="pricing-note">*All prices are subject to VAT</p>
+                    <a href="{% url 'card_detail' %}" class="pricing-btn">Get Started</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Corporate Cards -->
+        <div class="pricing-card">
+            <div class="pricing-content">
+                <h3 class="pricing-package">Corporate</h3>
+                <p class="pricing-subtitle">Customized card for 2 year</p>
+                <div class="pricing-details">
+                    <div class="pricing-item">
+                        <span class="pricing-label">Quantity</span>
+                        <span class="pricing-value">&gt;50</span>
+                    </div>
+                    <div class="pricing-price">2500 Birr</div>
+                    <p class="pricing-note">*All prices are subject to VAT</p>
+                    <a href="{% url 'store' %}" class="pricing-btn">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ==================== END PRICING SECTION ==================== -->
+
+<!-- ==================== LOGO CAROUSEL SECTION ==================== -->
+<section class="logo-carousel-section">
+    <div class="logo-track">
+        <!-- Slide Set 1 -->
+        <div class="logo-slide">
+            <div class="logo-item"><img src="{% static 'images/Logos/ahadu-removebg-preview.png' %}" alt="Ahadu Bank"></div>
+            <div class="logo-item"><img src="{% static 'images/Logos/Hibret-Bank-removebg-preview.png' %}" alt="Hibret Bank"></div>
+            <div class="logo-item"><img src="{% static 'images/Logos/COOP-removebg-preview.png' %}" alt="COOP Bank"></div>
+            <div class="logo-item"><img src="{% static 'images/Logos/Development-Bank-of-Ethiopia-DBE-removebg-preview.png' %}" alt="DBE">
+            </div>
+            <div class="logo-item"><img src="{% static 'images/Logos/ESL_Logo_2-removebg-preview.png' %}" alt="ESL"></div>
+            <div class="logo-item"><img src="{% static 'images/Logos/INSA-removebg-preview.png' %}" alt="INSA"></div>
+            <div class="logo-item"><img src="{% static 'images/Logos/IPDC_LOGO-removebg-preview.png' %}" alt="IPDC"></div>
+            <div class="logo-item"><img src="{% static 'images/Logos/aaitdb-removebg-preview.png' %}" alt="AAIT"></div>
+            <div class="logo-item"><img src="{% static 'images/Logos/amibara-removebg-preview.png' %}" alt="Amibara"></div>
+            <div class="logo-item"><img src="{% static 'images/Logos/mla-removebg-preview.png' %}" alt="MLA"></div>
+            <div class="logo-item"><img src="{% static 'images/Logos/moi-removebg-preview.png' %}" alt="MOI"></div>
+            <div class="logo-item"><img src="{% static 'images/Logos/sd-removebg-preview.png' %}" alt="SD"></div>
+            <div class="logo-item"><img src="{% static 'images/Logos/sinqe-removebg-preview.png' %}" alt="Sinqe Bank"></div>
+            <div class="logo-item"><img src="{% static 'images/Logos/zamzam-removebg-preview.png' %}" alt="Zamzam Bank"></div>
+        </div>
+
+        <!-- Slide Set 2 (Duplicate for Infinity) -->
+        <div class="logo-slide">
+            <div class="logo-item"><img src="{% static 'images/Logos/ahadu-removebg-preview.png' %}" alt="Ahadu Bank"></div>
+            <div class="logo-item"><img src="{% static 'images/Logos/Hibret-Bank-removebg-preview.png' %}" alt="Hibret Bank"></div>
+            <div class="logo-item"><img src="{% static 'images/Logos/COOP-removebg-preview.png' %}" alt="COOP Bank"></div>
+            <div class="logo-item"><img src="{% static 'images/Logos/Development-Bank-of-Ethiopia-DBE-removebg-preview.png' %}" alt="DBE">
+            </div>
+            <div class="logo-item"><img src="{% static 'images/Logos/ESL_Logo_2-removebg-preview.png' %}" alt="ESL"></div>
+            <div class="logo-item"><img src="{% static 'images/Logos/INSA-removebg-preview.png' %}" alt="INSA"></div>
+            <div class="logo-item"><img src="{% static 'images/Logos/IPDC_LOGO-removebg-preview.png' %}" alt="IPDC"></div>
+            <div class="logo-item"><img src="{% static 'images/Logos/aaitdb-removebg-preview.png' %}" alt="AAIT"></div>
+            <div class="logo-item"><img src="{% static 'images/Logos/amibara-removebg-preview.png' %}" alt="Amibara"></div>
+            <div class="logo-item"><img src="{% static 'images/Logos/mla-removebg-preview.png' %}" alt="MLA"></div>
+            <div class="logo-item"><img src="{% static 'images/Logos/moi-removebg-preview.png' %}" alt="MOI"></div>
+            <div class="logo-item"><img src="{% static 'images/Logos/sd-removebg-preview.png' %}" alt="SD"></div>
+            <div class="logo-item"><img src="{% static 'images/Logos/sinqe-removebg-preview.png' %}" alt="Sinqe Bank"></div>
+            <div class="logo-item"><img src="{% static 'images/Logos/zamzam-removebg-preview.png' %}" alt="Zamzam Bank"></div>
+        </div>
+    </div>
+</section>
+<!-- ==================== END LOGO CAROUSEL SECTION ==================== -->
+
+<div class="bottom-screen-blur"></div>
+
+<!-- SCROLL PROGRESS BUTTON -->
+<div class="scroll-progress" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    <svg width="50" height="50" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="45" pathLength="1" class="progress-bg"></circle>
+        <circle cx="50" cy="50" r="45" pathLength="1" class="progress-bar"></circle>
+    </svg>
+    <div class="scroll-arrow">↑</div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Word sliding animation
+    const words = document.querySelectorAll(".sliding span");
+    let index = 0;
+
+    function showNextWord() {
+        // Remove active class from all words
+        words.forEach(word => word.classList.remove("active"));
+
+        // Add active class to current word
+        words[index].classList.add("active");
+
+        // Move to next word
+        index = (index + 1) % words.length;
+    }
+
+    // Show first word immediately
+    showNextWord();
+
+    // Then cycle through words every 2 seconds
+    setInterval(showNextWord, 2000);
+
+    // CAROUSEL FUNCTIONALITY
+    let currentSlide = 0;
+    const purchaseCards = document.querySelectorAll('.purchase-card');
+    const dots = document.querySelectorAll('.dot');
+    const totalSlides = purchaseCards.length;
+
+    function showSlide(n) {
+        // Remove active class from all purchaseCards and dots
+        purchaseCards.forEach(card => {
+            card.classList.remove('active', 'prev');
+        });
+        dots.forEach(dot => dot.classList.remove('active'));
+
+        // Calculate new slide index
+        currentSlide = (n + totalSlides) % totalSlides;
+
+        // Show current slide
+        purchaseCards[currentSlide].classList.add('active');
+        dots[currentSlide].classList.add('active');
+
+        // Add prev class to previous slide for animation
+        const prevSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        purchaseCards[prevSlide].classList.add('prev');
+    }
+
+    function changeSlide(direction) {
+        showSlide(currentSlide + direction);
+    }
+
+    // Dot navigation
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            showSlide(index);
+        });
+    });
+
+    // Auto-play carousel (optional)
+    setInterval(() => {
+        changeSlide(1);
+    }, 5000);
+
+    // Touch/swipe support for mobile
+    let startX = 0;
+    let endX = 0;
+
+    const carousel = document.querySelector('.purchase-carousel');
+
+    carousel.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+    });
+
+    carousel.addEventListener('touchend', (e) => {
+        endX = e.changedTouches[0].clientX;
+        handleSwipe();
+    });
+
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = startX - endX;
+
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                changeSlide(1); // Swipe left - next slide
+            } else {
+                changeSlide(-1); // Swipe right - previous slide
+            }
+        }
+    }
+
+    // STACKING CARDS SCALE ANIMATION
+    const serviceCards = document.querySelectorAll('.service-card');
+
+    window.addEventListener('scroll', () => {
+        const windowHeight = window.innerHeight;
+
+        serviceCards.forEach((card, i) => {
+            const rect = card.getBoundingClientRect();
+            const nextCard = serviceCards[i + 1];
+            let scale = 1;
+            let brightness = 100;
+
+            if (nextCard) {
+                const nextRect = nextCard.getBoundingClientRect();
+                const diff = nextRect.top - 100;
+                const maxDist = windowHeight;
+
+                if (diff < windowHeight && diff > 0) {
+                    const progress = 1 - (diff / maxDist);
+                    scale = 1 - (progress * 0.1);
+                    brightness = 100 - (progress * 50);
+                } else if (diff <= 0) {
+                    scale = 0.9;
+                    brightness = 50;
+                }
+            }
+
+            if (rect.top <= 101) {
+                card.style.transform = `scale(${scale})`;
+                card.style.filter = `brightness(${brightness}%)`;
+            } else {
+                card.style.transform = `scale(1)`;
+                card.style.filter = `brightness(100%)`;
+            }
+        });
+    });
+
+    // Scroll Progress Logic
+    window.addEventListener('scroll', () => {
+        const scrollProgress = document.querySelector('.scroll-progress');
+        const progressBar = document.querySelector('.progress-bar');
+
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = scrollTop / docHeight;
+
+        // Update progress circle
+        progressBar.style.strokeDashoffset = 1 - scrollPercent;
+
+        // Toggle visibility (hide in first 500px/Hero section)
+        if (scrollTop > 500) {
+            scrollProgress.classList.add('visible');
+        } else {
+            scrollProgress.classList.remove('visible');
+        }
+    });
+
+    /* SCROLL NARRATIVE ANIMATION */
+    const videoContainer = document.getElementById('narrativeVideo');
+    const narrativeBlocks = document.querySelectorAll('.narrative-block');
+
+    const observerOptions = {
+        root: null,
+        rootMargin: '-40% 0px -40% 0px', // Trigger when element is near center
+        threshold: 0
+    };
+
+    const narrativeObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Add active class for text animation
+                entry.target.classList.add('active');
+
+                // Update Video Effect
+                const zoom = entry.target.dataset.zoom;
+                const brightness = entry.target.dataset.brightness;
+
+                if (videoContainer) {
+                    videoContainer.style.transform = `scale(${zoom})`;
+                    videoContainer.style.filter = `brightness(${brightness}%)`;
+                }
+            } else {
+                entry.target.classList.remove('active');
+            }
+        });
+    }, observerOptions);
+
+    narrativeBlocks.forEach(block => {
+        narrativeObserver.observe(block);
+    });
+
+    /* TRANSITION SECTION ANIMATION */
+    const transitionSection = document.querySelector('.transition-section');
+    const afterState = document.querySelector('.state-after');
+
+    if (transitionSection && afterState) {
+        window.addEventListener('scroll', () => {
+            const rect = transitionSection.getBoundingClientRect();
+            const viewportHeight = window.innerHeight;
+            const scrollDistance = rect.height - viewportHeight;
+            const scrolled = -rect.top;
+
+            if (scrollDistance > 0) {
+                let progress = scrolled / scrollDistance;
+                // Clamp progress between 0 and 1
+                if (progress < 0) progress = 0;
+                if (progress > 1) progress = 1;
+
+                const insetVal = 100 - (progress * 100);
+                afterState.style.clipPath = `inset(0 0 0 ${insetVal}%)`;
+            }
+        });
+    }
+
+    /* ==================== SMART NAVBAR SCROLL LOGIC ==================== */
+    let lastScrollY = window.scrollY;
+    // Threshold to prevent jitter (e.g., 15px diff required to trigger hide/show)
+    const threshold = 15;
+    const header = document.querySelector('header');
+
+    window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+
+        // Always show at very top
+        if (currentScrollY <= 0) {
+            header.classList.remove('nav-hidden');
+            lastScrollY = currentScrollY;
+            return;
+        }
+
+        // Calculate difference
+        const diff = Math.abs(currentScrollY - lastScrollY);
+
+        // Only act if difference exceeds threshold
+        if (diff > threshold) {
+            if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                // Scrolling DOWN -> Hide
+                header.classList.add('nav-hidden');
+            } else {
+                // Scrolling UP -> Show
+                header.classList.remove('nav-hidden');
+            }
+            // Update lastScrollY only when threshold exceeded to avoid small jitters accumulating
+            lastScrollY = currentScrollY;
+        }
+    });
+</script>
+{% endblock %}
