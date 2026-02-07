@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}TAP - Card Detail{% endblock %}
+
+{% block extra_css %}
+<style>
+    .product-detail-section {
+        padding: 120px 40px;
+        background: var(--bg);
+        min-height: 80vh;
+    }
+
+    .detail-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .back-btn {
+        background: none;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 30px;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        margin-bottom: 40px;
+        transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+    }
+
+    .detail-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 60px;
+        align-items: start;
+    }
+
+    .detail-main-img {
+        width: 100%;
+        border-radius: 30px;
+        background: #111;
+    }
+
+    .detail-info h1 {
+        font-size: 48px;
+        font-weight: 800;
+        margin-bottom: 20px;
+        color: #fff;
+    }
+
+    .detail-price {
+        font-size: 32px;
+        color: var(--accent);
+        font-weight: 700;
+        display: block;
+        margin-bottom: 30px;
+    }
+
+    .detail-desc {
+        font-size: 18px;
+        color: #888;
+        line-height: 1.6;
+        margin-bottom: 40px;
+    }
+
+    .add-btn-large {
+        width: 100%;
+        padding: 20px;
+        background: var(--accent);
+        color: #000;
+        border: none;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .add-btn-large:hover {
+        transform: scale(1.02);
+        background: #fff;
+    }
+
+    @media (max-width: 991px) {
+        .detail-grid {
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+
+        .detail-info h1 {
+            font-size: 36px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="product-detail-section">
+    <div class="detail-container">
+        <a href="{% url 'home' %}#pricing" class="back-btn">← Back to Plans</a>
+
+        <div class="detail-grid">
+            <div class="detail-gallery">
+                <img src="{% static 'images/card_detail.png' %}" alt="TAP Classic Card" class="detail-main-img">
+            </div>
+
+            <div class="detail-info">
+                <h1>TAP Classic</h1>
+                <span class="detail-price">3900 Birr</span>
+                <p class="detail-desc">
+                    Our signature matte black NFC business card. Sleek, professional, and built for modern
+                    networking.
+                    Simply tap to share your profile instantly with anyone—no app required.
+                </p>
+
+                <button class="add-btn-large"
+                    onclick="addToCart('tap_classic', 'Tap Classic', 3900, '{% static 'images/A.png' %}')">
+                    Add to Cart
+                </button>
+
+                <div class="detail-accordion" style="margin-top: 40px;">
+                    <div class="accordion-item"
+                        style="border-bottom: 1px solid rgba(255,255,255,0.05); padding: 20px 0;">
+                        <h4 style="color: #fff; margin-bottom: 10px;">Ongoing Fees?</h4>
+                        <p style="color: #888; font-size: 14px;">No subscription required. Pay once and it's yours
+                            forever.</p>
+                    </div>
+                    <div class="accordion-item"
+                        style="border-bottom: 1px solid rgba(255,255,255,0.05); padding: 20px 0;">
+                        <h4 style="color: #fff; margin-bottom: 10px;">Customization</h4>
+                        <p style="color: #888; font-size: 14px;">Link your photo, social profiles, and website in
+                            seconds.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

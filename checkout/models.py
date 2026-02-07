@@ -1,4 +1,5 @@
 from django.db import models
+import uuid
 
 
 class CheckoutSubmission(models.Model):
@@ -23,9 +24,20 @@ class CheckoutSubmission(models.Model):
     subscription_type = models.CharField(max_length=20, choices=SUBSCRIPTION_TYPES)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     
+    # Chapa Payment Integration
+    chapa_tx_ref = models.CharField(max_length=100, unique=True, null=True, blank=True)
+    chapa_payment_status = models.CharField(max_length=50, default='pending')
+    is_paid = models.BooleanField(default=False)
+    
     # Timestamps
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    
+    def save(self, *args, **kwargs):
+        # Generate unique transaction reference if not exists
+        if not self.chapa_tx_ref:
+            self.chapa_tx_ref = f"TAP-{uuid.uuid4().hex[:12].upper()}"
+        super().save(*args, **kwargs)
     
     def __str__(self):
         return f"{self.first_name} {self.last_name} - {self.subscription_type}"

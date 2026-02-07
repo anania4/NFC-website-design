@@ -114,6 +114,49 @@
         color: #888;
     }
 
+    .image-preview {
+        margin-top: 15px;
+        display: none;
+    }
+
+    .image-preview.active {
+        display: block;
+    }
+
+    .image-preview img {
+        max-width: 100%;
+        max-height: 200px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        object-fit: cover;
+    }
+
+    .image-preview-info {
+        margin-top: 10px;
+        font-size: 12px;
+        color: var(--accent);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .remove-image-btn {
+        background: #ff4a4a;
+        color: #fff;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 12px;
+        margin-top: 10px;
+        transition: all 0.3s ease;
+    }
+
+    .remove-image-btn:hover {
+        background: #ff2020;
+        transform: scale(1.05);
+    }
+
     .social-link-item {
         display: flex;
         gap: 15px;
@@ -255,10 +298,18 @@
             <div class="form-row">
                 <div class="form-group">
                     <label for="{{ form.profile_picture.id_for_label }}">Profile Picture</label>
-                    <div class="uploader-group">
+                    <div class="uploader-group" id="profile-picture-uploader">
                         <span class="uploader-icon">👤</span>
                         <span class="uploader-text">Upload Personal Image</span>
                         {{ form.profile_picture }}
+                    </div>
+                    <div class="image-preview" id="profile-picture-preview">
+                        <img id="profile-picture-img" src="" alt="Profile Preview">
+                        <div class="image-preview-info">
+                            <span>✓ Image selected</span>
+                            <span id="profile-picture-name"></span>
+                        </div>
+                        <button type="button" class="remove-image-btn" onclick="removeImage('profile_picture')">Remove Image</button>
                     </div>
                     {% if form.profile_picture.errors %}
                         {% for error in form.profile_picture.errors %}
@@ -268,10 +319,18 @@
                 </div>
                 <div class="form-group">
                     <label for="{{ form.company_logo.id_for_label }}">Company Logo</label>
-                    <div class="uploader-group">
+                    <div class="uploader-group" id="company-logo-uploader">
                         <span class="uploader-icon">🏢</span>
                         <span class="uploader-text">Upload Company Logo</span>
                         {{ form.company_logo }}
+                    </div>
+                    <div class="image-preview" id="company-logo-preview">
+                        <img id="company-logo-img" src="" alt="Logo Preview">
+                        <div class="image-preview-info">
+                            <span>✓ Image selected</span>
+                            <span id="company-logo-name"></span>
+                        </div>
+                        <button type="button" class="remove-image-btn" onclick="removeImage('company_logo')">Remove Image</button>
                     </div>
                     {% if form.company_logo.errors %}
                         {% for error in form.company_logo.errors %}
@@ -332,7 +391,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="checkout-btn">Submit Order</button>
+            <button type="submit" class="checkout-btn">Proceed to Payment</button>
         </form>
     </div>
 </section>
@@ -340,6 +399,14 @@
 
 {% block extra_js %}
 <script>
+    // Subscription pricing map (in ETB)
+    const subscriptionPricing = {
+        'individual': 3900,
+        'sm_business': 3600,
+        'enterprise': 3200,
+        'corporate': 2500
+    };
+
     // Platform icon map using Font Awesome classes
     const platformIcons = {
         'LinkedIn': '<i class="fa-brands fa-linkedin" style="color: #0A66C2;"></i>',
@@ -390,15 +457,107 @@
 
     // Load amount from cart
     document.addEventListener('DOMContentLoaded', () => {
-        // Load amount from cart if available
-        const cart = JSON.parse(localStorage.getItem('tap_cart')) || [];
-        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        if (total > 0) {
-            const amountField = document.getElementById('{{ form.amount.id_for_label }}');
-            if (amountField) {
-                amountField.value = total;
+        const subscriptionTypeField = document.getElementById('{{ form.subscription_type.id_for_label }}');
+        const amountField = document.getElementById('{{ form.amount.id_for_label }}');
+        
+        // Function to update amount based on subscription type
+        function updateAmount() {
+            const selectedType = subscriptionTypeField.value;
+            if (selectedType && subscriptionPricing[selectedType]) {
+                amountField.value = subscriptionPricing[selectedType];
             }
         }
+        
+        // Listen for subscription type changes
+        if (subscriptionTypeField) {
+            subscriptionTypeField.addEventListener('change', updateAmount);
+        }
+        
+        // Check if subscription type is passed via URL parameter (from pricing page)
+        const urlParams = new URLSearchParams(window.location.search);
+        const subscriptionParam = urlParams.get('subscription');
+        
+        if (subscriptionParam && subscriptionTypeField) {
+            // Set the subscription type from URL
+            subscriptionTypeField.value = subscriptionParam;
+            // Trigger change event to update amount
+            updateAmount();
+        }
+        
+        // Load amount from cart if available (fallback)
+        const cart = JSON.parse(localStorage.getItem('tap_cart')) || [];
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        if (total > 0 && !amountField.value) {
+            amountField.value = total;
+        }
+        
+        // Initial update in case subscription type is pre-selected
+        if (subscriptionTypeField && subscriptionTypeField.value) {
+            updateAmount();
+        }
+        
+        // Image preview functionality
+        setupImagePreview('{{ form.profile_picture.id_for_label }}', 'profile-picture');
+        setupImagePreview('{{ form.company_logo.id_for_label }}', 'company-logo');
     });
+    
+    // Function to setup image preview for file inputs
+    function setupImagePreview(inputId, previewPrefix) {
+        const input = document.getElementById(inputId);
+        const preview = document.getElementById(previewPrefix + '-preview');
+        const previewImg = document.getElementById(previewPrefix + '-img');
+        const previewName = document.getElementById(previewPrefix + '-name');
+        const uploader = document.getElementById(previewPrefix + '-uploader');
+        
+        if (input) {
+            input.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                
+                if (file) {
+                    // Validate file type
+                    if (!file.type.startsWith('image/')) {
+                        alert('Please select an image file');
+                        input.value = '';
+                        return;
+                    }
+                    
+                    // Validate file size (5MB max)
+                    if (file.size > 5 * 1024 * 1024) {
+                        alert('File size must be less than 5MB');
+                        input.value = '';
+                        return;
+                    }
+                    
+                    // Create preview
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        previewImg.src = e.target.result;
+                        preview.classList.add('active');
+                        uploader.style.display = 'none';
+                        if (previewName) {
+                            previewName.textContent = file.name;
+                        }
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+    }
+    
+    // Function to remove selected image
+    function removeImage(fieldName) {
+        const inputId = '{{ form.profile_picture.id_for_label }}'.replace('profile_picture', fieldName);
+        const previewPrefix = fieldName.replace('_', '-');
+        
+        const input = document.getElementById(inputId);
+        const preview = document.getElementById(previewPrefix + '-preview');
+        const uploader = document.getElementById(previewPrefix + '-uploader');
+        
+        if (input) {
+            input.value = '';
+            preview.classList.remove('active');
+            uploader.style.display = 'block';
+        }
+    }
 </script>
 {% endblock %}

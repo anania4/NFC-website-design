@@ -125,5 +125,6 @@ function checkout() {
         alert('Your cart is empty!');
         return;
     }
-    window.location.href = 'checkout.html';
+    // Use Django URL for checkout
+    window.location.href = '/checkout/';
 }
