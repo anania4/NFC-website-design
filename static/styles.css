@@ -472,6 +472,57 @@ nav {
     margin-top: 25px;
 }
 
+/* HERO CTA BUTTON */
+.hero-cta {
+    position: absolute;
+    right: 100px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+.hero-cta-btn {
+    display: inline-block;
+    padding: 20px 40px;
+    background: linear-gradient(135deg, var(--accent) 0%, #7ed321 100%);
+    color: #000;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 50px;
+    box-shadow: 0 10px 30px rgba(181, 255, 74, 0.3);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.hero-cta-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(181, 255, 74, 0.5);
+    background: linear-gradient(135deg, #7ed321 0%, var(--accent) 100%);
+}
+
+@media (max-width: 991px) {
+    .hero-cta {
+        position: static;
+        transform: none;
+        margin-top: 40px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-cta {
+        margin-top: 30px;
+        text-align: left;
+    }
+    
+    .hero-cta-btn {
+        padding: 16px 32px;
+        font-size: 16px;
+    }
+}
+
 /* SEAMLESS SCROLLING TEXT */
 .bottom-fade {
     position: absolute;
