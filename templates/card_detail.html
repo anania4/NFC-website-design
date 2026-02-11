@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}TAP - Card Detail{% endblock %}
+{% block title %}TAP - Pricing{% endblock %}
 
 {% block extra_css %}
 <style>
     .product-detail-section {
-        padding: 120px 40px;
+        padding: 15px 40px 80px;
         background: var(--bg);
-        min-height: 80vh;
+        min-height: 100vh;
     }
 
     .detail-container {
@@ -34,69 +34,193 @@
         color: var(--accent);
     }
 
-    .detail-grid {
-        display: grid;
-        grid-template-columns: 1.2fr 1fr;
-        gap: 60px;
-        align-items: start;
+    .card-hero {
+        text-align: center;
+        margin-bottom: 60px;
     }
 
     .detail-main-img {
+        max-width: 600px;
         width: 100%;
         border-radius: 30px;
         background: #111;
     }
 
-    .detail-info h1 {
+    .pricing-header {
+        text-align: center;
+        margin-bottom: 60px;
+    }
+
+    .pricing-header h1 {
         font-size: 48px;
         font-weight: 800;
-        margin-bottom: 20px;
         color: #fff;
+        margin-bottom: 15px;
     }
 
-    .detail-price {
-        font-size: 32px;
-        color: var(--accent);
-        font-weight: 700;
-        display: block;
-        margin-bottom: 30px;
-    }
-
-    .detail-desc {
+    .pricing-header p {
         font-size: 18px;
         color: #888;
-        line-height: 1.6;
-        margin-bottom: 40px;
     }
 
-    .add-btn-large {
-        width: 100%;
-        padding: 20px;
+    .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+        margin-bottom: 80px;
+    }
+
+    .card-type-box {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 24px;
+        padding: 30px 25px;
+        position: relative;
+        transition: all 0.3s ease;
+    }
+
+    .card-type-box:hover {
+        border-color: rgba(181, 255, 74, 0.3);
+        transform: translateY(-5px);
+    }
+
+    .card-type-box.featured {
+        border-color: var(--accent);
+        background: rgba(181, 255, 74, 0.05);
+    }
+
+    .card-badge {
+        position: absolute;
+        top: -12px;
+        left: 50%;
+        transform: translateX(-50%);
         background: var(--accent);
         color: #000;
-        border: none;
-        border-radius: 12px;
+        font-size: 11px;
         font-weight: 700;
+        padding: 5px 15px;
+        border-radius: 20px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .card-type-box h2 {
+        font-size: 24px;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 8px;
+        margin-top: 10px;
+    }
+
+    .card-subtitle {
+        font-size: 14px;
+        color: #888;
+        margin-bottom: 20px;
+    }
+
+    .card-price {
+        font-size: 40px;
+        font-weight: 800;
+        color: var(--accent);
+        margin-bottom: 25px;
+    }
+
+    .card-price span {
         font-size: 16px;
-        cursor: pointer;
+        font-weight: 500;
+        color: #888;
+    }
+
+    .card-features {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 30px 0;
+    }
+
+    .card-features li {
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        color: #ccc;
+        font-size: 14px;
+    }
+
+    .card-features li:last-child {
+        border-bottom: none;
+    }
+
+    .card-cta-btn {
+        display: block;
+        width: 100%;
+        padding: 14px;
+        background: var(--accent);
+        color: #000;
+        text-align: center;
+        text-decoration: none;
+        font-weight: 700;
+        border-radius: 12px;
         transition: all 0.3s ease;
         text-transform: uppercase;
         letter-spacing: 1px;
+        font-size: 13px;
     }
 
-    .add-btn-large:hover {
-        transform: scale(1.02);
+    .card-cta-btn:hover {
         background: #fff;
+        transform: scale(1.02);
     }
 
-    @media (max-width: 991px) {
-        .detail-grid {
-            grid-template-columns: 1fr;
-            gap: 40px;
+    .card-faq {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .card-faq h3 {
+        font-size: 32px;
+        font-weight: 700;
+        color: #fff;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .faq-item {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 25px 0;
+    }
+
+    .faq-item h4 {
+        color: #fff;
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .faq-item p {
+        color: #888;
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    @media (max-width: 1100px) {
+        .cards-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .product-detail-section {
+            padding: 100px 20px 60px;
         }
 
-        .detail-info h1 {
-            font-size: 36px;
+        .cards-grid {
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .pricing-header h1 {
+            font-size: 32px;
+        }
+
+        .card-faq h3 {
+            font-size: 24px;
         }
     }
 </style>
@@ -105,41 +229,93 @@
 {% block content %}
 <section class="product-detail-section">
     <div class="detail-container">
-        <a href="{% url 'home' %}#pricing" class="back-btn">← Back to Plans</a>
+        <!-- Page Title -->
+        <div class="pricing-header">
+            <h1>Choose Your TAP Card</h1>
+            <p>Select the plan that fits your networking needs. All cards include a 2-year subscription.</p>
+        </div>
 
-        <div class="detail-grid">
-            <div class="detail-gallery">
-                <img src="{% static 'images/card_detail.png' %}" alt="TAP Classic Card" class="detail-main-img">
+
+
+        <!-- 4 Card Types Grid -->
+        <div class="cards-grid">
+            <!-- Individual -->
+            <div class="card-type-box">
+                <div class="card-badge">Most Popular</div>
+                <h2>Individual</h2>
+                <p class="card-subtitle">Perfect for professionals</p>
+                <div class="card-price">3,900 <span>Birr</span></div>
+                <ul class="card-features">
+                    <li>1-9 Cards</li>
+                    <li>Customized Design</li>
+                    <li>2 Year Subscription</li>
+                    <li>Digital Profile</li>
+                    <li>Analytics Dashboard</li>
+                </ul>
+                <a href="{% url 'checkout' %}?plan=individual" class="card-cta-btn">Get Started</a>
             </div>
 
-            <div class="detail-info">
-                <h1>TAP Classic</h1>
-                <span class="detail-price">3900 Birr</span>
-                <p class="detail-desc">
-                    Our signature matte black NFC business card. Sleek, professional, and built for modern
-                    networking.
-                    Simply tap to share your profile instantly with anyone—no app required.
-                </p>
+            <!-- S&M Business -->
+            <div class="card-type-box">
+                <h2>S&M Business</h2>
+                <p class="card-subtitle">For small & medium teams</p>
+                <div class="card-price">3,600 <span>Birr</span></div>
+                <ul class="card-features">
+                    <li>10-24 Cards</li>
+                    <li>Customized Design</li>
+                    <li>2 Year Subscription</li>
+                    <li>Digital Profile</li>
+                    <li>Team Analytics</li>
+                </ul>
+                <a href="{% url 'checkout' %}?plan=sm_business" class="card-cta-btn">Get Started</a>
+            </div>
 
-                <button class="add-btn-large"
-                    onclick="addToCart('tap_classic', 'Tap Classic', 3900, '{% static 'images/A.png' %}')">
-                    Add to Cart
-                </button>
+            <!-- Enterprise -->
+            <div class="card-type-box">
+                <h2>Enterprise</h2>
+                <p class="card-subtitle">For growing companies</p>
+                <div class="card-price">3,200 <span>Birr</span></div>
+                <ul class="card-features">
+                    <li>25-49 Cards</li>
+                    <li>Customized Design</li>
+                    <li>2 Year Subscription</li>
+                    <li>Digital Profile</li>
+                    <li>Priority Support</li>
+                </ul>
+                <a href="{% url 'checkout' %}?plan=enterprise" class="card-cta-btn">Get Started</a>
+            </div>
 
-                <div class="detail-accordion" style="margin-top: 40px;">
-                    <div class="accordion-item"
-                        style="border-bottom: 1px solid rgba(255,255,255,0.05); padding: 20px 0;">
-                        <h4 style="color: #fff; margin-bottom: 10px;">Ongoing Fees?</h4>
-                        <p style="color: #888; font-size: 14px;">No subscription required. Pay once and it's yours
-                            forever.</p>
-                    </div>
-                    <div class="accordion-item"
-                        style="border-bottom: 1px solid rgba(255,255,255,0.05); padding: 20px 0;">
-                        <h4 style="color: #fff; margin-bottom: 10px;">Customization</h4>
-                        <p style="color: #888; font-size: 14px;">Link your photo, social profiles, and website in
-                            seconds.</p>
-                    </div>
-                </div>
+            <!-- Corporate -->
+            <div class="card-type-box featured">
+                <div class="card-badge">Best Value</div>
+                <h2>Corporate</h2>
+                <p class="card-subtitle">For large organizations</p>
+                <div class="card-price">2,500 <span>Birr</span></div>
+                <ul class="card-features">
+                    <li>50+ Cards</li>
+                    <li>Customized Design</li>
+                    <li>2 Year Subscription</li>
+                    <li>Admin Panel</li>
+                    <li>Dedicated Support</li>
+                </ul>
+                <a href="{% url 'checkout' %}?plan=corporate" class="card-cta-btn">Get Started</a>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="card-faq">
+            <h3>Frequently Asked Questions</h3>
+            <div class="faq-item">
+                <h4>Are there any ongoing fees?</h4>
+                <p>No subscription required after 2 years. Pay once and the card is yours forever.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Can I customize my card design?</h4>
+                <p>Yes! We work with you to create a professional design that matches your brand.</p>
+            </div>
+            <div class="faq-item">
+                <h4>How does the digital profile work?</h4>
+                <p>Link your photo, social profiles, website, and contact info. Update anytime from your dashboard.</p>
             </div>
         </div>
     </div>

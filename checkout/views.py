@@ -122,7 +122,7 @@ class CheckoutView(View):
                 "last_name": submission.last_name,
                 "tx_ref": submission.chapa_tx_ref,
                 "callback_url": request.build_absolute_uri(reverse('payment_callback')),
-                "return_url": request.build_absolute_uri(reverse('payment_callback')),
+                "return_url": request.build_absolute_uri(reverse('payment_verify', kwargs={'tx_ref': submission.chapa_tx_ref})),
                 "customization": {
                     "title": "TAP",  # Max 16 characters
                 }
@@ -196,9 +196,13 @@ class PaymentCallbackView(View):
     View to handle Chapa payment callback
     """
     
-    def get(self, request):
+    def get(self, request, tx_ref=None):
         """Handle payment callback from Chapa"""
-        tx_ref = request.GET.get('tx_ref')
+        # If tx_ref passed in URL, use it
+        if not tx_ref:
+            # Fallback to query params
+            tx_ref = request.GET.get('tx_ref') or request.GET.get('trx_ref')
+        
         status = request.GET.get('status')
         
         if not tx_ref:

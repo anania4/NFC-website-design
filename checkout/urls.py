@@ -6,6 +6,7 @@ urlpatterns = [
     path('checkout/', views.CheckoutView.as_view(), name='checkout'),
     path('checkout/success/<int:submission_id>/', views.CheckoutSuccessView.as_view(), name='checkout_success'),
     path('payment/callback/', views.PaymentCallbackView.as_view(), name='payment_callback'),
+    path('payment/verify/<str:tx_ref>/', views.PaymentCallbackView.as_view(), name='payment_verify'),
     
     # Main site URLs
     path('', views.HomeView.as_view(), name='home'),
