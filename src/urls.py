@@ -24,6 +24,12 @@ urlpatterns = [
     path('', include('checkout.urls')),
 ]
 
-# Serve media files during development
+# Serve static and media files
 if settings.DEBUG:
+    # Development: serve media files
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    # Development: serve static files (WhiteNoise handles this in production)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+else:
+    # Production: serve media files
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
