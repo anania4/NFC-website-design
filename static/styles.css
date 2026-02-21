@@ -88,6 +88,36 @@ header.nav-hidden {
     background: linear-gradient(135deg, #7ed321 0%, var(--accent) 100%);
 }
 
+/* MOBILE HERO CTA BUTTON - Hidden on desktop, shown on mobile */
+.hero-mobile-cta-btn {
+    display: none; /* Hidden by default on desktop */
+}
+
+@media (max-width: 991px) {
+    .hero-mobile-cta-btn {
+        display: inline-block;
+        margin-top: 50px; /* Increased from 30px to make it lower */
+        padding: 16px 40px;
+        background: linear-gradient(135deg, var(--accent) 0%, #7ed321 100%);
+        color: #000;
+        font-size: 16px;
+        font-weight: 700;
+        text-decoration: none;
+        border-radius: 50px;
+        box-shadow: 0 4px 15px rgba(181, 255, 74, 0.3);
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        white-space: nowrap;
+    }
+    
+    .hero-mobile-cta-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(181, 255, 74, 0.5);
+        background: linear-gradient(135deg, #7ed321 0%, var(--accent) 100%);
+    }
+}
+
 /* Hamburger - hidden on desktop */
 .hamburger {
     display: none;
@@ -4058,6 +4088,13 @@ body.hovering .cursor-outline {
         line-height: 1.6;
         text-align: left;
     }
+    
+    /* Mobile hero button positioning */
+    .hero-mobile-cta-btn {
+        margin-top: 40px; /* Increased from 25px to make it lower */
+        font-size: 14px;
+        padding: 14px 32px;
+    }
 
     /* Background scrolling text - consistent positioning */
     .bottom-fade {
@@ -4197,8 +4234,7 @@ body.hovering .cursor-outline {
     }
 
     .header-cta-btn {
-        font-size: 12px;
-        padding: 10px 20px;
+        display: none; /* Hide header button on mobile */
     }
 
     /* SMALL MOBILE HERO ADJUSTMENTS - CONSISTENT */
