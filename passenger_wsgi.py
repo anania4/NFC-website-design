@@ -1,27 +1,12 @@
-#!/bin/bash
+import imp
+import os
+import sys
 
-# Exit immediately if a command exits with a non-zero status
-set -e
+project_home = os.path.join(os.path.dirname(__file__), 'src')
+if project_home not in sys.path:
+    sys.path.insert(0, project_home)
 
-echo "Starting deployment script for Render..."
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "src.settings")
 
-# Step 1: Install dependencies
-echo "Installing dependencies..."
-pip install -r requirements.txt
-
-# Step 2: Collect static files
-echo "Collecting static files..."
-python manage.py collectstatic --noinput
-
-# Step 3: Apply database migrations
-echo "Applying database migrations..."
-python manage.py makemigrations
-python manage.py migrate
-
-# Step 4: Verify database tables (for debugging)
-echo "Verifying database tables..."
-python manage.py dbshell <<EOF
-.tables
-EOF
-
-echo "Deployment completed successfully on Render!"
+from django.core.wsgi import get_wsgi_application
+application = get_wsgi_application()
