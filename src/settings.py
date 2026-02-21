@@ -12,7 +12,11 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 import os
 from pathlib import Path
-from decouple import config
+from dotenv import load_dotenv  # Import the dotenv library
+
+# Load environment variables from the .env file
+load_dotenv()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,13 +26,24 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = os.getenv('DEBUG','False')
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1,localhost', cast=lambda v: [s.strip() for s in v.split(',')])
+# ALLOWED_HOSTS configuration from environment variable
+# ALLOWED_HOSTS = [
+#     "127.0.0.1",
+#     "localhost",
+#     "tap.et",
+#     "www.tap.et",
+#     "https://tap.et/",
+#     "angelica-unskirted-sawyer.ngrok-free.dev",
+#     "https://angelica-unskirted-sawyer.ngrok-free.dev",
+#     "www.angelica-unskirted-sawyer.ngrok-free.dev",
+# ]
 
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',') if os.getenv('ALLOWED_HOSTS') else []
 
 # Application definition
 
@@ -129,5 +144,5 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 # Chapa Payment Configuration
 # Get these from your Chapa dashboard: https://dashboard.chapa.co
-CHAPA_SECRET_KEY = config('CHAPA_SECRET_KEY')
-CHAPA_PUBLIC_KEY = config('CHAPA_PUBLIC_KEY')
+CHAPA_SECRET_KEY = os.getenv('CHAPA_SECRET_KEY')
+CHAPA_PUBLIC_KEY = os.getenv('CHAPA_PUBLIC_KEY')
