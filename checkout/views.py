@@ -5,8 +5,11 @@ from django.urls import reverse
 from django.conf import settings
 import requests
 import json
+import logging
 from .models import CheckoutSubmission, SocialMediaLink
 from .forms import CheckoutForm
+
+logger = logging.getLogger(__name__)
 
 
 class CheckoutView(View):
@@ -25,15 +28,15 @@ class CheckoutView(View):
         """Handle form submission and redirect to Chapa payment"""
         form = CheckoutForm(request.POST, request.FILES)
         
-        print("Form submitted")
-        print(f"Form valid: {form.is_valid()}")
+        logger.info("Form submitted")
+        logger.info(f"Form valid: {form.is_valid()}")
         
         if not form.is_valid():
-            print(f"Form errors: {form.errors}")
+            logger.warning(f"Form errors: {form.errors}")
         
         if form.is_valid():
             try:
-                print("Form is valid, creating submission...")
+                logger.info("Form is valid, creating submission...")
                 
                 # Create checkout submission
                 submission = CheckoutSubmission.objects.create(
@@ -48,7 +51,7 @@ class CheckoutView(View):
                     chapa_payment_status='pending'
                 )
                 
-                print(f"Submission created: ID={submission.id}, TX_REF={submission.chapa_tx_ref}")
+                logger.info(f"Submission created: ID={submission.id}, TX_REF={submission.chapa_tx_ref}")
                 
                 # Process social media links from POST data
                 social_links = self._extract_social_links(request.POST)
@@ -60,26 +63,24 @@ class CheckoutView(View):
                             url=url.strip()
                         )
                 
-                print(f"Social links processed: {len(social_links)} links")
+                logger.info(f"Social links processed: {len(social_links)} links")
                 
                 # Initialize Chapa payment
-                print("Initializing Chapa payment...")
+                logger.info("Initializing Chapa payment...")
                 payment_url = self._initialize_chapa_payment(request, submission)
                 
                 if payment_url:
-                    print(f"Redirecting to: {payment_url}")
+                    logger.info(f"Redirecting to: {payment_url}")
                     # Redirect to Chapa payment page
                     return redirect(payment_url)
                 else:
-                    print("Payment URL is None")
+                    logger.error("Payment URL is None")
                     messages.error(request, 'Unable to initialize payment. Please check server logs or configure Chapa API keys.')
                     return render(request, 'checkout/checkout.html', {'form': form})
                 
             except Exception as e:
                 # Handle any database or processing errors
-                print(f"Exception occurred: {str(e)}")
-                import traceback
-                traceback.print_exc()
+                logger.exception(f"Exception occurred: {str(e)}")
                 
                 messages.error(
                     request, 
@@ -88,7 +89,7 @@ class CheckoutView(View):
                 return render(request, 'checkout/checkout.html', {'form': form})
         
         # Form is not valid - return with errors
-        print("Returning form with errors")
+        logger.warning("Returning form with errors")
         return render(request, 'checkout/checkout.html', {'form': form})
     
     def _initialize_chapa_payment(self, request, submission):
@@ -101,8 +102,8 @@ class CheckoutView(View):
             chapa_secret_key = getattr(settings, 'CHAPA_SECRET_KEY', None)
             
             if not chapa_secret_key or chapa_secret_key == 'your-chapa-secret-key-here':
-                print("WARNING: CHAPA_SECRET_KEY not configured properly in settings")
-                print("For testing, redirecting to success page without payment")
+                logger.warning("CHAPA_SECRET_KEY not configured properly in settings")
+                logger.warning("For testing, redirecting to success page without payment")
                 # For development/testing: redirect to success page directly
                 messages.warning(
                     request,
@@ -128,8 +129,8 @@ class CheckoutView(View):
                 }
             }
             
-            print(f"Initializing Chapa payment for TX_REF: {submission.chapa_tx_ref}")
-            print(f"Amount: {submission.amount} ETB")
+            logger.info(f"Initializing Chapa payment for TX_REF: {submission.chapa_tx_ref}")
+            logger.info(f"Amount: {submission.amount} ETB")
             
             # Make request to Chapa API
             headers = {
@@ -139,30 +140,28 @@ class CheckoutView(View):
             
             response = requests.post(chapa_url, json=payment_data, headers=headers, timeout=10)
             
-            print(f"Chapa API Response Status: {response.status_code}")
+            logger.info(f"Chapa API Response Status: {response.status_code}")
             
             if response.status_code == 200:
                 response_data = response.json()
-                print(f"Chapa Response: {response_data}")
+                logger.info(f"Chapa Response: {response_data}")
                 
                 if response_data.get('status') == 'success':
                     checkout_url = response_data.get('data', {}).get('checkout_url')
-                    print(f"Checkout URL: {checkout_url}")
+                    logger.info(f"Checkout URL: {checkout_url}")
                     return checkout_url
             
-            print(f"Chapa API Error: {response.text}")
+            logger.error(f"Chapa API Error: {response.text}")
             return None
             
         except requests.exceptions.Timeout:
-            print("Chapa API request timed out")
+            logger.error("Chapa API request timed out")
             return None
         except requests.exceptions.RequestException as e:
-            print(f"Network error connecting to Chapa: {str(e)}")
+            logger.error(f"Network error connecting to Chapa: {str(e)}")
             return None
         except Exception as e:
-            print(f"Error initializing Chapa payment: {str(e)}")
-            import traceback
-            traceback.print_exc()
+            logger.exception(f"Error initializing Chapa payment: {str(e)}")
             return None
     
     def _extract_social_links(self, post_data):
@@ -260,7 +259,7 @@ class PaymentCallbackView(View):
             return False
             
         except Exception as e:
-            print(f"Error verifying payment: {str(e)}")
+            logger.exception(f"Error verifying payment: {str(e)}")
             return False
 
 
