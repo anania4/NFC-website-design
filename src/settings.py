@@ -10,7 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import os
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-fq^yv+^d(x$5wf9b7bg6cu-)t9-e#e7t#af1niy*5y(@2mw-%s'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ["127.0.0.1","127.0.0.1:8000" ,"https://loyally-odontalgic-jana.ngrok-free.dev","www.loyally-odontalgic-jana.ngrok-free.dev","loyally-odontalgic-jana.ngrok-free.dev"]
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1,localhost', cast=lambda v: [s.strip() for s in v.split(',')])
 
 
 # Application definition
@@ -127,10 +129,5 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 # Chapa Payment Configuration
 # Get these from your Chapa dashboard: https://dashboard.chapa.co
-CHAPA_SECRET_KEY = 'CHASECK_TEST-Xt8KWd58iaw0BaDkAvvKiChEowWz3Fgo'  # Replace with your actual secret key
-CHAPA_PUBLIC_KEY = 'CHAPUBK_TEST-Q8GcQWlV4Evk2J9qdmPkNSvOI6gtEhbY'  # Replace with your actual public key
-
-# For production, use environment variables:
-# import os
-# CHAPA_SECRET_KEY = os.environ.get('CHAPA_SECRET_KEY')
-# CHAPA_PUBLIC_KEY = os.environ.get('CHAPA_PUBLIC_KEY')
+CHAPA_SECRET_KEY = config('CHAPA_SECRET_KEY')
+CHAPA_PUBLIC_KEY = config('CHAPA_PUBLIC_KEY')

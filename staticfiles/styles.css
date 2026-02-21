@@ -64,6 +64,30 @@ header.nav-hidden {
     mix-blend-mode: screen;
 }
 
+/* HEADER CTA BUTTON */
+.header-cta-btn {
+    justify-self: end;
+    display: inline-block;
+    padding: 12px 28px;
+    background: linear-gradient(135deg, var(--accent) 0%, #7ed321 100%);
+    color: #000;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(181, 255, 74, 0.3);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.header-cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(181, 255, 74, 0.5);
+    background: linear-gradient(135deg, #7ed321 0%, var(--accent) 100%);
+}
+
 /* Hamburger - hidden on desktop */
 .hamburger {
     display: none;
@@ -4170,6 +4194,11 @@ body.hovering .cursor-outline {
     .logo {
         height: 50px;
         width: 80px;
+    }
+
+    .header-cta-btn {
+        font-size: 12px;
+        padding: 10px 20px;
     }
 
     /* SMALL MOBILE HERO ADJUSTMENTS - CONSISTENT */
