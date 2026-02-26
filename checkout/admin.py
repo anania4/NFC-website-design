@@ -1,6 +1,51 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import CheckoutSubmission, SocialMediaLink
+from django.utils.safestring import mark_safe
+from .models import CheckoutSubmission, SocialMediaLink, CardPricing
+
+
+@admin.register(CardPricing)
+class CardPricingAdmin(admin.ModelAdmin):
+    list_display = ('name', 'plan_type', 'price_display', 'card_range', 'badge_display', 'is_active', 'display_order')
+    list_filter = ('is_active', 'is_featured', 'is_popular')
+    search_fields = ('name', 'subtitle', 'plan_type')
+    ordering = ('display_order', 'plan_type')
+    list_editable = ('display_order', 'is_active')
+    
+    fieldsets = (
+        ('Basic Information', {
+            'fields': ('plan_type', 'name', 'subtitle', 'price', 'card_range')
+        }),
+        ('Features', {
+            'fields': ('features',),
+            'description': 'Enter one feature per line'
+        }),
+        ('Display Options', {
+            'fields': ('is_featured', 'is_popular', 'display_order', 'is_active')
+        }),
+    )
+    
+    def price_display(self, obj):
+        formatted_price = f'{obj.price:,.2f}'
+        return format_html(
+            '<strong style="color: #28a745; font-size: 16px;">{} Birr</strong>',
+            formatted_price
+        )
+    price_display.short_description = 'Price'
+    
+    def badge_display(self, obj):
+        badges = []
+        if obj.is_popular:
+            badges.append('<span style="background: #ffc107; color: #000; padding: 3px 8px; border-radius: 3px; font-size: 11px; font-weight: bold;">POPULAR</span>')
+        if obj.is_featured:
+            badges.append('<span style="background: #28a745; color: #fff; padding: 3px 8px; border-radius: 3px; font-size: 11px; font-weight: bold;">FEATURED</span>')
+        
+        if badges:
+            return mark_safe(' '.join(badges))
+        else:
+            return '-'
+    badge_display.short_description = 'Badges'
+    badge_display.short_description = 'Badges'
 
 
 class SocialMediaLinkInline(admin.TabularInline):

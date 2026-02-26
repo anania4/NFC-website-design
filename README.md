@@ -5,11 +5,14 @@ A Django-based web application for TAP digital business cards with persistent ch
 ## Features
 
 - Digital business card checkout form with data persistence
+- **Dynamic pricing management from Django admin panel**
 - File upload support for profile pictures and company logos
 - Social media link management
 - Django admin interface for order management
+- Chapa payment gateway integration
 - Responsive design with modern UI
 - Shopping cart functionality with localStorage
+- Automatic cleanup of failed payment attempts
 
 ## Technology Stack
 
@@ -98,6 +101,18 @@ python manage.py runserver
 
 The application will be available at `http://127.0.0.1:8000/`
 
+### 9. Set Up Dynamic Pricing (Important!)
+
+After running migrations, populate the initial pricing data:
+
+```bash
+python manage.py populate_pricing
+```
+
+This creates the 4 default pricing plans. You can then manage pricing from the Django admin panel.
+
+For detailed instructions on managing pricing, see [PRICING_SETUP.md](PRICING_SETUP.md).
+
 ## Project Structure
 
 ```
@@ -176,6 +191,7 @@ You can set up a cron job or scheduled task to run this periodically.
 1. Navigate to `http://127.0.0.1:8000/admin/`
 2. Log in with your superuser credentials
 3. View and manage:
+   - **Card Pricing**: Manage pricing plans, features, and badges
    - Checkout submissions
    - Social media links
    - User accounts
@@ -189,6 +205,14 @@ The admin interface provides:
 - Export capabilities
 
 ## Database Models
+
+### CardPricing
+
+Manages pricing plans displayed on the website:
+- Plan information (name, subtitle, price, card range)
+- Features list (multi-line text)
+- Display options (badges, order, active status)
+- Fully manageable from Django admin panel
 
 ### CheckoutSubmission
 

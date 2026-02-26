@@ -239,67 +239,32 @@
 
         <!-- 4 Card Types Grid -->
         <div class="cards-grid">
-            <!-- Individual -->
-            <div class="card-type-box">
+            {% for plan in pricing_plans %}
+            <div class="card-type-box {% if plan.is_featured %}featured{% endif %}">
+                {% if plan.is_popular %}
                 <div class="card-badge">Most Popular</div>
-                <h2>Individual</h2>
-                <p class="card-subtitle">Perfect for professionals</p>
-                <div class="card-price">3,900 <span>Birr</span></div>
-                <ul class="card-features">
-                    <li>1-9 Cards</li>
-                    <li>Customized Design</li>
-                    <li>2 Year Subscription</li>
-                    <li>Digital Profile</li>
-                    <li>Analytics Dashboard</li>
-                </ul>
-                <a href="{% url 'checkout' %}?plan=individual" class="card-cta-btn">Get Started</a>
-            </div>
-
-            <!-- S&M Business -->
-            <div class="card-type-box">
-                <h2>S&M Business</h2>
-                <p class="card-subtitle">For small & medium teams</p>
-                <div class="card-price">3,600 <span>Birr</span></div>
-                <ul class="card-features">
-                    <li>10-24 Cards</li>
-                    <li>Customized Design</li>
-                    <li>2 Year Subscription</li>
-                    <li>Digital Profile</li>
-                    <li>Team Analytics</li>
-                </ul>
-                <a href="{% url 'checkout' %}?plan=sm_business" class="card-cta-btn">Get Started</a>
-            </div>
-
-            <!-- Enterprise -->
-            <div class="card-type-box">
-                <h2>Enterprise</h2>
-                <p class="card-subtitle">For growing companies</p>
-                <div class="card-price">3,200 <span>Birr</span></div>
-                <ul class="card-features">
-                    <li>25-49 Cards</li>
-                    <li>Customized Design</li>
-                    <li>2 Year Subscription</li>
-                    <li>Digital Profile</li>
-                    <li>Priority Support</li>
-                </ul>
-                <a href="{% url 'checkout' %}?plan=enterprise" class="card-cta-btn">Get Started</a>
-            </div>
-
-            <!-- Corporate -->
-            <div class="card-type-box featured">
+                {% elif plan.is_featured %}
                 <div class="card-badge">Best Value</div>
-                <h2>Corporate</h2>
-                <p class="card-subtitle">For large organizations</p>
-                <div class="card-price">2,500 <span>Birr</span></div>
+                {% endif %}
+                
+                <h2>{{ plan.name }}</h2>
+                <p class="card-subtitle">{{ plan.subtitle }}</p>
+                <div class="card-price">{{ plan.price|floatformat:0 }} <span>Birr</span></div>
+                
                 <ul class="card-features">
-                    <li>50+ Cards</li>
-                    <li>Customized Design</li>
-                    <li>2 Year Subscription</li>
-                    <li>Admin Panel</li>
-                    <li>Dedicated Support</li>
+                    <li>{{ plan.card_range }}</li>
+                    {% for feature in plan.get_features_list %}
+                    <li>{{ feature }}</li>
+                    {% endfor %}
                 </ul>
-                <a href="{% url 'checkout' %}?plan=corporate" class="card-cta-btn">Get Started</a>
+                
+                <a href="{% url 'checkout' %}?plan={{ plan.plan_type }}" class="card-cta-btn">Get Started</a>
             </div>
+            {% empty %}
+            <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #888;">
+                <p>No pricing plans available at the moment. Please check back later.</p>
+            </div>
+            {% endfor %}
         </div>
 
         <!-- FAQ Section -->

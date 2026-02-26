@@ -2,6 +2,50 @@ from django.db import models
 import uuid
 
 
+class CardPricing(models.Model):
+    """Model to manage card pricing from admin panel"""
+    PLAN_TYPES = [
+        ('individual', 'Individual Cards'),
+        ('sm_business', 'S&M Business'),
+        ('enterprise', 'Enterprise'),
+        ('corporate', 'Corporate'),
+    ]
+    
+    # plan_type = models.CharField(max_length=20, choices=PLAN_TYPES, unique=True)
+    plan_type = models.CharField(max_length=100, default='')
+    name = models.CharField(max_length=100, help_text="Display name (e.g., 'Individual')")
+    subtitle = models.CharField(max_length=200, help_text="Short description (e.g., 'Perfect for professionals')")
+    price = models.DecimalField(max_digits=10, decimal_places=2, help_text="Price in Birr")
+    card_range = models.CharField(max_length=50, help_text="Number of cards (e.g., '1-9 Cards')")
+    
+    # Features (stored as text, one per line)
+    features = models.TextField(
+        help_text="Enter features, one per line (e.g., 'Customized Design')",
+        default="Customized Design\n2 Year Subscription\nDigital Profile\nAnalytics Dashboard"
+    )
+    
+    # Display options
+    is_featured = models.BooleanField(default=False, help_text="Show 'Best Value' badge")
+    is_popular = models.BooleanField(default=False, help_text="Show 'Most Popular' badge")
+    display_order = models.IntegerField(default=0, help_text="Order to display (lower numbers first)")
+    is_active = models.BooleanField(default=True, help_text="Show this plan on the website")
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    def get_features_list(self):
+        """Return features as a list"""
+        return [f.strip() for f in self.features.split('\n') if f.strip()]
+    
+    def __str__(self):
+        return f"{self.name} - {self.price} Birr"
+    
+    class Meta:
+        ordering = ['display_order', 'plan_type']
+        verbose_name = 'Card Pricing'
+        verbose_name_plural = 'Card Pricing'
+
+
 class CheckoutSubmission(models.Model):
     SUBSCRIPTION_TYPES = [
         ('individual', 'Individual Cards'),

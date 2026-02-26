@@ -8,7 +8,7 @@ from datetime import timedelta
 import requests
 import json
 import logging
-from .models import CheckoutSubmission, SocialMediaLink
+from .models import CheckoutSubmission, SocialMediaLink, CardPricing
 from .forms import CheckoutForm
 
 logger = logging.getLogger(__name__)
@@ -338,7 +338,14 @@ class ContactView(View):
 
 
 class CardDetailView(View):
-    """View for card detail page"""
+    """View for card detail page with dynamic pricing"""
     
     def get(self, request):
-        return render(request, 'card_detail.html')
+        # Get all active pricing plans ordered by display_order
+        pricing_plans = CardPricing.objects.filter(is_active=True).order_by('display_order')
+        
+        context = {
+            'pricing_plans': pricing_plans
+        }
+        
+        return render(request, 'card_detail.html', context)
