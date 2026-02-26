@@ -3,6 +3,8 @@ from django.views import View
 from django.contrib import messages
 from django.urls import reverse
 from django.conf import settings
+from django.utils import timezone
+from datetime import timedelta
 import requests
 import json
 import logging
@@ -37,6 +39,9 @@ class CheckoutView(View):
         if form.is_valid():
             try:
                 logger.info("Form is valid, creating submission...")
+                
+                # Clean up old unpaid submissions for this email (older than 1 hour)
+                self._cleanup_old_pending_submissions(form.cleaned_data['email'])
                 
                 # Create checkout submission
                 submission = CheckoutSubmission.objects.create(
@@ -188,6 +193,29 @@ class CheckoutView(View):
                 social_links[platform] = url
         
         return social_links
+    
+    def _cleanup_old_pending_submissions(self, email):
+        """
+        Delete old unpaid/pending submissions for the same email.
+        This allows users to retry after failed payments.
+        """
+        try:
+            # Delete submissions older than 1 hour that are not paid
+            cutoff_time = timezone.now() - timedelta(hours=1)
+            old_submissions = CheckoutSubmission.objects.filter(
+                email=email.lower(),
+                is_paid=False,
+                created_at__lt=cutoff_time
+            )
+            
+            count = old_submissions.count()
+            if count > 0:
+                old_submissions.delete()
+                logger.info(f"Cleaned up {count} old pending submission(s) for email: {email}")
+        except Exception as e:
+            logger.warning(f"Error cleaning up old submissions: {str(e)}")
+            # Don't fail the checkout if cleanup fails
+            pass
 
 
 class PaymentCallbackView(View):
@@ -211,22 +239,24 @@ class PaymentCallbackView(View):
         try:
             submission = CheckoutSubmission.objects.get(chapa_tx_ref=tx_ref)
             
-            # Verify payment with Chapa API
-            if status == 'success':
-                verified = self._verify_payment(tx_ref)
+            # Always verify payment with Chapa API regardless of status parameter
+            logger.info(f"Verifying payment for TX_REF: {tx_ref}, status param: {status}")
+            verified = self._verify_payment(tx_ref)
+            
+            if verified:
+                submission.is_paid = True
+                submission.chapa_payment_status = 'success'
+                submission.save()
                 
-                if verified:
-                    submission.is_paid = True
-                    submission.chapa_payment_status = 'success'
-                    submission.save()
-                    
-                    messages.success(
-                        request,
-                        f'Payment successful! Order #{submission.id} confirmed.'
-                    )
-                    return redirect('checkout_success', submission_id=submission.id)
+                logger.info(f"Payment verified successfully for submission ID: {submission.id}")
+                messages.success(
+                    request,
+                    f'Payment successful! Order #{submission.id} confirmed.'
+                )
+                return redirect('checkout_success', submission_id=submission.id)
             
             # Payment failed or cancelled
+            logger.warning(f"Payment verification failed for TX_REF: {tx_ref}")
             submission.chapa_payment_status = 'failed'
             submission.save()
             
@@ -243,6 +273,7 @@ class PaymentCallbackView(View):
             chapa_secret_key = getattr(settings, 'CHAPA_SECRET_KEY', None)
             
             if not chapa_secret_key:
+                logger.error("CHAPA_SECRET_KEY not configured")
                 return False
             
             verify_url = f"https://api.chapa.co/v1/transaction/verify/{tx_ref}"
@@ -250,11 +281,17 @@ class PaymentCallbackView(View):
                 "Authorization": f"Bearer {chapa_secret_key}"
             }
             
+            logger.info(f"Calling Chapa verify API for TX_REF: {tx_ref}")
             response = requests.get(verify_url, headers=headers)
+            
+            logger.info(f"Chapa verify response status: {response.status_code}")
             
             if response.status_code == 200:
                 response_data = response.json()
+                logger.info(f"Chapa verify response data: {response_data}")
                 return response_data.get('status') == 'success'
+            else:
+                logger.error(f"Chapa verify API error: {response.text}")
             
             return False
             

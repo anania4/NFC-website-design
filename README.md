@@ -141,6 +141,36 @@ NFC-website-design/
 - **Contact**: `http://127.0.0.1:8000/contact/`
 - **Admin Panel**: `http://127.0.0.1:8000/admin/`
 
+### Payment Flow
+
+1. User fills out checkout form with personal information
+2. System redirects to Chapa payment gateway
+3. After payment, Chapa redirects back to verify endpoint
+4. System verifies payment with Chapa API
+5. If successful, user is redirected to success page
+6. If failed, user can retry (old pending orders are automatically cleaned up)
+
+### Failed Payment Retry
+
+The system now allows users to retry payments if they fail:
+- Only paid orders block email reuse
+- Pending/failed orders older than 1 hour are automatically cleaned up
+- Users can submit a new order with the same email after a failed payment
+
+### Cleaning Up Old Orders
+
+Run the management command to clean up old pending orders:
+
+```bash
+# Clean up orders older than 24 hours (default)
+python manage.py cleanup_pending_orders
+
+# Clean up orders older than 6 hours
+python manage.py cleanup_pending_orders --hours 6
+```
+
+You can set up a cron job or scheduled task to run this periodically.
+
 ### Admin Interface
 
 1. Navigate to `http://127.0.0.1:8000/admin/`

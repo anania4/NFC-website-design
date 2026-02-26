@@ -138,13 +138,21 @@ class CheckoutForm(forms.ModelForm):
             # Convert to lowercase for consistency
             email = email.lower()
             
-            # Check if email already exists (excluding current instance if updating)
-            existing_submission = CheckoutSubmission.objects.filter(email=email)
-            if self.instance.pk:
-                existing_submission = existing_submission.exclude(pk=self.instance.pk)
+            # Check if email already exists with a successful payment
+            # Allow retries if previous submissions failed or are still pending
+            existing_paid_submission = CheckoutSubmission.objects.filter(
+                email=email,
+                is_paid=True
+            )
             
-            if existing_submission.exists():
-                raise ValidationError('A submission with this email already exists.')
+            if self.instance.pk:
+                existing_paid_submission = existing_paid_submission.exclude(pk=self.instance.pk)
+            
+            if existing_paid_submission.exists():
+                raise ValidationError(
+                    'A paid order with this email already exists. '
+                    'Please contact support if you need assistance.'
+                )
         
         return email
 
