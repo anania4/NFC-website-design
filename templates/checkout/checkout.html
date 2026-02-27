@@ -425,13 +425,8 @@
 
 {% block extra_js %}
 <script>
-    // Subscription pricing map (in ETB)
-    const subscriptionPricing = {
-        'individual': 3900,
-        'sm_business': 3600,
-        'enterprise': 3200,
-        'corporate': 2500
-    };
+    // Subscription pricing map (in ETB) - dynamically loaded from backend
+    const subscriptionPricing = {{ pricing_map|safe }};
 
     // Platform icon map using Font Awesome classes
     const platformIcons = {

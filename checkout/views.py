@@ -23,8 +23,27 @@ class CheckoutView(View):
     
     def get(self, request):
         """Display checkout form"""
+        from django.core.cache import cache
+        
+        # Get pricing plans from cache
+        cache_key = 'active_pricing_plans'
+        pricing_plans = cache.get(cache_key)
+        
+        if pricing_plans is None:
+            # Cache miss - fetch from database
+            pricing_plans = list(CardPricing.objects.filter(is_active=True).order_by('display_order'))
+            # Cache for 1 hour (will be invalidated by signals on update)
+            cache.set(cache_key, pricing_plans, 3600)
+        
+        # Create pricing map for JavaScript
+        pricing_map = {plan.plan_type: float(plan.price) for plan in pricing_plans}
+        
         form = CheckoutForm()
-        return render(request, 'checkout/checkout.html', {'form': form})
+        return render(request, 'checkout/checkout.html', {
+            'form': form,
+            'pricing_plans': pricing_plans,
+            'pricing_map': pricing_map
+        })
     
     def post(self, request):
         """Handle form submission and redirect to Chapa payment"""
@@ -320,7 +339,23 @@ class HomeView(View):
     """View for the home page (tap_new.html)"""
     
     def get(self, request):
-        return render(request, 'home.html')
+        from django.core.cache import cache
+        
+        # Try to get pricing plans from cache
+        cache_key = 'active_pricing_plans'
+        pricing_plans = cache.get(cache_key)
+        
+        if pricing_plans is None:
+            # Cache miss - fetch from database
+            pricing_plans = list(CardPricing.objects.filter(is_active=True).order_by('display_order'))
+            # Cache for 1 hour (will be invalidated by signals on update)
+            cache.set(cache_key, pricing_plans, 3600)
+        
+        context = {
+            'pricing_plans': pricing_plans
+        }
+        
+        return render(request, 'home.html', context)
 
 
 class StoreView(View):
@@ -341,8 +376,17 @@ class CardDetailView(View):
     """View for card detail page with dynamic pricing"""
     
     def get(self, request):
-        # Get all active pricing plans ordered by display_order
-        pricing_plans = CardPricing.objects.filter(is_active=True).order_by('display_order')
+        from django.core.cache import cache
+        
+        # Try to get pricing plans from cache
+        cache_key = 'active_pricing_plans'
+        pricing_plans = cache.get(cache_key)
+        
+        if pricing_plans is None:
+            # Cache miss - fetch from database
+            pricing_plans = list(CardPricing.objects.filter(is_active=True).order_by('display_order'))
+            # Cache for 1 hour (will be invalidated by signals on update)
+            cache.set(cache_key, pricing_plans, 3600)
         
         context = {
             'pricing_plans': pricing_plans

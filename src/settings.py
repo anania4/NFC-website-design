@@ -153,6 +153,18 @@ STORAGES = {
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+# Cache Configuration
+# Using local-memory caching for development, consider Redis for production
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+        'OPTIONS': {
+            'MAX_ENTRIES': 1000
+        }
+    }
+}
+
 # Chapa Payment Configuration
 # Get these from your Chapa dashboard: https://dashboard.chapa.co
 CHAPA_SECRET_KEY = os.getenv('CHAPA_SECRET_KEY')

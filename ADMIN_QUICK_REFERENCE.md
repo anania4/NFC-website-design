@@ -1,5 +1,19 @@
 # Admin Panel Quick Reference
 
+## 🎯 NEW: Real-Time Card Updates
+
+**Great news!** When you update card pricing in the admin panel, changes now appear **instantly** on the website. No cache clearing or server restart needed!
+
+### How It Works
+1. Edit any card pricing
+2. Click Save
+3. Website updates automatically
+4. Cache refreshes in the background
+
+See [CARD_STATUS_UPDATE_GUIDE.md](CARD_STATUS_UPDATE_GUIDE.md) for technical details.
+
+---
+
 ## Managing Card Pricing
 
 ### Quick Steps to Update Pricing
@@ -100,6 +114,19 @@ Priority Support
 - 🔴 Red "✗ Failed" = Payment failed
 
 ## Maintenance Commands
+
+### Test Cache System (NEW!)
+
+Test that pricing updates are working correctly:
+
+```bash
+python manage.py test_pricing_cache
+```
+
+This shows:
+- Current cached pricing data
+- Database pricing data
+- Cache clearing confirmation
 
 ### Clean Up Old Pending Orders
 

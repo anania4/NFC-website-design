@@ -9,6 +9,13 @@ class CheckoutForm(forms.ModelForm):
     for personal information, file uploads, and social media links.
     """
     
+    # Override subscription_type to use ChoiceField instead of ModelChoiceField
+    subscription_type = forms.ChoiceField(
+        choices=[],  # Will be populated in __init__
+        widget=forms.Select(attrs={'class': 'form-control'}),
+        required=True
+    )
+    
     # Additional field for personal website (not in model but in HTML form)
     personal_website = forms.URLField(
         required=False,
@@ -60,9 +67,6 @@ class CheckoutForm(forms.ModelForm):
                 'accept': 'image/*',
                 'class': 'form-control'
             }),
-            'subscription_type': forms.Select(attrs={
-                'class': 'form-control'
-            }),
             'amount': forms.NumberInput(attrs={
                 'class': 'form-control',
                 'step': '0.01'
@@ -71,6 +75,28 @@ class CheckoutForm(forms.ModelForm):
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        
+        # Dynamically populate subscription_type choices from CardPricing
+        from .models import CardPricing
+        from django.core.cache import cache
+        
+        # Get pricing plans from cache
+        cache_key = 'active_pricing_plans'
+        pricing_plans = cache.get(cache_key)
+        
+        if pricing_plans is None:
+            # Cache miss - fetch from database
+            pricing_plans = list(CardPricing.objects.filter(is_active=True).order_by('display_order'))
+            cache.set(cache_key, pricing_plans, 3600)
+        
+        # Build choices from pricing plans
+        subscription_choices = [('', 'Choose a subscription type...')]  # Empty choice
+        subscription_choices.extend([
+            (plan.plan_type, plan.name) for plan in pricing_plans
+        ])
+        
+        # Update the subscription_type field choices
+        self.fields['subscription_type'].choices = subscription_choices
         
         # Make certain fields required
         self.fields['first_name'].required = True

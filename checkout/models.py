@@ -47,13 +47,6 @@ class CardPricing(models.Model):
 
 
 class CheckoutSubmission(models.Model):
-    SUBSCRIPTION_TYPES = [
-        ('individual', 'Individual Cards'),
-        ('sm_business', 'S&M Business'),
-        ('enterprise', 'Enterprise'),
-        ('corporate', 'Corporate'),
-    ]
-    
     # Personal Information
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
@@ -65,7 +58,9 @@ class CheckoutSubmission(models.Model):
     company_logo = models.ImageField(upload_to='profiles/logos/', blank=True, null=True)
     
     # Subscription Choice
-    subscription_type = models.CharField(max_length=20, choices=SUBSCRIPTION_TYPES)
+    # Note: subscription_type now accepts any plan_type from CardPricing
+    # No hardcoded choices - dynamically populated in the form
+    subscription_type = models.CharField(max_length=100)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     
     # Chapa Payment Integration
