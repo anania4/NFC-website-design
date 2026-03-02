@@ -12,10 +12,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 import os
 from pathlib import Path
-from dotenv import load_dotenv  # Import the dotenv library
-
-# Load environment variables from the .env file
-load_dotenv()
+from decouple import config  # Import python-decouple
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,10 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG','False')
+DEBUG = config('DEBUG', default='False')
 
 # ALLOWED_HOSTS configuration from environment variable
 # ALLOWED_HOSTS = [
@@ -43,11 +40,12 @@ DEBUG = os.getenv('DEBUG','False')
 #     "www.angelica-unskirted-sawyer.ngrok-free.dev",
 # ]
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',') if os.getenv('ALLOWED_HOSTS') else []
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='').split(',') if config('ALLOWED_HOSTS', default='') else []
 
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',  # Must be before django.contrib.admin
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -167,8 +165,8 @@ CACHES = {
 
 # Chapa Payment Configuration
 # Get these from your Chapa dashboard: https://dashboard.chapa.co
-CHAPA_SECRET_KEY = os.getenv('CHAPA_SECRET_KEY')
-CHAPA_PUBLIC_KEY = os.getenv('CHAPA_PUBLIC_KEY')
+CHAPA_SECRET_KEY = config('CHAPA_SECRET_KEY', default='')
+CHAPA_PUBLIC_KEY = config('CHAPA_PUBLIC_KEY', default='')
 
 # Logging Configuration
 LOGGING = {
@@ -228,4 +226,93 @@ LOGGING = {
         'handlers': ['file', 'console'],
         'level': 'INFO',
     },
+}
+
+# Jazzmin Admin UI Configuration
+JAZZMIN_SETTINGS = {
+    # Site branding
+    "site_title": "Card Management Admin",
+    "site_header": "Card Management System",
+    "site_brand": "Tap.et",
+    "welcome_sign": "Welcome to Card Management",
+    "copyright": "Tap.et",
+    
+    # Logo and icons
+    "site_logo": None,  # Path to your logo in static files
+    "login_logo": None,
+    "site_icon": None,
+    
+    # Navigation
+    "show_sidebar": True,
+    "navigation_expanded": True,
+    "hide_apps": [],
+    "hide_models": [],
+    
+    # Top menu
+    "topmenu_links": [
+        {"name": "Home", "url": "admin:index", "permissions": ["auth.view_user"]},
+        {"name": "View Site", "url": "/", "new_window": True},
+    ],
+    
+    # User menu
+    "usermenu_links": [
+        {"model": "auth.user"}
+    ],
+    
+    # Side menu ordering
+    "order_with_respect_to": ["checkout", "auth"],
+    
+    # Custom icons for models
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+        "checkout.checkoutsubmission": "fas fa-shopping-cart",
+        "checkout.card": "fas fa-id-card",
+        "checkout.cardpricing": "fas fa-dollar-sign",
+        "checkout.socialmedialink": "fas fa-share-alt",
+    },
+    
+    # UI Tweaks
+    "show_ui_builder": False,
+    "changeform_format": "horizontal_tabs",
+    "changeform_format_overrides": {
+        "auth.user": "collapsible",
+        "auth.group": "vertical_tabs"
+    },
+    
+    # Theme
+    "theme": "flatly",  # Options: default, cerulean, cosmo, cyborg, darkly, flatly, journal, litera, lumen, lux, materia, minty, pulse, sandstone, simplex, slate, solar, spacelab, superhero, united, yeti
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "navbar_small_text": False,
+    "footer_small_text": False,
+    "body_small_text": False,
+    "brand_small_text": False,
+    "brand_colour": "navbar-primary",
+    "accent": "accent-primary",
+    "navbar": "navbar-white navbar-light",
+    "no_navbar_border": False,
+    "navbar_fixed": False,
+    "layout_boxed": False,
+    "footer_fixed": False,
+    "sidebar_fixed": False,
+    "sidebar": "sidebar-dark-primary",
+    "sidebar_nav_small_text": False,
+    "sidebar_disable_expand": False,
+    "sidebar_nav_child_indent": False,
+    "sidebar_nav_compact_style": False,
+    "sidebar_nav_legacy_style": False,
+    "sidebar_nav_flat_style": False,
+    "theme": "flatly",
+    "dark_mode_theme": None,
+    "button_classes": {
+        "primary": "btn-primary",
+        "secondary": "btn-secondary",
+        "info": "btn-info",
+        "warning": "btn-warning",
+        "danger": "btn-danger",
+        "success": "btn-success"
+    }
 }
