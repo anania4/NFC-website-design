@@ -7,7 +7,7 @@ echo "Starting deployment script..."
 
 # Step 1: Install dependencies
 echo "Installing dependencies..."
-pip install asgiref certifi charset-normalizer Django idna pillow python-decouple requests sqlparse tzdata urllib3 whitenoise
+pip install -r requirements.txt
 # Step 2: Collect static files
 echo "Collecting static files..."
 python manage.py collectstatic --noinput
