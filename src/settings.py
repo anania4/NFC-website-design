@@ -147,6 +147,12 @@ STORAGES = {
     },
 }
 
+# WhiteNoise - Don't compress video files
+WHITENOISE_SKIP_COMPRESS_EXTENSIONS = ('jpg', 'jpeg', 'png', 'gif', 'webp', 'zip', 'gz', 'tgz', 'bz2', 'tbz', 'xz', 'br', 'swf', 'flv', 'woff', 'woff2', 'mp4', 'webm', 'ogg', 'avi', 'mov')
+WHITENOISE_MIMETYPES = {
+    '.mp4': 'video/mp4',
+}
+
 # Media files (User uploads)
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
